@@ -1,0 +1,25 @@
+{
+  "name": "udderly_forgetful",
+  "version": "1.0.0",
+  "description": "Team Project with Matthew Satterwhite and Cody Lavene",
+  "main": "index.js",
+  "dependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15",
+    "pug": "^2.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jchau-623/udderly_forgetful.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jchau-623/udderly_forgetful/issues"
+  },
+  "homepage": "https://github.com/jchau-623/udderly_forgetful#readme"
+}
