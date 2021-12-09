@@ -8,3 +8,4 @@ Step Order:
 2. create a server file along with a routers file for each different page (do routes)
 3. views folder for a basic front end outlines
 4. dom front end development event listeners and css*
+hi
