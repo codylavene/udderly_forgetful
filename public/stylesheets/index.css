@@ -1,3 +1,20 @@
 h1 {
     color: #555555;
 }
+* {
+    margin: 0
+}
+.top-nav-bar {
+    background-color: rgb(0,96,191);
+    height: 40px;
+    width: 100%;
+    display:flex;
+    justify-content: space-between;
+}
+
+.hamburger-div {
+    width: 180px;
+    border: 1px solid red;
+    display: flex;
+    align-items: center;
+}

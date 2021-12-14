@@ -56,7 +56,7 @@ router.post(
       await db.List.create({ name: 'Personal', userId: user.id })
       await db.List.create({ name: 'Work', userId: user.id })
       loginUser(req, res, user);
-      res.redirect("/users/:userId");
+      return res.redirect(`/users/${user.id}`);
     } else {
       const errors = validationErrors.array().map((error) => error.msg);
       res.render("user-signup", {
@@ -111,9 +111,15 @@ router.post("/logout", (req, res) => {
   res.redirect("/login");
 });
 
-router.get("/:userId(\\d+)", csrfProtection, async (req, res) => {
-  res.render("user-home", { csrfToken: req.csrfToken() })
-})
+router.get("/:userId(\\d+)", csrfProtection, asyncHandler(async (req, res) => {
+  const { userId } = req.session.auth;
+  const lists = await db.List.findAll(
+    { where: {
+      userId: userId
+     }}
+  )
+  res.render("user-home", { csrfToken: req.csrfToken(), lists })
+}));
 /*--------------------------------------------------------------------*/
 // EXPORTS
 module.exports = router;

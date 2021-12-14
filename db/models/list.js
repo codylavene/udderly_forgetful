@@ -3,7 +3,6 @@ module.exports = (sequelize, DataTypes) => {
   const List = sequelize.define('List', {
     name: {
       type: DataTypes.STRING(100),
-      unique: true,
       allowNull: false
     },
     userId: {
