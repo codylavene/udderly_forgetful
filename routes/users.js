@@ -53,8 +53,10 @@ router.post(
       user.hashedPassword = hashedPassword;
 
       await user.save();
+      await db.List.create({name: 'Personal', userId: user.id})
+      await db.List.create({name: 'Work', userId: user.id})
       loginUser(req, res, user);
-      res.redirect("/");
+      res.redirect("/users/:userId");
     } else {
       const errors = validationErrors.array().map((error) => error.msg);
       res.render("user-signup", {
@@ -88,7 +90,7 @@ router.post(
 
         if (passwordCheck) {
           loginUser(req, res, user);
-          return res.redirect("/");
+          return res.redirect("/users/:userId");
         }
       }
       errors.push("login failure -- wrong stuff bro");
@@ -108,6 +110,10 @@ router.post("/logout", (req, res) => {
   logoutUser(req, res);
   res.redirect("/login");
 });
+
+router.get("/:userId(\\d+)", csrfProtection, async (req, res) => {
+  res.render("user-home", { csrfToken: req.csrfToken() })
+})
 /*--------------------------------------------------------------------*/
 // EXPORTS
 module.exports = router;
