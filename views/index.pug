@@ -7,5 +7,15 @@ append head
   script(src="/javascripts/index.js" type="module" defer)
 
 block content
-  h1= Login Page
+  h1= title
   p Welcome to Udderly Forgetful
+  div.nav-container
+    nav.home-nav-bar
+      a.logo(href='/') insert logo here
+      ul.link-list
+        li.tour
+          a#tour(href="/tour") tour
+        li.login
+          a#login(href="/users/login") login
+        li.signup
+          a#signup(href="/users/signup") signup
