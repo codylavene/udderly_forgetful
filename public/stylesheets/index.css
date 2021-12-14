@@ -1,9 +1,11 @@
 h1 {
     color: #555555;
 }
+
 * {
     margin: 0
 }
+
 .top-nav-bar {
     background-color: rgb(0,96,191);
     height: 40px;
@@ -11,10 +13,27 @@ h1 {
     display:flex;
     justify-content: space-between;
 }
+#hamburger-container {
+    background-color: green;
+    width: 20px;
+    height: 20px;
+    display:flex;
+    z-index: 9000;
+}
 
 .hamburger-div {
     width: 180px;
     border: 1px solid red;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
+}
+
+#hamburger-icon {
+    width: 20px;
+    height: 20px;
+    background-image: url("../../assets/icons/hamburger/2x/outline_menu_black_24dp.png");
+    background-position: center;
+    background-size: contain;
+    background-color: red;
 }
