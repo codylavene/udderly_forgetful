@@ -53,8 +53,8 @@ router.post(
       user.hashedPassword = hashedPassword;
 
       await user.save();
-      await db.List.create({name: 'Personal', userId: user.id})
-      await db.List.create({name: 'Work', userId: user.id})
+      await db.List.create({ name: 'Personal', userId: user.id })
+      await db.List.create({ name: 'Work', userId: user.id })
       loginUser(req, res, user);
       res.redirect("/users/:userId");
     } else {
@@ -90,7 +90,7 @@ router.post(
 
         if (passwordCheck) {
           loginUser(req, res, user);
-          return res.redirect("/users/:userId");
+          return res.redirect(`/users/${user.id}`);
         }
       }
       errors.push("login failure -- wrong stuff bro");

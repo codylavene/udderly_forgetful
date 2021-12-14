@@ -10,11 +10,12 @@ const {
 const { check, validationResult } = require("express-validator");
 
 
-router.post('/', csrfProtection, asyncHandler(async(req, res) => {
-    const { name } = req.body
-    console.log(req.params, '===================================')
-    const list = await db.List.create({ name, userId: req.params.userId })
-    res.send("Success")
+router.post('/lists', csrfProtection, asyncHandler(async (req, res) => {
+  const { name } = req.body
+  const { userId } = req.session.auth;
+
+  const list = await db.List.create({ name, userId })
+  res.send("Success")
 }))
 
 
