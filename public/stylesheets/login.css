@@ -1,0 +1,30 @@
+.thisBody{
+background-color: green;
+}
+
+.panels {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    width: 100%;
+}
+.right{
+    display: flex;
+    width: 50%;
+    font-size: 20px;
+    border: red 1px solid;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+
+}
+
+.left{
+    display: flex;
+    width: 50%;
+    background-color: #0060bf;
+    justify-content: center;
+    color: white;
+    font-size: 40px;
+
+}
