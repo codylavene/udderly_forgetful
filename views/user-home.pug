@@ -1,7 +1,8 @@
 extends layout.pug
 include utils.pug
-append head 
+append head
   link(rel="stylesheet", href="/stylesheets/user-top-nav.css")
+  script(src="/javascripts/user-top-nav.js" type="module")
 block content
     div(class='top-nav-bar')
         div(class='hamburger-div')
@@ -10,10 +11,14 @@ block content
         div(class='searchbar-div')
           div(class="search-container")
             label(for="search-bar")
-                span(class="material-icons material-icons-dark" id="search-icon") search
+                span(class="material-icons" id="search-icon") search
             input(type='text' id='search-bar' name="search-bar")
         div(class='settings-div')
-            button(type='submit' id='settings-button') Settings
+            div.settings-container
+                span(class="material-icons material-icons-hover" id="settings-icon") settingsarrow_drop_down
+
+
+
     div(class='left-nav-bar')
         ul
             li All Tasks
