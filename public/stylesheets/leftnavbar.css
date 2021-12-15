@@ -3,8 +3,8 @@
     background-color: #d7e7f5;
     flex-direction: column;
     width: 15%;
-    height: 100px;
-    font-family: "Segoe UI",Arial,clean,sans-serif,"Segoe UI Emoji","Segoe UI Symbol"!important;
+    height: 800px;
+    font-family: "Segoe UI",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol"!important;
 }
 
 .all-lists {
@@ -39,6 +39,7 @@
 
 #today:hover {
     background-color: #bfd7ef;
+    max-width: 100px;
 }
 
 #tomorrow:hover {
