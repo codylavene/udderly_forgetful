@@ -5,8 +5,12 @@ block content
     div(class='top-nav-bar')
         div(class='hamburger-div')
             div(class='hamburger-container')
+              span(class="material-icons material-icons-hover") menu
         div(class='searchbar-div')
-            input(type='text' id='search-bar')
+          div(class="search-container")
+            label(for="search-bar")
+                span(class="material-icons" id="search-icon") search
+            input(type='text' id='search-bar' name="search-bar")
         div(class='settings-div')
             button(type='submit' id='settings-button') Settings
     div(class='left-nav-bar')

@@ -11,7 +11,7 @@ h1 {
     height: 40px;
     width: 100%;
     display:flex;
-    justify-content: space-between;
+
 }
 #hamburger-container {
     background-color: green;
@@ -22,7 +22,7 @@ h1 {
 }
 
 .hamburger-div {
-    width: 180px;
+    width: 200px;
     border: 1px solid red;
     display: flex;
     align-items: center;
@@ -36,4 +36,69 @@ h1 {
     background-position: center;
     background-size: contain;
     background-color: red;
+}
+
+.searchbar-div {
+    width: 80%;
+    border: 1px solid black;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.settings-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.material-icons {
+    font-family: "Material Icons";
+    font-size: 24px;
+    padding-left: 15px;
+    color: rgba(255,255,255,0.7)
+}
+
+.material-icons-hover:hover {
+    font-family: "Material Icons";
+    font-size: 24px;
+    padding-left: 15px;
+    color: rgba(255,255,255,0.95);
+}
+
+
+.search-container {
+   margin: 18px;
+   height: 25px;
+   width: 300px;
+   background-color: rgb(51,128,204);
+   border-style: none;
+   border-radius: 3px;
+   display: flex;
+   justify-content: center;
+}
+
+#search-bar {
+    height: 80%;
+    width: 100%;
+    background-color: rgb(51,128,204);
+    border-style: none;
+    border-radius: 3px;
+}
+
+#search-bar:focus {
+    height: 80%;
+    width: 80%;
+    background-color: white;
+    border-style: none;
+    border-radius: 3px;
+    outline: none;
+
+}
+
+.search-container:focus-within {
+   background-color: white;
+   border-style: none;
+   border-radius: 3px;
 }
