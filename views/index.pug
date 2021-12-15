@@ -4,18 +4,30 @@ append head
   //- add page specific styles by appending to the head
   link(rel="stylesheet" href="/stylesheets/index.css")
   //- add page specific js
-  script(src="/javascripts/index.js" type="module" defer)
+  script(src="/javascripts/landing.js" type="module" defer)
+  link(rel="preconnect" href="https://fonts.googleapis.com")
+  link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+  link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet")
+
 
 block content
-  h1= title
-  p Welcome to Udderly Forgetful
   div.nav-container
     nav.home-nav-bar
-      a.logo(href='/') insert logo here
+      div.logo-container
+        a.logo(href='/')
       ul.link-list
-        li.tour
-          a#tour(href="/tour") tour
-        li.login
-          a#login(href="/users/login") login
         li.signup
-          a#signup(href="/users/signup") signup
+          a#signup(href="/users/signup") Sign up for free
+        li.login
+          a#login(href="/users/login") Login
+        li.tour
+          a#tour(href="/tour") Tour
+  .heading-sign-up
+    h1 The smart to-do app for busy people.
+    a(href='/users/signup') Sign Up Free
+  .swiper-container
+    .swiper-card
+      .swiper-img
+
+      h2.swiper-head
+      p.swiper-text

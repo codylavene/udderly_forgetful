@@ -1,0 +1,95 @@
+* {
+  margin: 0px;
+  box-sizing: border-box;
+  font-family: "Roboto";
+  font-weight: 800;
+  background-color: cadetblue;
+  color: rgb(216, 216, 216);
+}
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%--NAV--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+.nav-container {
+  display: inline;
+  background-color: aqua;
+  border-bottom: 1px solid black;
+}
+.link-list {
+  margin-right: 20%;
+}
+.link-list li {
+  float: right;
+  margin: 30px 40px;
+  list-style: none;
+}
+
+.link-list li > a {
+  text-decoration: none;
+  font-size: 15px;
+}
+.link-list li > a:hover {
+  color: white;
+}
+
+#signup {
+  padding: 6px;
+  border: 1px solid rgb(216, 216, 216);
+  border-radius: 3px;
+}
+
+#signup:hover {
+  border-color: white;
+  color: white;
+}
+
+.home-nav-bar {
+  display: flex;
+}
+
+.logo-container {
+  width: 40%;
+  display: flex;
+}
+.logo-container > a {
+  background: url("../assets/images/logo3.png");
+  background-size: 179px auto;
+  width: 179px;
+  min-height: 100%;
+  height: 83px;
+  display: flex;
+  /* margin-top: 20px; */
+  margin-left: 20%;
+  /* z-index: 80; */
+}
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%--SWIPER--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+.heading-sign-up {
+  display: flex;
+  flex-direction: column;
+  margin-top: 120px;
+  /* margin: 0px auto; */
+}
+.heading-sign-up > h1 {
+  display: flex;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bolder;
+  color: white;
+}
+.heading-sign-up > a {
+  display: flex;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 13px 40px;
+  border: 1px solid orangered;
+  text-decoration: none;
+  font-size: 20px;
+  background-color: orangered;
+  color: white;
+  font-weight: bolder;
+  border-radius: 3px;
+}
+
+.swiper-img {
+  height: 350px;
+  width: 500px;
+}
