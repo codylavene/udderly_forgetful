@@ -15,10 +15,10 @@ block content
             button(type='submit' id='settings-button') Settings
     div(class='left-nav-bar')
         ul(class='all-lists') All Tasks
-            li Today
-            li Tomorrow
-            li This Week
-            li Trash
+            li(id='today') Today
+            li(id='tomorrow') Tomorrow
+            li(id='this-week') This Week
+            li(id='trash') Trash
         ul(class='added-lists') Lists
             each list in lists
                 li= list.name

@@ -2,8 +2,8 @@
     display:flex;
     background-color: #d7e7f5;
     flex-direction: column;
-    width: 20%;
-    height: 100%;
+    width: 15%;
+    height: 100px;
     font-family: "Segoe UI",Arial,clean,sans-serif,"Segoe UI Emoji","Segoe UI Symbol"!important;
 }
 
@@ -14,6 +14,7 @@
     justify-content: space-between;
     padding-bottom: 20px;
     align-items: center;
+    margin-right:50px;
 }
 
 .added-lists {
@@ -23,14 +24,31 @@
     justify-content: space-between;
     padding-bottom: 20px;
     align-items: center;
+    margin-right:50px;
 }
 
 .all-lists li {
-    padding-top: 20px;
+    margin-top: 20px;
     list-style-type: none;
 }
 
 .added-lists li {
-    padding-top: 20px;
+    margin-top: 20px;
     list-style-type: none;
+}
+
+#today:hover {
+    background-color: #bfd7ef;
+}
+
+#tomorrow:hover {
+    background-color: #bfd7ef;
+}
+
+#this-week:hover {
+    background-color: #bfd7ef;
+}
+
+#trash:hover {
+    background-color: #bfd7ef;
 }
