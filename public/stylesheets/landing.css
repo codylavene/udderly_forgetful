@@ -3,8 +3,11 @@
   box-sizing: border-box;
   font-family: "Roboto";
   font-weight: 800;
-  background-color: cadetblue;
+
   color: rgb(216, 216, 216);
+}
+body {
+  background-color: rgb(0, 96, 191);
 }
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%--NAV--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 .nav-container {
@@ -42,6 +45,8 @@
 
 .home-nav-bar {
   display: flex;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgb(100, 100, 100);
 }
 
 .logo-container {
@@ -80,16 +85,77 @@
   margin-left: auto;
   margin-right: auto;
   padding: 13px 40px;
-  border: 1px solid orangered;
+  border: 1px solid #ca492e;
   text-decoration: none;
   font-size: 20px;
-  background-color: orangered;
+  background-color: #ca492e;
   color: white;
   font-weight: bolder;
   border-radius: 3px;
 }
 
+.swiper-container {
+  overflow: hidden;
+  width: 90%;
+}
+
+.swiper-container * {
+  box-sizing: border-box;
+}
+
+.swiper-card {
+  transform-style: preserve-3d;
+}
+.swiper-card h2 {
+  margin: 10px auto;
+  position: relative;
+  left: 5%;
+  /* right: 30%; */
+  text-align: center;
+  font-size: 32px;
+  color: white;
+  font-weight: bolder;
+}
+.swiper-card p {
+  margin: 10px auto;
+  position: relative;
+  width: 325px;
+  word-wrap: normal;
+  left: 5%;
+  /* right: 30%; */
+  text-align: center;
+  font-size: 22px;
+  color: white;
+}
+
 .swiper-img {
-  height: 350px;
-  width: 500px;
+  opacity: 0;
+  position: absolute;
+  top: 10px;
+  left: 35%;
+  right: 30%;
+  width: 40%;
+  margin: auto;
+  padding: 4px 16px;
+  z-index: 90;
+  transition: transform 0.6s, opacity 0.6s, z-index 0.6s;
+}
+
+.swiper-img.starter,
+.swiper-img.active {
+  opacity: 1;
+  position: relative;
+  z-index: 800;
+}
+
+.swiper-img.prev,
+.swiper-img.next {
+  z-index: 700;
+}
+
+.swiper-img.prev {
+  transform: translateX(-100%);
+}
+.swiper-img.next {
+  transform: translateX(100%);
 }

@@ -8,9 +8,9 @@ block content
     input(type='hidden' name='_csrf' value=csrfToken)
     +field('Email Address', 'emailAddress', emailAddress)
     +field('Password', 'password', null, 'password')
-    div(class='py-4')
-      button(type='submit' class='btn btn-primary') Login
+    div
+      button(type='submit') Login
       button(type='submit' class='demo-log') Demo-User
-      a(href='/' class='btn btn-warning ml-2') Cancel
+      a(href='/') Cancel
   div
     p: a(href='/users/signup') Don't have an account?
