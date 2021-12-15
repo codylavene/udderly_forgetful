@@ -1,7 +1,7 @@
 extends layout.pug
 include utils.pug
 append head
-    script(src='leftnavbar.js')
+    script(type="module" src='/javascripts/leftnavbar.js')
     link(rel='stylesheet' href='/stylesheets/leftnavbar.css')
 
 block content
@@ -17,6 +17,7 @@ block content
         div(class='settings-div')
             button(type='submit' id='settings-button') Settings
     div(class='left-nav-bar')
+        div(id="nav-bar-logo") Utterly Forgetful Logo
         ul(class='all-lists') All Tasks
             li(id='today') Today
             li(id='tomorrow') Tomorrow

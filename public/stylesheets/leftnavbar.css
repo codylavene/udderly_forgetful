@@ -1,9 +1,10 @@
 .left-nav-bar {
     display:flex;
+    position: fixed;
     background-color: #d7e7f5;
     flex-direction: column;
-    width: 15%;
-    height: 800px;
+    width: 9.5%;
+    height: 1000px;
     font-family: "Segoe UI",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol"!important;
 }
 
@@ -39,17 +40,30 @@
 
 #today:hover {
     background-color: #bfd7ef;
-    max-width: 100px;
+    font-weight: bold;
 }
 
 #tomorrow:hover {
     background-color: #bfd7ef;
+    font-weight: bold;
 }
 
 #this-week:hover {
     background-color: #bfd7ef;
+    font-weight: bold;
 }
 
 #trash:hover {
     background-color: #bfd7ef;
+    font-weight: bold;
+}
+
+#nav-bar-logo {
+    display: flex;
+    padding-top: 2rem;
+    justify-content: center;
+}
+
+.red {
+    color: red;
 }
