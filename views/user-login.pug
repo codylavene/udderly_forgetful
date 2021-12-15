@@ -1,25 +1,25 @@
 extends layout.pug
-
 include utils.pug
-
 block content
   +validationErrorSummary(errors)
-  body(class='thisBody')
-      div(class='right')
-        p: a(href='/users/signup' id='account-sign-up') Don't have an account?
-        p Been here before? I wouldn't remember.
-        form(action='/users/login' method='post')
-          input(type='hidden' name='_csrf' value=csrfToken)
-          +field('Email Address', 'emailAddress', emailAddress)
-          +field('Password', 'password', null, 'password')
-          div(class='py-4')
-            button(type='submit' class='btn btn-primary') Login
-            p OR
-            button(type='submit' class='demo-log') Demo-User
-            a(href='/' class='btn btn-warning ml-2')
-      div(class='left')
-        div(class='title')
-          img
-          p Utterly Forgetful
-      //- div
-        //- p: a(href='/users/signup') Don't have an account?
+  body
+    div(class="row")
+      div(class="col")
+        div(class="left")
+          div(class="title")
+            img
+            h1(id="login-header") Utterly<br>Forgetful
+            p(id= "quote") “Do or do not. There is no try." -Yoda
+      div(class="col")
+        div(class="right")
+          p: a(href='/users/signup' id='account-sign-up') Don't have an account?
+          p Been here before? I wouldn't remember.
+          form(action='/users/login' method='post')
+            input#whatever(type='hidden' name='_csrf' value=csrfToken)
+            +field(null, 'emailAddress', emailAddress, null, "Email")(id="email-box")
+            +field(null, 'password', null, 'password', "Password")(id="password-box")
+            div(class='py-4')
+              button(type='submit' class='btn btn-primary') Login
+              p(id="orOption") OR
+              button(type='submit' class='demo-log') Demo-User
+              a(href='/' class='btn btn-warning ml-2')

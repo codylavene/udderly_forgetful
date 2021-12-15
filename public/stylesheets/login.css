@@ -1,30 +1,90 @@
-.thisBody{
-background-color: green;
+* {
+    box-sizing: border-box;
+    margin: 0;
 }
 
-.panels {
-    display: inline-flex;
-    flex-direction: row-reverse;
+.row {
+    display: grid;
+    height: 1000px;
+    grid-template-areas:
+    "left right"
+}
+
+.left {
+    display:flex;
     justify-content: center;
+    grid-area: left;
+    height: 100%;
+    color: white;
+    background-color: #0060bf;
+    font-size: 28px;
+    font-weight: 500;
+
+}
+
+.right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    grid-area: right;
+    border: red 2px solid;
+    font-size: 20px;
+    height: 100%;
+    margin: 2px;
+}
+
+
+#login-header {
+    color: white;
+    font-size: 100%;
+}
+
+
+#quote {
+    margin-top: 50%;
+}
+
+.btn-primary{
+    height: 48px;
+    font-size: 20px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 10px 12px;
+    color: white;
+    background-color: #009dff;
+    border-radius: 5px;
     width: 100%;
 }
-.right{
-    display: flex;
-    width: 50%;
-    font-size: 20px;
-    border: red 1px solid;
-    flex-direction: column;
-    justify-content: center;
-    background-color: white;
-
+.btn-primary:hover {
+    background-color: blue;
 }
 
-.left{
-    display: flex;
-    width: 50%;
-    background-color: #0060bf;
-    justify-content: center;
+.demo-log {
+    height: 48px;
+    font-size: 20px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 10px 12px;
     color: white;
-    font-size: 40px;
+    background-color: #009dff;
+    border-radius: 5px;
+    width: 100%;
+}
 
+.demo-log:hover {
+    background-color: blue;
+}
+
+#orOption {
+    font-size: 40px;
+    display:flex;
+    justify-content: center;
+}
+
+
+#whatever{
+    background-color: red;
+    height: 50px;
+    width: 50px;
+    padding: 2px;
+    border: 5px blue solid;
 }
