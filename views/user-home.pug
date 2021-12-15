@@ -4,18 +4,21 @@ include utils.pug
 block content
     div(class='top-nav-bar')
         div(class='hamburger-div')
-            button(type='submit' id='hamburger-menu') Hamburger
+            div(class='hamburger-container')
+              span(class="material-icons material-icons-hover") menu
         div(class='searchbar-div')
-            input(type='text' id='search-bar')
+          div(class="search-container")
+            label(for="search-bar")
+                span(class="material-icons" id="search-icon") search
+            input(type='text' id='search-bar' name="search-bar")
         div(class='settings-div')
             button(type='submit' id='settings-button') Settings
     div(class='left-nav-bar')
-        ul
-            li All Tasks
+        ul(class='all-lists') All Tasks
             li Today
             li Tomorrow
             li This Week
             li Trash
-        ul Lists
+        ul(class='added-lists') Lists
             each list in lists
                 li= list.name

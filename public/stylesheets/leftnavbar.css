@@ -1,0 +1,36 @@
+.left-nav-bar {
+    display:flex;
+    background-color: #d7e7f5;
+    flex-direction: column;
+    width: 20%;
+    height: 100%;
+    font-family: "Segoe UI",Arial,clean,sans-serif,"Segoe UI Emoji","Segoe UI Symbol"!important;
+}
+
+.all-lists {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    align-items: center;
+}
+
+.added-lists {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    align-items: center;
+}
+
+.all-lists li {
+    padding-top: 20px;
+    list-style-type: none;
+}
+
+.added-lists li {
+    padding-top: 20px;
+    list-style-type: none;
+}
