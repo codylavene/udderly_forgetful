@@ -34,9 +34,17 @@ window.addEventListener("DOMContentLoaded", () => {
       });
   });
 
-  // const listsButton = document.querySelector('.added-lists')
-  // const listChildren = listsButton.children
-  // listsButton.addEventListener('click', e => {
-  //     listChildren.style.color = '#d7e7f5'
-  // })
+
+
+
+  const listsButton = document.querySelector('.added-lists')
+  listsButton.addEventListener('click', e => {
+      for( let i = 0; i <= listsButton.children.length; i++) {
+          let listChildren = listsButton.children[i]
+          listsButton.removeChild(listChildren)
+      }
+      if (!listChildren) {
+          listsButton.appendChild()
+      }
+  })
 });
