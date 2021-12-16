@@ -18,6 +18,7 @@ h1 {
   height: 20px;
   display: flex;
   z-index: 9000;
+  cursor: pointer;
 }
 
 .hamburger-div {
@@ -106,8 +107,30 @@ h1 {
   color: black;
 }
 
-.settings-container {
+.logout-container {
   display: flex;
-  justify-content: space-around;
-  letter-spacing: -10px;
+  align-items: center;
+  padding: 4px;
+}
+.logout-container:hover {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+}
+#logout,
+#logout-icon {
+  padding: 4px;
+}
+
+#logout {
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin-top: -24px;
+  margin-left: 30px;
+}
+.height-transition {
+  /* transition: margin-top -100px;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
+  overflow-y: hidden; */
+  display: none;
 }
