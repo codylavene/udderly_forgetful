@@ -21,28 +21,28 @@ block content
                     div#logout Sign out
     div(class='left-nav-bar')
         div(id="nav-bar-logo") Utterly Forgetful Logo
-        ul.all-lists
+        ul(class='all-lists')
             li(id='all-tasks') All Tasks
-            li.today
-                a#today(href="/users/signup") Today
-            li.tomorrow
-                a#tomorrow(href="/users/signup") Tomorrow
-            li.this-week
-                a#this-week(href="/users/signup") This Week
-            li.trash
-                a#trash(href="/users/signup") Trash
-        ul.added-lists
+            li(id='today') Today
+            li(id='tomorrow') Tomorrow
+            li(id='this-week') This Week
+            li(id='trash') Trash
+        ul(class='added-lists')
             li(id='list') Lists
             each list in lists
-                li.added-list-children
-                    a#added-list-children(href="/users/signup")= list.name
-        //- ul(class='all-lists')
+                li(class='added-list-children')= list.name
+        //- ul.all-lists
         //-     li(id='all-tasks') All Tasks
-        //-     li(id='today') Today
-        //-     li(id='tomorrow') Tomorrow
-        //-     li(id='this-week') This Week
-        //-     li(id='trash') Trash
-        //- ul(class='added-lists')
+        //-     li.today
+        //-         a#today(href="/users/signup") Today
+        //-     li.tomorrow
+        //-         a#tomorrow(href="/users/signup") Tomorrow
+        //-     li.this-week
+        //-         a#this-week(href="/users/signup") This Week
+        //-     li.trash
+        //-         a#trash(href="/users/signup") Trash
+        //- ul.added-lists
         //-     li(id='list') Lists
         //-     each list in lists
-        //-         li(class='added-list-children')= list.name
+        //-         li.added-list-children
+        //-             a#added-list-children(href="/users/signup")= list.name

@@ -69,26 +69,31 @@
 #today:hover {
     background-color: #bfd7ef;
     font-weight: bold;
+    cursor: pointer;
 }
 
 #tomorrow:hover {
     background-color: #bfd7ef;
     font-weight: bold;
+    cursor: pointer;
 }
 
 #this-week:hover {
     background-color: #bfd7ef;
     font-weight: bold;
+    cursor: pointer;
 }
 
 #trash:hover {
     background-color: #bfd7ef;
     font-weight: bold;
+    cursor: pointer;
 }
 
-#added-list-children:hover {
+.added-list-children:hover {
     background-color: #bfd7ef;
     font-weight: bold;
+    cursor: pointer;
 }
 
 #list:hover {
