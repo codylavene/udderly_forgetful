@@ -12,8 +12,8 @@ block content
     +field('Username', 'username', user.username)
     +field('Password', 'password', user.password, 'password')
     +field('Confirm Password', 'confirmPassword', '', 'password')
-    div(class='py-4')
-      button(type='submit' class='btn btn-primary') Register
-      a(href='/' class='btn btn-warning ml-2') Cancel
+    div
+      button(type='submit') Register
+      a(href='/') Cancel
   div
     p: a(href='/users/login') Already have an account?
