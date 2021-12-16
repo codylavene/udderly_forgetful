@@ -1,9 +1,8 @@
 
 window.addEventListener("DOMContentLoaded", () => {
 
-  const AllTasks = document.querySelector("all-tasks");
-  const hamburgerHelper = (e) => {
-    e.stopPropagation()
+  const allTasks = document.querySelector("#all-tasks");
+  const taskCollapse = (e) => {
     const todayButton = document.querySelector("#today");
     todayButton.classList.toggle("height-transition");
     const tomorrowButton = document.querySelector("#tomorrow");
@@ -12,18 +11,19 @@ window.addEventListener("DOMContentLoaded", () => {
     thisWeekButton.classList.toggle("height-transition");
     const trashButton = document.querySelector("#trash");
     trashButton.classList.toggle("height-transition");
-  };
-    lists.addEventListener('click', hamburgerHelper)
+  }
+  allTasks.addEventListener('click', taskCollapse)
 
-  // const addedListButton = document.querySelector('lists')
-  // const cheeseburgerHelper = (e) => {
-  //   if (e.target !== list) {
-  //     e.stopPropagation()
-  //   }
-  //   const children = document.querySelectorAll('.added-list-children');
-  //   children.forEach(child => {
-  //     child.classList.toggle("height-transition");
-  //   })
-  // };
-  // addedListButton.addEventListener('click', cheeseburgerHelper)
+  const addedListButton = document.querySelector('#list')
+  const listCollapse = (e) => {
+    const children = document.querySelectorAll('.added-list-children');
+    console.log(e.target.className)
+    if (e.target.className === 'added-list-children') {
+      return;
+    }
+    children.forEach(child => {
+      child.classList.toggle("height-transition");
+    })
+  }
+  addedListButton.addEventListener('click', listCollapse)
 });
