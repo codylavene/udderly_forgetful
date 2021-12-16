@@ -1,9 +1,10 @@
 extends layout.pug
 include utils.pug
 append head
-    script(type="module" src='/javascripts/leftnavbar.js')
     link(rel='stylesheet' href='/stylesheets/leftnavbar.css')
-
+    link(rel="stylesheet", href="/stylesheets/user-top-nav.css")
+    script(type="module" src='/javascripts/leftnavbar.js')
+    script(src="/javascripts/user-top-nav.js" type="module")
 block content
     div(class='top-nav-bar')
         div(class='hamburger-div')
@@ -14,8 +15,14 @@ block content
             label(for="search-bar")
                 span(class="material-icons" id="search-icon") search
             input(type='text' id='search-bar' name="search-bar")
-        div(class='settings-div')
-            button(type='submit' id='settings-button') Settings
+        div(class='logout-div')
+            div.logout-container
+                div(class="material-icons material-icons-hover" id="logout-icon") logout
+                    div#logout Sign out
+
+
+
+
     div(class='left-nav-bar')
         div(id="nav-bar-logo") Utterly Forgetful Logo
         ul(class='all-lists') All Tasks

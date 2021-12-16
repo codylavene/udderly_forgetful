@@ -1,5 +1,7 @@
 extends layout.pug
 include utils.pug
+append head
+        link(rel='stylesheet' href='/stylesheets/login.css')
 block content
   +validationErrorSummary(errors)
   body
