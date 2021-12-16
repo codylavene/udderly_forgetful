@@ -8,6 +8,7 @@
     font-family: "Segoe UI",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol"!important;
 }
 
+
 .all-lists {
     display: flex;
     flex-direction: column;
@@ -38,6 +39,33 @@
     list-style-type: none;
 }
 
+#all-tasks:hover {
+    background-color: #bfd7ef;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#today {
+
+    text-decoration: none;
+}
+
+#tomorrow {
+    text-decoration: none;
+}
+
+#this-week {
+    text-decoration: none;
+}
+
+#trash {
+    text-decoration: none;
+}
+
+#added-list-children {
+    text-decoration: none;
+}
+
 #today:hover {
     background-color: #bfd7ef;
     font-weight: bold;
@@ -56,6 +84,17 @@
 #trash:hover {
     background-color: #bfd7ef;
     font-weight: bold;
+}
+
+#added-list-children:hover {
+    background-color: #bfd7ef;
+    font-weight: bold;
+}
+
+#list:hover {
+    background-color: #bfd7ef;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 #nav-bar-logo {
