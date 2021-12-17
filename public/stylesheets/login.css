@@ -4,10 +4,26 @@
 }
 
 .row {
-    display: grid;
-    height: 1000px;
-    grid-template-areas:
-    "left right"
+    display: flex;
+    flex-direction: row;
+    height: 730px;
+    width: 100%
+}
+
+.left-col {
+    width:50%;
+    height: 100%
+}
+
+.title-and-quote {
+    margin-top: 55px;
+    margin-left: 30px;
+}
+
+
+.right-col {
+    width:50%;
+    height: 100%;
 }
 
 .left {
@@ -24,14 +40,23 @@
 
 .right {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
     flex-direction: column;
+    align-items: center;
     grid-area: right;
-    border: red 2px solid;
     font-size: 20px;
     height: 100%;
-    margin: 2px;
+    width: 100%;
+    flex-shrink: 2;
+
+}
+
+#no-account-link {
+    width: 33%;
+    display: flex;
+    justify-content: flex-end;
+    height: 170px;
+    margin-top: 45px;
 }
 
 
@@ -42,7 +67,7 @@
 
 
 #quote {
-    margin-top: 50%;
+    margin-top: 85%;
 }
 
 .btn-primary{
@@ -54,9 +79,11 @@
     background-color: #009dff;
     border-radius: 5px;
     width: 100%;
+    border: none;
+    margin-bottom: 15px;
 }
 .btn-primary:hover {
-    background-color: blue;
+    background-color: rgb(41, 104, 185);
     cursor: pointer;
 }
 
@@ -68,25 +95,61 @@
     color: white;
     background-color: #009dff;
     border-radius: 5px;
-    width: 100%;
+    width: 400px;
+    border: none;
 }
 
 .demo-log:hover {
-    background-color: blue;
+    background-color: rgb(41, 104, 185);
     cursor: pointer;
 }
 
 #orOption {
-    font-size: 40px;
+    font-size: 20px;
     display:flex;
     justify-content: center;
+    margin-bottom: 15px;
+    color: gray;
 }
 
 
-#whatever{
-    background-color: red;
-    height: 50px;
-    width: 50px;
-    padding: 2px;
-    border: 5px blue solid;
+#account-sign-up {
+    text-decoration:none;
+    background-color: rgb(226, 235, 247);
+    border-radius: 3px;
+    font-size: 15px;
+    padding: 8px 11px 8px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.5);
+    font-family: "Helvetica Neue";
+    border: 1px solid transparent;
 }
+
+#form-content {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    align-items: flex-start;
+    flex-shrink: 2;
+}
+
+#been-here-text {
+    font-size: larger;
+    margin-bottom: 30px;
+}
+
+#emailAddress {
+    width: 90%;
+    height: 48px;
+    margin-bottom: 10px;
+}
+
+#password {
+    width: 90%;
+    height: 48px;
+    margin-bottom: 20px;
+}
+
+
+

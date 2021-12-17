@@ -6,22 +6,25 @@ block content
   +validationErrorSummary(errors)
   body
     div(class="row")
-      div(class="col")
+      div(class="left-col")
         div(class="left")
-          div(class="title")
-            img
+          div(class="title-and-quote")
             h1(id="login-header") Utterly<br>Forgetful
             p(id= "quote") “Do or do not. There is no try." -Yoda
-      div(class="col")
+      div(class="right-col")
         div(class="right")
-          p: a(href='/users/signup' id='account-sign-up') Don't have an account?
-          p Been here before? I wouldn't remember.
-          form(action='/users/login' method='post')
-            input#whatever(type='hidden' name='_csrf' value=csrfToken)
-            +field(null, 'emailAddress', emailAddress, null, "Email")(id="email-box")
-            +field(null, 'password', null, 'password', "Password")(id="password-box")
-            div(class='py-4')
-              button(type='submit' class='btn btn-primary') Login
-              p(id="orOption") OR
-              button(type='submit' class='demo-log') Demo-User
-              a(href='/' class='btn btn-warning ml-2')
+          div#no-account-link
+            p: a(href='/users/signup' id='account-sign-up') Sign up for free
+          div#form-content
+            p#been-here-text Been here before? Welcome Back!
+            form(action='/users/login' method='post')
+              input(type='hidden' name='_csrf' value=csrfToken)
+              +field(null, 'emailAddress', emailAddress, null, "Email")
+              +field(null, 'password', null, 'password', "Password")
+              div(class='py-4')
+                button(type='submit' class='btn btn-primary') Log in
+                div.left-border-of-or
+                p(id="orOption") OR
+                div.right-border-of-or
+                button(type='submit' class='demo-log') Demo-User
+                a(href='/' class='btn btn-warning ml-2')
