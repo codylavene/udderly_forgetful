@@ -4,7 +4,12 @@ document.addEventListener("DOMContentLoaded", (e) => {
   const addTaskButton = document.getElementById("add-task-button");
   const addedTasks = document.querySelector(".added-tasks");
   const lists = document.querySelector(".added-lists");
-  const trashIcon = document.getElementById('trash-icon')
+  const trashIcon = document.getElementById("trash-icon");
+  const emptyTaskInit = document.querySelector(".empty-task-template");
+  for (let i = 0; i < 70; i++) {
+    const div = document.createElement("div");
+    emptyTaskInit.appendChild(div);
+  }
   let listId;
   let taskId;
   /*--------------------------------------------------------------------*/
@@ -51,7 +56,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
         const val = addTaskInput.value;
         const div = document.createElement("div");
         div.classList.add("filled");
-        const boiler = `<div id=${data.task.id}> <input type="checkbox"><p> ${val} </p></div>`;
+        div.id = data.task.id;
+        const boiler = `<div><input type="checkbox"><p>${val}</p></div>`;
         div.innerHTML = boiler;
         addedTasks.appendChild(div);
         addTaskInput.value = "";
@@ -61,16 +67,16 @@ document.addEventListener("DOMContentLoaded", (e) => {
     }
   });
   addedTasks.addEventListener("click", (e) => {
-    taskId = e.target.id
-    e.target.style.color = "red"
+    taskId = e.target.id;
+    e.target.style.color = "red";
   });
 
   trashIcon.addEventListener("click", (e) => {
-    const task = document.querySelector(`#${taskId}`)
-    console.log(task)
-    task.style.color = 'blue';
+    const task = document.getElementById(`${taskId}`);
+    console.log(task);
+    // task.style.color = "blue";
     if (task) {
-      addedTasks.removeChild(task)
+      addedTasks.removeChild(task);
     }
-  })
+  });
 });
