@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db/models");
 
-router.use(express.json());
+// router.use(express.json());
 const {
   csrfProtection,
   asyncHandler,
@@ -13,7 +13,6 @@ const { check, validationResult } = require("express-validator");
 
 router.post(
   "/lists",
-  csrfProtection,
   asyncHandler(async (req, res) => {
     const { description, listId } = req.body;
     const { userId } = req.session.auth;
@@ -25,17 +24,16 @@ router.post(
 
 router.post(
   "/tasks",
-  csrfProtection,
   asyncHandler(async (req, res) => {
-    const { description, currList } = req.body;
+    const { description, listId } = req.body;
     const { userId } = req.session.auth;
-    console.log("============", currList);
+    // console.log("============", listId);
     const task = await db.Task.create({
       description,
-      listId: currList,
+      listId,
       userId,
     });
-    res.send("Success");
+    res.json({ message: "Success" });
   })
 );
 

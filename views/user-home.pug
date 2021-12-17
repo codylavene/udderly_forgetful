@@ -39,8 +39,7 @@ block content
                 div
                 div(class="task-control-panel") To do tools
                 div(class="add-task-form")
-                    form(action='/api/tasks' method='post')
-                        input(type='hidden' name='_csrf' value=csrfToken)
+                    form(action='/api/tasks' method='post' class="add-task-form2")
                         input(id="add-task-input" type="text" name="description" placeholder="Add a task...")
                         button(type='submit' id="add-task-button" class="hide-button") Add Task
                 .added-tasks
