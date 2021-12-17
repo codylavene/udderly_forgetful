@@ -1,2 +1,32 @@
 extends layout.pug
 include utils.pug
+append head
+    link(rel='stylesheet' href='/stylesheets/tours.css')
+block content
+    +validationErrorSummary(errors)
+    body
+        div(class='tour-navbar')
+            img(src="../assets/images/logo3.png")
+            div(class='headers')
+                p Tour
+                p Login
+                p(id='sign-up') Sign up for free
+        div(class='first')
+            h1 Tour
+            p Hop aboard and enjoy the tour!
+        div(class='second')
+            h2 Hello! Remember The Milk is the smart to-do app for busy people.
+            img(src="../assets/images/waving_steve.png")
+        div(class='third')
+            div(class='third-text')
+                h2 Get to-dos out of your head.
+                p Stop thinking about your to-dos, and let the app remember for you.
+            img(src="../assets/images/hp_steve_1.png")
+        div(class='fourth')
+            div(class='fourth-text')
+                h2 Add with Smart Add.
+                p It's super fast and easy to add your tasks to Remember The Milk with Smart Add. Enter your task's properties in one line, including due date, priority, repeat, tags, and more.
+            img(src="../assets/images/tour_smartadd2x.png")
+        div(class='fifth')
+
+        div(class='sixth')
