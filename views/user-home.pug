@@ -1,10 +1,10 @@
 extends layout.pug
 include utils.pug
 append head
-    link(rel='stylesheet' href='/stylesheets/leftnavbar.css')
-    link(rel="stylesheet", href="/stylesheets/user-top-nav.css")
+    link(rel="stylesheet" href="/stylesheets/leftnavbar.css")
     link(rel="stylesheet", href="/stylesheets/user-content.css")
-    script(type="module" src='/javascripts/leftnavbar.js')
+    link(rel="stylesheet", href="/stylesheets/user-top-nav.css")
+    script(src="/javascripts/leftnavbar.js" type="module" )
     script(src="/javascripts/user-top-nav.js" type="module")
     script(src="/javascripts/user-content.js" type="module")
 block content
@@ -21,30 +21,19 @@ block content
             div.logout-container
                 div(class="material-icons material-icons-hover" id="logout-icon") logout
                     div#logout Sign out
-
-    div(class='left-nav-bar')
-        div(id="nav-bar-logo") Utterly Forgetful Logo
-        ul(class='all-lists')
-            li(id='all-tasks') All Tasks
-            li(id='today') Today
-            li(id='tomorrow') Tomorrow
-            li(id='this-week') This Week
-            li(id='trash') Trash
-        ul(class='added-lists')
-            li(id='list') Lists
-            each list in lists
-                li(class='added-list-children')= list.name
     div(class="main-content")
         div(class='left-nav-bar')
             div(id="nav-bar-logo") Utterly Forgetful Logo
-            ul(class='all-lists') All Tasks
+            ul(class='all-lists')
+                li(id='all-tasks') All Tasks
                 li(id='today') Today
                 li(id='tomorrow') Tomorrow
                 li(id='this-week') This Week
                 li(id='trash') Trash
-            ul(class='added-lists') Lists
-                each list in lists
-                    li= list.name
+            ul(class='added-lists')
+                li(id='list') Lists
+                    each list in lists
+                        li(class='added-list-children')= list.name
         div(class="task-container")
             div(class="task-content")
                 div
@@ -73,4 +62,3 @@ block content
                 div(id="14")
                 div(id="15")
             div(class="task-details")
-

@@ -1,109 +1,108 @@
 .left-nav-bar {
-    display:flex;
-    position: fixed;
-    background-color: #d7e7f5;
-    flex-direction: column;
-    width: 210px;
-    height: 1000px;
-    font-family: "Segoe UI",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol"!important;
+  display: flex;
+  position: fixed;
+  background-color: #d7e7f5;
+  flex-direction: column;
+  width: 210px;
+  height: 1000px;
+  font-family: "Segoe UI", Arial, sans-serif, "Segoe UI Emoji",
+    "Segoe UI Symbol" !important;
 }
 
-
 .all-lists {
-    display: flex;
-    flex-direction: column;
-    margin-top: 100px;
-    justify-content: space-between;
-    padding-bottom: 20px;
-    align-items: center;
-    margin-right:50px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  align-items: center;
+  margin-right: 50px;
 }
 
 .added-lists {
-    display: flex;
-    flex-direction: column;
-    margin-top: 100px;
-    justify-content: space-between;
-    padding-bottom: 20px;
-    align-items: center;
-    margin-right:50px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  align-items: center;
+  margin-right: 50px;
 }
 
 .all-lists li {
-    margin-top: 20px;
-    list-style-type: none;
+  margin-top: 20px;
+  list-style-type: none;
 }
 
 .added-lists li {
-    margin-top: 20px;
-    list-style-type: none;
+  margin-top: 20px;
+  list-style-type: none;
 }
 
 #all-tasks:hover {
-    background-color: #bfd7ef;
-    font-weight: bold;
-    cursor: pointer;
+  background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 #today {
-
-    text-decoration: none;
+  text-decoration: none;
 }
 
 #tomorrow {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 #this-week {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 #trash {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 #added-list-children {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 #today:hover {
-    background-color: #bfd7ef;
-    font-weight: bold;
-    cursor: pointer;
+  background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 #tomorrow:hover {
-    background-color: #bfd7ef;
-    font-weight: bold;
-    cursor: pointer;
+  background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 #this-week:hover {
-    background-color: #bfd7ef;
-    font-weight: bold;
-    cursor: pointer;
+  background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 #trash:hover {
-    background-color: #bfd7ef;
-    font-weight: bold;
-    cursor: pointer;
+  background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .added-list-children:hover {
-    background-color: #bfd7ef;
-    font-weight: bold;
-    cursor: pointer;
+  background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 #list:hover {
-    background-color: #bfd7ef;
-    font-weight: bold;
-    cursor: pointer;
+  background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 #nav-bar-logo {
-    display: flex;
-    padding-top: 2rem;
-    justify-content: center;
+  display: flex;
+  padding-top: 2rem;
+  justify-content: center;
 }
