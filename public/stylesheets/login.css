@@ -57,6 +57,7 @@
 }
 .btn-primary:hover {
     background-color: blue;
+    cursor: pointer;
 }
 
 .demo-log {
@@ -72,6 +73,7 @@
 
 .demo-log:hover {
     background-color: blue;
+    cursor: pointer;
 }
 
 #orOption {

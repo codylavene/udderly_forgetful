@@ -21,6 +21,19 @@ block content
             div.logout-container
                 div(class="material-icons material-icons-hover" id="logout-icon") logout
                     div#logout Sign out
+
+    div(class='left-nav-bar')
+        div(id="nav-bar-logo") Utterly Forgetful Logo
+        ul(class='all-lists')
+            li(id='all-tasks') All Tasks
+            li(id='today') Today
+            li(id='tomorrow') Tomorrow
+            li(id='this-week') This Week
+            li(id='trash') Trash
+        ul(class='added-lists')
+            li(id='list') Lists
+            each list in lists
+                li(class='added-list-children')= list.name
     div(class="main-content")
         div(class='left-nav-bar')
             div(id="nav-bar-logo") Utterly Forgetful Logo
@@ -60,3 +73,4 @@ block content
                 div(id="14")
                 div(id="15")
             div(class="task-details")
+
