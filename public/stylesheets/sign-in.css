@@ -1,0 +1,115 @@
+body {
+    margin: 0px;
+}
+
+.sign-up-panel-holder {
+    display: grid;
+    height: 1000px;
+    width: 100%;
+    grid-template-areas:
+    "left right"
+}
+
+
+#left-sign-up {
+    grid-area: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    height: 100%;
+    width: 100%;
+    color: white;
+    background-color: #0060bf;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+
+#right-sign-up {
+    grid-area: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-right: 150x;
+}
+
+
+
+#links-and-buttons {
+    display: flex;
+    flex-direction: column;
+    height: 30px;
+}
+
+
+#register {
+    height: 48px;
+    font-size: 20px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 10px 12px;
+    color: white;
+    background-color: #009dff;
+    border-radius: 5px;
+    width: 100%;
+    margin: 3px;
+}
+
+
+#register:hover {
+    background-color: blue;
+}
+
+
+#cancel {
+    height: 48px;
+    font-size: 20px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 10px 12px;
+    text-decoration: none;
+    color: white;
+    background-color: #009dff;
+    border-radius: 5px;
+    width: 100%;
+    margin: 3px;
+}
+
+#cancel:hover {
+    background-color: #ca492e;
+}
+
+#form-contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+#icons img {
+    width:150px;
+    height:150px;
+    margin: 40px;
+}
+
+
+#main-logo {
+    position: absolute;
+}
+
+#already-have-account{
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+#already-have-account:hover {
+    text-decoration: underline;
+    color: blue;
+}
+
+input {
+    height: 40px;
+}
