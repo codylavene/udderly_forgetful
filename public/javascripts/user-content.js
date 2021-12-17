@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   /*--------------------------------------------------------------------*/
   lists.addEventListener("click", (e) => {
     listId = e.target.id;
+    console.log(listId);
   });
   /*--------------------------------------------------------------------*/
   document.addEventListener("click", (e) => {
@@ -28,8 +29,17 @@ document.addEventListener("DOMContentLoaded", (e) => {
     div.innerHTML = boiler;
     addedTasks.appendChild(div);
     addTaskInput.value = "";
-    // let description = val;
-    // const task = await db.Task.create({ description });
-    // await fetch("/api/tasks");
+
+    await fetch("/api/tasks", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        description: val,
+        currList: listId,
+      }),
+    });
   });
 });
