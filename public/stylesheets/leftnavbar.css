@@ -95,7 +95,7 @@
   cursor: pointer;
 }
 
-#list:hover {
+.list:hover {
   background-color: #bfd7ef;
   font-weight: bold;
   cursor: pointer;

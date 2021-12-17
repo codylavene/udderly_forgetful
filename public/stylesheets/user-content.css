@@ -41,13 +41,19 @@ body {
   margin-left: 10px;
 }
 
-.task-content > div {
+.task-content > div:not(.added-tasks) {
   height: fit-content;
   min-height: 38px;
   border-bottom: 1px dotted rgb(229, 229, 229);
   padding: 6px;
 }
 
+.empty-task-template > div {
+  height: fit-content;
+  min-height: 38px;
+  border-bottom: 1px dotted rgb(229, 229, 229);
+  padding: 6px;
+}
 .task-content:first-child {
   padding-top: 20px;
   border-bottom: 1px solid rgb(189, 32, 32);
@@ -104,11 +110,14 @@ body {
   flex-direction: row;
   height: 28px;
   border-left: 3px solid grey;
+  border-bottom: 1px dotted rgb(229, 229, 229);
   margin-left: 2%;
   padding-left: 4px;
   font-size: 13px;
 }
-
+.added-tasks {
+  border: 1px solid red;
+}
 .filled * {
   margin: auto 5px;
 }
