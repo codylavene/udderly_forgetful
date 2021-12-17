@@ -11,6 +11,7 @@ const {
 const { check, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const { loginUser, logoutUser, requireAuth } = require("../auth");
+let usersId;
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -117,6 +118,7 @@ router.get(
   requireAuth,
   asyncHandler(async (req, res) => {
     const { userId } = req.session.auth;
+    usersId = userId
     const lists = await db.List.findAll({
       where: {
         userId: userId,

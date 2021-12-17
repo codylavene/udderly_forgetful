@@ -2,6 +2,7 @@ extends layout.pug
 include utils.pug
 append head
         link(rel='stylesheet' href='/stylesheets/login.css')
+        script(src="/javascripts/login.js" type="module")
 block content
   +validationErrorSummary(errors)
   body
