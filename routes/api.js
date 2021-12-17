@@ -33,7 +33,7 @@ router.post(
       listId,
       userId,
     });
-    res.json({ message: "Success" });
+    res.json({ message: "Success", task: { id: task.id }  });
   })
 );
 

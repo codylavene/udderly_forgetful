@@ -4,7 +4,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
   const addTaskButton = document.getElementById("add-task-button");
   const addedTasks = document.querySelector(".added-tasks");
   const lists = document.querySelector(".added-lists");
+  const trashIcon = document.getElementById('trash-icon')
   let listId;
+  let taskId;
   /*--------------------------------------------------------------------*/
   addTaskInput.addEventListener("focus", (e) => {
     addTaskButton.classList.remove("hide-button");
@@ -49,7 +51,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
         const val = addTaskInput.value;
         const div = document.createElement("div");
         div.classList.add("filled");
-        const boiler = `<input type="checkbox"><p> ${val} </p>`;
+        const boiler = `<div id=${data.task.id}> <input type="checkbox"><p> ${val} </p></div>`;
         div.innerHTML = boiler;
         addedTasks.appendChild(div);
         addTaskInput.value = "";
@@ -58,4 +60,17 @@ document.addEventListener("DOMContentLoaded", (e) => {
       console.error(e);
     }
   });
+  addedTasks.addEventListener("click", (e) => {
+    taskId = e.target.id
+    e.target.style.color = "red"
+  });
+
+  trashIcon.addEventListener("click", (e) => {
+    const task = document.querySelector(`#${taskId}`)
+    console.log(task)
+    task.style.color = 'blue';
+    if (task) {
+      addedTasks.removeChild(task)
+    }
+  })
 });

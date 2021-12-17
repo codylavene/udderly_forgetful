@@ -37,7 +37,8 @@ block content
         div(class="task-container")
             div(class="task-content")
                 div
-                div(class="task-control-panel") To do tools
+                div(class="task-control-panel")
+                    div(class="material-icons-dark material-icons"  id="trash-icon") delete
                 div(class="add-task-form")
                     form(action='/api/tasks' method='post' class="add-task-form2")
                         input(id="add-task-input" type="text" name="description" placeholder="Add a task...")
