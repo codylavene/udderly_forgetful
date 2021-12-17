@@ -39,9 +39,12 @@ block content
                 div(class="add-task-form")
                     form(action='/lists' method='post')
                         input(type='hidden' name='_csrf' value=csrfToken)
-                        input(id="add-task-input" type="text" placeholder="add a task...")
-                        button(type='submit' id="add-task-button") Add Task
+                        input(id="add-task-input" type="text" placeholder="Add a task...")
+                        button(type='submit' id="add-task-button" class="hide-button") Add Task
                 div(id="1")
+                    .filled
+                        input(type="checkbox")
+                        p Testing
                 div(id="2")
                 div(id="3")
                 div(id="4")
