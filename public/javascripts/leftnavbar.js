@@ -23,15 +23,15 @@ window.addEventListener("DOMContentLoaded", () => {
       allTaskButton.removeChild(trashButton);
       // allTaskButton.removeEventListener()
     }
-      allTaskButton.addEventListener("click", (e) => {
-        if(allTaskButton.children.length === 0) {
+    allTaskButton.addEventListener("click", (e) => {
+      if (allTaskButton.children.length === 0) {
         allTaskButton.innerText = "All Tasks";
         allTaskButton.appendChild(todayButton);
         allTaskButton.appendChild(tomorrowButton);
         allTaskButton.appendChild(thisWeekButton);
         allTaskButton.appendChild(trashButton);
-          }
-      });
+      }
+    });
   });
 
 
@@ -39,12 +39,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const listsButton = document.querySelector('.added-lists')
   listsButton.addEventListener('click', e => {
-      for( let i = 0; i <= listsButton.children.length; i++) {
-          let listChildren = listsButton.children[i]
-          listsButton.removeChild(listChildren)
-      }
-      if (!listChildren) {
-          listsButton.appendChild()
-      }
+    for (let i = 0; i <= listsButton.children.length; i++) {
+      let listChildren = listsButton.children[i]
+      listsButton.removeChild(listChildren)
+    }
+    if (!listChildren) {
+      listsButton.appendChild()
+    }
   })
 });
