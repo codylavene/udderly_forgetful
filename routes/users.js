@@ -10,7 +10,7 @@ const {
 } = require("./utils");
 const { check, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
-const { loginUser, logoutUser } = require("../auth");
+const { loginUser, logoutUser, requireAuth } = require("../auth");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -114,6 +114,7 @@ router.post("/logout", (req, res) => {
 router.get(
   "/:userId(\\d+)",
   csrfProtection,
+  requireAuth,
   asyncHandler(async (req, res) => {
     const { userId } = req.session.auth;
     const lists = await db.List.findAll({

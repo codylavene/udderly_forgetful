@@ -32,10 +32,14 @@ document.addEventListener("DOMContentLoaded", (e) => {
         console.info(err + " url: " + "/users/logout");
       });
   };
+
   const ham = document.querySelector(".hamburger-container");
   const hamburgerHelper = (e) => {
+    const taskContent = document.querySelector(".task-container")
     const lists = document.querySelector(".left-nav-bar");
     lists.classList.toggle("height-transition");
+    taskContent.classList.toggle("task-full-screen")
+
   };
   logoutBtn.addEventListener("click", signout);
   ham.addEventListener("click", hamburgerHelper);

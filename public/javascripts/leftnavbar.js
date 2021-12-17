@@ -26,4 +26,5 @@ window.addEventListener("DOMContentLoaded", () => {
     })
   }
   addedListButton.addEventListener('click', listCollapse)
+
 });
