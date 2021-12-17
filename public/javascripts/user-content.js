@@ -21,4 +21,4 @@ document.addEventListener("DOMContentLoaded", (e) => {
                     <p> ${val}`;
     div.innerHTML = boiler;
   });
-});
+})
