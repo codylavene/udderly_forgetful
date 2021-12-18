@@ -37,14 +37,17 @@ router.post(
   })
 );
 router.delete(
-  "/tasks",
+  "/tasks/:taskId(\\d+)",
   asyncHandler(async (req, res, next) => {
-    const { taskId } = req.body;
-    console.log(">>>>>>>>>>>>>", taskId);
+    console.log(req.params);
+    const taskId = req.params.taskId;
+    id = parseInt(taskId, 10);
     // const { userId } = req.session.auth;
-    const task = await db.Task.findByPk(taskId);
+    console.log(">>>>>>>>>>>>>", id);
+    const task = await db.Task.findAll();
+    console.log("<><><><><><><><>", task);
     await task.destroy();
-    res.json({ message: "Destroyed" });
+    res.status(202).json({ message: "Destroyed" });
   })
 );
 module.exports = router;

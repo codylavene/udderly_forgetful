@@ -78,16 +78,16 @@ document.addEventListener("DOMContentLoaded", (e) => {
     console.log(task);
     if (task) {
       try {
-        const res = await fetch("/api/tasks", {
+        const res = await fetch(`/api/tasks/${taskId}`, {
           method: "DELETE",
-          body: JSON.stringify({ taskId: 3 }),
-          headers: {
-            "Content-Type": "application/json",
-          },
+          // body: JSON.stringify({ taskId: taskId }),
+          // headers: {
+          //   "Content-Type": "application/json",
+          // },
         });
-        // if (!res.ok) throw res;
+        if (!res.ok) throw res;
         const data = await res.json();
-
+        console.log(data);
         if (data.message === "Destroyed") {
           addedTasks.removeChild(task);
         }
