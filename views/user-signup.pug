@@ -3,6 +3,7 @@ extends layout.pug
 include utils.pug
   append head
      link(rel='stylesheet' href='/stylesheets/sign-in.css')
+     script(src="/javascripts/sign-up-demo-user.js" type="module")
 
 block content
   +validationErrorSummary(errors)
@@ -26,23 +27,27 @@ block content
       div(id='left-sign-up-container')
         img(src='../assets/images/logo3.png', id="main-logo")
         div(id='left-sign-up')
-          h1 Utterly ForgetFul
           div(id="icons")
-            img(src="../assets/images/hp_steve_1.png")
-            img(src="../assets/images/hp_steve_2.png")
-            img(src="../assets/images/hp_steve_3.png")
-            p Join millions of people getting more organized and productive!
+            div.image-container
+              img(src="../assets/images/hp_steve_2.png", class="animated-images")
+            
+          p(id="p-text") Join millions of people getting more organized and productive!
       div(id='right-sign-up-container')
         div(id='right-sign-up')
           div(id="form-contents")
-            +field('First Name', 'firstName', user.firstName)
-            +field('Last Name', 'lastName', user.lastName)
-            +field('Email', 'email', user.email)
-            +field('Username', 'username', user.username)
-            +field('Password', 'password', user.password, 'password')
-            +field('Confirm Password', 'confirmPassword', '', 'password')
-          div(id="links-and-buttons")
+            +field(null, 'firstName', null, null, "First Name")
+            +field(null, 'lastName', null, null, "Last Name")
+            +field(null, 'email', null, null, "Email")
+            +field(null, 'username', null, null, "Username")
+            +field(null, 'password', null, "password", "Password")
+            +field(null, 'confirmPassword', null, "password", "Confirm Password")
+          div(id="sign-up-button")
             button(type='submit' id="register") Sign up!
-            a(href='/' id="cancel") Cancel
-            div
-              p: a(href='/users/login' id="already-have-account") Already have an account?
+            p(id="orOption") OR
+            a(href="/users/login" id="login-button") Login
+  form(action="/users/login" method="post")
+    input(type='hidden' name='_csrf' value=csrfToken)
+    input(type='hidden' name="emailAddress" value="demouser")
+    input(type='hidden' name='password' value="Demo1!")
+    button(type= "submit" id="demo-button") Demo User
+
