@@ -108,16 +108,16 @@ body {
 .filled {
   display: flex;
   flex-direction: row;
-  height: 28px;
+  height: 38px;
   border-left: 3px solid grey;
   border-bottom: 1px dotted rgb(229, 229, 229);
   margin-left: 2%;
   padding-left: 4px;
   font-size: 13px;
 }
-.added-tasks {
+/* .added-tasks {
   border: 1px solid red;
-}
+} */
 .filled * {
   margin: auto 5px;
 }

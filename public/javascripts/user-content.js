@@ -55,9 +55,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
       if (data.message === "Success") {
         const val = addTaskInput.value;
         const div = document.createElement("div");
-        div.classList.add("filled");
+        // div.classList.add("filled");
         div.id = data.task.id;
-        const boiler = `<div><input type="checkbox"><p>${val}</p></div>`;
+        console.log(div.id);
+        const boiler = `<div class="filled" id=${data.task.id}><input type="checkbox" id=${data.task.id}><p id=${data.task.id}>${val}</p></div>`;
         div.innerHTML = boiler;
         addedTasks.appendChild(div);
         addTaskInput.value = "";
@@ -68,15 +69,31 @@ document.addEventListener("DOMContentLoaded", (e) => {
   });
   addedTasks.addEventListener("click", (e) => {
     taskId = e.target.id;
+    console.log(taskId);
     e.target.style.color = "red";
   });
 
-  trashIcon.addEventListener("click", (e) => {
-    const task = document.getElementById(`${taskId}`);
+  trashIcon.addEventListener("click", async (e) => {
+    const task = document.getElementById(taskId);
     console.log(task);
-    // task.style.color = "blue";
     if (task) {
-      addedTasks.removeChild(task);
+      try {
+        const res = await fetch("/api/tasks", {
+          method: "DELETE",
+          body: JSON.stringify({ taskId: 3 }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        // if (!res.ok) throw res;
+        const data = await res.json();
+
+        if (data.message === "Destroyed") {
+          addedTasks.removeChild(task);
+        }
+      } catch (e) {
+        console.error(e);
+      }
     }
   });
 });

@@ -33,8 +33,18 @@ router.post(
       listId,
       userId,
     });
-    res.json({ message: "Success", task: { id: task.id }  });
+    res.json({ message: "Success", task: { id: task.id } });
   })
 );
-
+router.delete(
+  "/tasks",
+  asyncHandler(async (req, res, next) => {
+    const { taskId } = req.body;
+    console.log(">>>>>>>>>>>>>", taskId);
+    // const { userId } = req.session.auth;
+    const task = await db.Task.findByPk(taskId);
+    await task.destroy();
+    res.json({ message: "Destroyed" });
+  })
+);
 module.exports = router;
