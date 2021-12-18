@@ -10,9 +10,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
   }, {});
-  List.associate = function(models) {
+  List.associate = function (models) {
     List.belongsTo(models.User, { foreignKey: "userId" })
-    List.hasMany(models.Task, {foreignKey: "taskId" })
+    List.hasMany(models.Task, { foreignKey: "listId" })
   };
   return List;
 };
