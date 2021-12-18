@@ -76,24 +76,20 @@ document.addEventListener("DOMContentLoaded", (e) => {
   trashIcon.addEventListener("click", async (e) => {
     const task = document.getElementById(taskId);
     console.log(task);
-    if (task) {
-      try {
-        const res = await fetch(`/api/tasks/${taskId}`, {
-          method: "DELETE",
-          // body: JSON.stringify({ taskId: taskId }),
-          // headers: {
-          //   "Content-Type": "application/json",
-          // },
-        });
-        if (!res.ok) throw res;
-        const data = await res.json();
-        console.log(data);
-        if (data.message === "Destroyed") {
-          addedTasks.removeChild(task);
-        }
-      } catch (e) {
-        console.error(e);
+
+    try {
+      const res = await fetch(`/api/tasks/${task.id}`, { method: "DELETE" });
+
+      // if (!res.ok) throw res;
+      const data = await res.json();
+      console.log(data);
+      if (data.message === "Destroyed") {
+        addedTasks.removeChild(task);
+      } else {
+        console.log("failed");
       }
+    } catch (e) {
+      console.error(e);
     }
   });
 });

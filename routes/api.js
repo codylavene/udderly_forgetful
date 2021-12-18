@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../db/models");
+const { Task } = require("../db/models");
 
 // router.use(express.json());
 const {
@@ -17,7 +17,7 @@ router.post(
     const { description, listId } = req.body;
     const { userId } = req.session.auth;
 
-    const task = await db.Task.create({ description, userId, listId });
+    const task = await Task.create({ description, userId, listId });
     res.end();
   })
 );
@@ -28,7 +28,7 @@ router.post(
     const { description, listId } = req.body;
     const { userId } = req.session.auth;
     // console.log("============", listId);
-    const task = await db.Task.create({
+    const task = await Task.create({
       description,
       listId,
       userId,
@@ -36,18 +36,16 @@ router.post(
     res.json({ message: "Success", task: { id: task.id } });
   })
 );
-router.delete(
-  "/tasks/:taskId(\\d+)",
-  asyncHandler(async (req, res, next) => {
-    console.log(req.params);
-    const taskId = req.params.taskId;
-    id = parseInt(taskId, 10);
-    // const { userId } = req.session.auth;
-    console.log(">>>>>>>>>>>>>", id);
-    const task = await db.Task.findAll();
-    console.log("<><><><><><><><>", task);
+router.delete("/tasks/:id(\\d+)", async (req, res, next) => {
+  // const { userId } = req.session.auth;
+  console.log(">>>>>>>>>>>>>", req.params.id);
+  const task = await Task.findByPk(req.params.id);
+  console.log("<><><><><><><><>", task);
+  if (task) {
     await task.destroy();
-    res.status(202).json({ message: "Destroyed" });
-  })
-);
+    res.json({ message: "Destroyed" });
+  } else {
+    res.json({ message: "Failed" });
+  }
+});
 module.exports = router;
