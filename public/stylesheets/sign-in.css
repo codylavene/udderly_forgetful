@@ -3,11 +3,10 @@ body {
 }
 
 .sign-up-panel-holder {
-    display: grid;
-    height: 1000px;
+    display: flex;
+    height: 787px;
     width: 100%;
-    grid-template-areas:
-    "left right"
+    flex-direction: row;
 }
 
 
@@ -26,23 +25,43 @@ body {
     font-weight: 500;
 }
 
+#orOption {
+    margin-left: 165px;
+    margin-bottom: 30px;
+}
 
+#login-button {
+    margin-left: 0px;
+    padding: 15px 150px;
+    height: 48px;
+    color: white;
+    background-color: #009dff;
+    border-radius: 5px;
+    text-decoration:none;
+    font-size: 20px;
+}
+
+#login-button:hover {
+        background-color: rgb(52, 114, 195);
+}
 #right-sign-up {
-    grid-area: right;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     height: 100%;
-    margin-right: 150x;
+    width: 100%;
+}
+
+.or-and-login-button {
+    padding-top: 100px;
 }
 
 
-
-#links-and-buttons {
-    display: flex;
-    flex-direction: column;
+#sign-up-button {
     height: 30px;
+    padding-top: 30px;
+    margin-left: 70px;
 }
 
 
@@ -56,11 +75,14 @@ body {
     border-radius: 5px;
     width: 100%;
     margin: 3px;
+    border: none;
+    width: 350px;
 }
 
 
 #register:hover {
-    background-color: blue;
+    background-color: rgb(52, 114, 195);
+    cursor: pointer;
 }
 
 
@@ -84,20 +106,33 @@ body {
 #form-contents {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
+    /* justify-content: center; */
+    margin-left: 10%;
+
 }
 
-
+#icons {
+    display: flex;
+    flex-direction: row;
+}
 
 #icons img {
-    width:150px;
+    width: 70%;
     height:150px;
-    margin: 40px;
+    margin: 20px;
+}
+
+#p-text {
+    font-size: 18px;
 }
 
 
 #main-logo {
     position: absolute;
+    width: 180px;
+    margin-left: 13.5%;
+    margin-top: 1%;
 }
 
 #already-have-account{
@@ -113,3 +148,63 @@ body {
 input {
     height: 40px;
 }
+
+#demo-button {
+height: 48px;
+font-size: 20px;
+font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+padding: 10px 12px;
+color: white;
+background-color: #009dff;
+border-radius: 5px;
+width: 9%;
+margin: 3px;
+position: absolute;
+right: 200px;
+top: 50px;
+border: none;
+}
+
+#demo-button:hover {
+    background-color: rgb(52, 114, 195);
+    cursor: pointer;
+
+}
+
+#form-contents input {
+    margin-top: 10px;
+    width: 350px;
+    height: 48px;
+}
+
+/* #firstName::placeholder {
+    font-size: 20px;
+    padding-left: 10px;
+    font-family: "Helvetica Neue";
+    font-weight: 350;
+    color: rgb(135, 135, 135);  
+} */
+
+#form-contents input::placeholder {
+    font-size: 20px;
+    padding-left: 10px;
+    font-family: "Helvetica Neue";
+    font-weight: 350;
+    color: rgb(135, 135, 135); 
+}
+
+#left-sign-up-container {
+    width: 50%
+}
+
+#right-sign-up-container {
+    width: 50%;
+}
+
+
+
+
+
+
+
+

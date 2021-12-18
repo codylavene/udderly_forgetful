@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
     //get demo button
     const demoButton = document.querySelector(".demo-log")
 
+    //get login in button
+    const loginButton = document.querySelector(".btn")
     //get value of username input
     const username = document.getElementById("emailAddress")
 
@@ -12,10 +14,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
     demoButton.addEventListener("click", e => {
         e.preventDefault()
 
-        username.value = "Demo-User"
-        username.password = "Shhtevebarca16!"
+        username.value = "demouser"
+        password.value = "Demo1!"
 
-
-
+        loginButton.click()
     })
 });
