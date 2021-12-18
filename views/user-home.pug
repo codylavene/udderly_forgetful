@@ -24,19 +24,26 @@ block content
     div(class="main-content")
         div(class='left-nav-bar')
             div(id="nav-bar-logo") Utterly Forgetful Logo
-            ul(class='all-lists')
-                li(id='all-tasks') All Tasks
-                li(id='today') Today
-                li(id='tomorrow') Tomorrow
-                li(id='this-week') This Week
-                li(id='trash') Trash
-            ul(class='added-lists')
-                li(class='list') Lists
+            div.time-based-lists
+                div.inbox-div
+                    span(class="material-icons material-icons-dark" id="inbox-toggle") arrow_drop_down
+                    span.inbox Tasks
+                div(class='all-lists')
+                    div(id='all-tasks') All Tasks
+                    div(id='today') Today
+                    div(id='tomorrow') Tomorrow
+                    div(id='this-week') This Week
+                    //- li(id='trash') Trash
+            div.created-lists
+                div.added-lists
+                    span(class="material-icons material-icons-dark" id="list-toggle") arrow_drop_down
+                    span.lists Lists
+                div.added-list-child-container
                     each list in lists
-                        li(class='added-list-children' id=list.id)= list.name
+                        div(class='added-list-children' id=list.id)= list.name
         div(class="task-container")
             div(class="task-content")
-                div
+                div.current-list All Tasks
                 div(class="task-control-panel")
                     div(class="material-icons-dark material-icons"  id="trash-icon") delete
                 div(class="add-task-form")
@@ -44,5 +51,11 @@ block content
                         input(id="add-task-input" type="text" name="description" placeholder="Add a task...")
                         button(type='submit' id="add-task-button" class="hide-button") Add Task
                 .added-tasks
+                    if tasks
+                        each task in tasks
+                            div(class="filled" id=task.id)
+                                input(type="checkbox" id=task.id)
+                                p(id=task.id)= task.description
+
                 .empty-task-template
             div(class="task-details")

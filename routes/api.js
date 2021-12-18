@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Task } = require("../db/models");
+const db = require("../db/models");
 
 // router.use(express.json());
 const {
@@ -17,18 +17,32 @@ router.post(
     const { description, listId } = req.body;
     const { userId } = req.session.auth;
 
-    const task = await Task.create({ description, userId, listId });
+    const task = await db.Task.create({ description, userId, listId });
     res.end();
   })
 );
-
+router.get(
+  "/tasks",
+  asyncHandler(async (req, res, next) => {
+    const { userId } = req.session.auth;
+    const tasks = await db.Task.findAll({
+      where: { userId },
+    });
+    console.log(JSON.stringify(tasks, null, 4));
+    if (tasks) {
+      res.json(tasks);
+    } else {
+      res.json({ message: "Failed" });
+    }
+  })
+);
 router.post(
   "/tasks",
   asyncHandler(async (req, res) => {
     const { description, listId } = req.body;
     const { userId } = req.session.auth;
     // console.log("============", listId);
-    const task = await Task.create({
+    const task = await db.Task.create({
       description,
       listId,
       userId,
@@ -39,7 +53,7 @@ router.post(
 router.delete("/tasks/:id(\\d+)", async (req, res, next) => {
   // const { userId } = req.session.auth;
   console.log(">>>>>>>>>>>>>", req.params.id);
-  const task = await Task.findByPk(req.params.id);
+  const task = await db.Task.findByPk(req.params.id);
   console.log("<><><><><><><><>", task);
   if (task) {
     await task.destroy();
@@ -48,4 +62,20 @@ router.delete("/tasks/:id(\\d+)", async (req, res, next) => {
     res.json({ message: "Failed" });
   }
 });
+
+router.get(
+  "/lists/:id",
+  asyncHandler(async (req, res, next) => {
+    const tasks = await db.Task.findAll({
+      where: {
+        listId: req.params.id,
+      },
+    });
+    if (tasks) {
+      res.json(tasks);
+    } else {
+      res.json({ message: "Failed" });
+    }
+  })
+);
 module.exports = router;
