@@ -78,4 +78,17 @@ router.get(
     }
   })
 );
+router.get(
+  "/tasks/:id",
+  asyncHandler(async (req, res, next) => {
+    const task = await db.Task.findByPk(req.params.id, {
+      include: db.List,
+    });
+    if (task) {
+      res.json(task);
+    } else {
+      res.json({ message: "Failed" });
+    }
+  })
+);
 module.exports = router;

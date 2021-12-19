@@ -53,9 +53,13 @@ block content
                 .added-tasks
                     if tasks
                         each task in tasks
-                            div(class="filled" id=task.id)
-                                input(type="checkbox" id=task.id)
-                                p(id=task.id)= task.description
+                            div.pre-filled(id=task.id)
+                                div(class="filled" data-id=task.id)
+                                    input(type="checkbox" data-id=task.id)
+                                    p(data-id=task.id)= task.description
 
-                .empty-task-template
+                .empty-task-template#empty
             div(class="task-details")
+                h2.task-name
+                h3.list-name
+                h3.due-date

@@ -18,9 +18,12 @@
   border-radius: 6px;
   position: relative;
   top: 7px;
+  border: none;
 }
 #inbox-toggle:hover {
   background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
 }
 .inbox {
   font-size: 14px;
@@ -60,9 +63,12 @@
   border-radius: 6px;
   position: relative;
   top: 7px;
+  border: none;
 }
 #list-toggle:hover {
   background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
 }
 .lists {
   font-size: 14px;
