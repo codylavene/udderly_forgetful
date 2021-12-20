@@ -1,3 +1,3 @@
-window.addEventListener("load", (event)=>{
-    console.log("hello from javascript!")
-})
+// export function name() {
+//   console.log("hello world");
+// }

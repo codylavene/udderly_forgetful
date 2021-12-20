@@ -118,13 +118,20 @@ router.get(
   requireAuth,
   asyncHandler(async (req, res) => {
     const { userId } = req.session.auth;
-    usersId = userId
-    const lists = await db.List.findAll({
-      where: {
-        userId: userId,
-      },
-    });
-    res.render("user-home", { csrfToken: req.csrfToken(), lists });
+    // usersId = userId
+    // const lists = await db.List.findAll({
+    //   where: {
+    //     userId: userId,
+    //   },
+    // });
+    // res.render("user-home", { csrfToken: req.csrfToken(), lists });
+    const lists = await db.List.findAll({ where: { userId: userId } });
+    const tasks = await db.Task.findAll({ where: { userId: userId } });
+    if (tasks) {
+      res.render("user-home", { csrfToken: req.csrfToken(), lists, tasks });
+    } else {
+      res.render("user-home", { csrfToken: req.csrfToken(), lists });
+    }
   })
 );
 /*--------------------------------------------------------------------*/
