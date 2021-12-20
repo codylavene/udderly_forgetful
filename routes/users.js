@@ -59,7 +59,13 @@ router.post(
       loginUser(req, res, user);
       return res.redirect(`/users/${user.id}`);
     } else {
-      const errors = validationErrors.array().map((error) => error.msg);
+      console.log(validationErrors.errors);
+      const errors = {};
+      for (let i = 0; i < validationErrors.errors.length; i++) {
+        errors[validationErrors.errors[i].param] = validationErrors.errors[i].msg
+      }
+
+      console.log(errors)
       res.render("user-signup", {
         title: "Sign-up",
         errors,
@@ -80,8 +86,10 @@ router.post(
     let errors = [];
     const validationErrors = validationResult(req);
 
+    console.log("==============", email);
+
     if (validationErrors.isEmpty()) {
-      const user = await db.User.findOne({ where: email });
+      const user = await db.User.findOne({ where: { email: email } });
 
       if (user !== null) {
         const passwordCheck = await bcrypt.compare(

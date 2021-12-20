@@ -16,11 +16,11 @@ block content
           div#no-account-link
             p: a(href='/users/signup' id='account-sign-up') Sign up for free
           div#form-content
-            +validationErrorSummary(errors)
             p#been-here-text Been here before? Welcome Back!
+            +validationErrorSummary(errors)
             form(action='/users/login' method='post')
               input(type='hidden' name='_csrf' value=csrfToken)
-              +field(null, 'emailAddress', emailAddress, null, "Email")
+              +field(null, 'email', email, null, "Email")
               +field(null, 'password', null, 'password', "Password")
               div(class='py-4')
                 button(type='submit' class='btn btn-primary') Log in

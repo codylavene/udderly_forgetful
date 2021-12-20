@@ -1,11 +1,11 @@
 body {
     margin: 0px;
-    height: fit-content;
+    height: 850px;
 }
 
 .sign-up-panel-holder {
     display: flex;
-    height: 787px;
+    height: 100%;
     width: 100%;
     flex-direction: row;
 }
@@ -62,7 +62,6 @@ body {
 #sign-up-button {
     height: 30px;
     padding-top: 30px;
-    margin-left: 70px;
 }
 
 
@@ -110,7 +109,7 @@ body {
     /* align-items: center; */
     /* justify-content: center; */
     margin-left: 10%;
-
+    margin-top: -60px;
 }
 
 #icons {
@@ -218,6 +217,12 @@ border: none;
 
 #error-ul li {
     list-style-type: none;
+}
+
+.errors {
+    color: red;
+    margin: 0px 0px;
+    max-width: 350px;
 }
 
 

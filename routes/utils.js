@@ -22,31 +22,28 @@ const userValidators = [
   check("username")
     .exists({ checkFalsy: true })
     .withMessage("Username is required")
-    .isLength({ max: 100, min: 2 })
+    .isLength({ max: 100 })
     .withMessage(
-      "Username must not be more than 100 characters long or less than 2 characters"
+      "Username must not be more than 100 characters long."
     )
     .custom((value) => {
       return db.User.findOne({ where: { username: value } }).then((user) => {
         if (user) {
           return Promise.reject(
-            "The provided username is already in use by another account"
+            "Username is already taken."
           );
         }
       });
     }),
-  check("email")
-    .exists({ checkFalsy: true })
-    .withMessage("Invalid email address")
+  check("email", "Please provide a valid email.")
+    .isEmail()
     .isLength({ max: 100 })
     .withMessage("Email must not be more than 100 characters long")
-    .isEmail()
-    .withMessage("Email is not a valid email")
     .custom((value) => {
       return db.User.findOne({ where: { email: value } }).then((user) => {
         if (user) {
           return Promise.reject(
-            "The provided email is already in use by another account"
+            "Email is already taken."
           );
         }
       });
@@ -75,9 +72,9 @@ const userValidators = [
 ];
 
 const loginValidators = [
-  check("emailAddress")
-    .exists({ checkFalsy: true })
-    .withMessage("Please provide a value for Email Address"),
+  check("email")
+    .isEmail()
+    .withMessage("Please provide a valid Email Address."),
   check("password")
     .exists({ checkFalsy: true })
     .withMessage("Please provide a value for Password"),
