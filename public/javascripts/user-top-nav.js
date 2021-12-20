@@ -35,12 +35,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
   const ham = document.querySelector(".hamburger-container");
   const hamburgerHelper = (e) => {
-    const taskContent = document.querySelector(".task-container")
+    const taskContent = document.querySelector(".task-container");
     const lists = document.querySelector(".left-nav-bar");
     lists.classList.toggle("height-transition");
-    taskContent.classList.toggle("task-full-screen")
-
+    taskContent.classList.toggle("task-full-screen");
   };
   logoutBtn.addEventListener("click", signout);
   ham.addEventListener("click", hamburgerHelper);
+  /*--------------------------------------------------------------------*/
+  // SEARCH FETCH
 });

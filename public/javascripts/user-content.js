@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   const trashIcon = document.getElementById("trash-icon");
   const allTasks = document.querySelector("#all-tasks");
   const currentList = document.querySelector(".current-list");
+  const searchInput = document.getElementById("search-bar");
   /*--------------------------------------------------------------------*/
   // GLOBAL VARIABLES
   let listId;
@@ -200,4 +201,19 @@ document.addEventListener("DOMContentLoaded", (e) => {
       console.error(e);
     }
   });
-})
+  searchInput.addEventListener("search", async (e) => {
+    const val = searchInput.value;
+    try {
+      const res = await fetch(`/api/search/${val}`);
+      const data = await res.json();
+      console.log(data);
+      if (!data.message) {
+        currentList.innerHTML = "Search Results";
+        addedTasks.innerHTML = "";
+        fetchAllTasks(data);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  });
+});
