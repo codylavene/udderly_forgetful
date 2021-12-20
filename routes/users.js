@@ -119,7 +119,6 @@ router.get(
     const { userId } = req.session.auth;
     const lists = await db.List.findAll({ where: { userId: userId } });
     const tasks = await db.Task.findAll({ where: { userId: userId } });
-    console.log(tasks);
     if (tasks) {
       res.render("user-home", { csrfToken: req.csrfToken(), lists, tasks });
     } else {

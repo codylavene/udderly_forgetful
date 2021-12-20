@@ -127,13 +127,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
       const res = await fetch(`/api/tasks/${taskId}`);
 
       const data = await res.json();
-      console.log(data);
       if (!data.message) {
         const taskName = document.querySelector(".task-name");
         const listName = document.querySelector(".list-name");
         const dueDate = document.querySelector(".due-date");
         const selected = document.querySelectorAll(".selected");
-        console.log(selected);
         if (selected.length > 1) {
           taskName.innerHTML = `${selected.length} tasks selected`;
           listName.innerHTML = "";
@@ -168,7 +166,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
   // DELETING TASKS FROM DATABASE AND PAGE
   trashIcon.addEventListener("click", async (e) => {
     const tasks = document.querySelectorAll(".selected");
-    console.log(tasks);
     tasks.forEach(async (task) => {
       taskId = !task.id ? task.dataset.id : task.id;
       try {
@@ -176,7 +173,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
         // if (!res.ok) throw res;
         const data = await res.json();
-        console.log(data);
         if (data.message === "Destroyed") {
           addedTasks.removeChild(task);
         } else {
@@ -196,7 +192,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
       const res = await fetch("/api/tasks");
 
       const data = await res.json();
-      console.log(data);
       if (data.message !== "Failed") {
         addedTasks.innerHTML = "";
         fetchAllTasks(data);

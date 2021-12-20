@@ -1,3 +1,3 @@
-export function name() {
-  console.log("hello world");
-}
+// export function name() {
+//   console.log("hello world");
+// }
