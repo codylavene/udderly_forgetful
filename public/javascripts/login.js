@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     //get login in button
     const loginButton = document.querySelector(".btn")
     //get value of username input
-    const username = document.getElementById("emailAddress")
+    const username = document.getElementById("email")
 
     //get value of password input
     const password = document.getElementById("password")
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     demoButton.addEventListener("click", e => {
         e.preventDefault()
 
-        username.value = "demouser"
+        username.value = "demouser@gmail.com"
         password.value = "Demo1!"
 
         loginButton.click()
