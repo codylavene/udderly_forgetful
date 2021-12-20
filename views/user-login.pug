@@ -4,7 +4,6 @@ append head
         link(rel='stylesheet' href='/stylesheets/login.css')
         script(src="/javascripts/login.js" type="module")
 block content
-  +validationErrorSummary(errors)
   body
     div(class="row")
       div(class="left-col")
@@ -17,6 +16,7 @@ block content
           div#no-account-link
             p: a(href='/users/signup' id='account-sign-up') Sign up for free
           div#form-content
+            +validationErrorSummary(errors)
             p#been-here-text Been here before? Welcome Back!
             form(action='/users/login' method='post')
               input(type='hidden' name='_csrf' value=csrfToken)

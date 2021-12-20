@@ -6,7 +6,6 @@ include utils.pug
      script(src="/javascripts/sign-up-demo-user.js" type="module")
 
 block content
-  +validationErrorSummary(errors)
   //- form(action='/users/signup' method='post')
   //-   input(type='hidden' name='_csrf' value=csrfToken)
   //-   +field('First Name', 'firstName', user.firstName)
@@ -21,7 +20,7 @@ block content
   //- div
   //-   p: a(href='/users/login') Already have an account?
 
-  form(action='/users/signup' method='post')
+  form.first-form(action='/users/signup' method='post')
     input(type='hidden' name='_csrf' value=csrfToken)
     div(class='sign-up-panel-holder')
       div(id='left-sign-up-container')
@@ -34,6 +33,7 @@ block content
           p(id="p-text") Join millions of people getting more organized and productive!
       div(id='right-sign-up-container')
         div(id='right-sign-up')
+          +validationErrorSummary(errors) 
           div(id="form-contents")
             +field(null, 'firstName', null, null, "First Name")
             +field(null, 'lastName', null, null, "Last Name")
