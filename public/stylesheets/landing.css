@@ -22,7 +22,7 @@ body {
   margin-left: 30px;
   list-style: none;
 }
-.link-list  {
+.link-list {
   width: 100%;
   /* margin-right: 10%; */
   display: flex;
@@ -53,6 +53,10 @@ body {
 
 .home-nav-bar {
   display: flex;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
   padding-bottom: 15px;
   border-bottom: 1px solid rgb(100, 100, 100);
   height: 114px;
@@ -66,7 +70,7 @@ body {
   margin-left: 130px;
 }
 .logo-container > a {
-  background: url("../assets/images/logo3.png");
+  background: url("../assets/images/logo-uf.png");
   background-repeat: no-repeat;
   background-size: 179px auto;
   width: 179px;
@@ -74,7 +78,7 @@ body {
   height: 83px;
   display: flex;
   /* margin-top: 20px; */
-  margin-left: 35%;
+  margin-left: 10%;
   /* z-index: 80; */
 }
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%--SWIPER--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
@@ -82,6 +86,7 @@ body {
   display: flex;
   flex-direction: column;
   margin-top: 120px;
+  padding-top: 100px;
   /* margin: 0px auto; */
 }
 .heading-sign-up > h1 {

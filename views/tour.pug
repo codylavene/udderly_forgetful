@@ -2,38 +2,42 @@ extends layout.pug
 include utils.pug
 append head
     link(rel='stylesheet' href='/stylesheets/tours.css')
+    link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet")
 block content
-    +validationErrorSummary(errors)
-    body
-        div(class='tour-navbar')
-            img(src="../assets/images/logo3.png")
-            div(class='headers')
-                p Tour
-                p Login
-                p(id='sign-up') Sign up for free
-        div(class='first')
-            h1 Tour
-            p Hop aboard and enjoy the tour!
-        div(class='second')
-            h2 Hello! Remember The Milk is the smart to-do app for busy people.
-            img(src="../assets/images/waving_steve.png")
-        div(class='third')
-            div(class='third-text')
-                h2 Get to-dos out of your head.
-                p Stop thinking about your to-dos, and let the app remember for you.
-            img(src="../assets/images/hp_steve_1.png")
-        div(class='fourth')
-            div(class='fourth-text')
-                h2 Add with Smart Add.
-                p It's super fast and easy to add your tasks to Remember The Milk with Smart Add. Enter your task's properties in one line, including due date, priority, repeat, tags, and more.
-            img(src="../assets/images/tour_smartadd2x.png")
-        div(class='fifth')
-            div(class='fifth-text')
-                h2 Get reminded, anywhere.
-                p You'll never forget the milk (or anything else) again. Get reminded by email, text, IM, Twitter, and mobile apps (Android, iOS, BlackBerry 10).
-            img(src="../assets/images/hp_steve_2.png")
-        div(class='sixth')
-            div(class='sixth-text')
-                h2 Organize the way you want to.
-                p Are you a list lover? Create as many lists as you need. Into tagging? Make your lists both organized and colorful with tags.
-            img(src="../assets/images/hp_steve_4.png")
+    div.nav-container
+        nav.home-nav-bar
+            div.logo-container
+                a.logo(href='/')
+            ul.link-list
+                li.signup
+                    a#signup(href="/users/signup") Sign up for free
+                li.login
+                    a#login(href="/users/login") Login
+                li.tour
+                    a#tour(href="/tour") Tour
+    div(class='first')
+        h1 Tour
+        p Hop aboard and enjoy the tour!
+    div(class='second')
+        h2 Hello! Remember The Milk is the smart to-do app for busy people.
+        img(src="../assets/images/waving_steve.png")
+    div(class='third')
+        div(class='third-text')
+            h2 Get to-dos out of your head.
+            p Stop thinking about your to-dos, and let the app remember for you.
+        img(src="../assets/images/hp_steve_1.png")
+    div(class='fourth')
+        div(class='fourth-text')
+            h2 Add with Smart Add.
+            p It's super fast and easy to add your tasks to Remember The Milk with Smart Add. Enter your task's properties in one line, including due date, priority, repeat, tags, and more.
+        img(src="../assets/images/tour_smartadd2x.png")
+    div(class='fifth')
+        div(class='fifth-text')
+            h2 Get reminded, anywhere.
+            p You'll never forget the milk (or anything else) again. Get reminded by email, text, IM, Twitter, and mobile apps (Android, iOS, BlackBerry 10).
+        img(src="../assets/images/hp_steve_2.png")
+    div(class='sixth')
+        div(class='sixth-text')
+            h2 Organize the way you want to.
+            p Are you a list lover? Create as many lists as you need. Into tagging? Make your lists both organized and colorful with tags.
+        img(src="../assets/images/hp_steve_4.png")
