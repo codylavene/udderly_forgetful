@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
       if (listId) {
         body = { description, listId };
       }
-
+      console.log({body})
       const res = await fetch("/api/tasks", {
         method: "POST",
         body: JSON.stringify(body),
@@ -96,12 +96,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
           "Content-Type": "application/json",
         },
       });
+      console.log({res})
       if (!res.ok) {
         throw res;
       }
 
       const data = await res.json();
-
+      console.log({data})
       if (data.message === "Success") {
         const val = addTaskInput.value;
         const div = document.createElement("div");
