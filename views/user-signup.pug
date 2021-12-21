@@ -1,19 +1,56 @@
 extends layout.pug
 
 include utils.pug
+  append head
+     link(rel='stylesheet' href='/stylesheets/sign-up.css')
+     script(src="/javascripts/sign-up-demo-user.js" type="module")
 
 block content
-  +validationErrorSummary(errors)
-  form(action='/users/signup' method='post')
+  div(class='sign-up-panel-holder')
+    div(id='left-sign-up-container')
+      .logo-container
+        a.logo(href="/")
+      div(id='left-sign-up')
+        div(id="icons")
+          div.image-container
+            img(src="../assets/images/hp_steve_2.png", class="animated-images")
+
+        p(id="p-text") Join millions of people getting more organized and productive!
+    div(id='right-sign-up-container')
+      div(id='right-sign-up')
+        div(id="form-contents")
+          form.first-form(action='/users/signup' method='post')
+            input(type='hidden' name='_csrf' value=csrfToken)
+            +field(null, 'firstName', user.firstName, null, "First Name")
+            if errors
+              if errors.firstName
+                p(class="errors")= errors.firstName
+            +field(null, 'lastName', user.lastName, null, "Last Name")
+            if errors
+              if errors.lastName
+                p(class="errors")= errors.lastName
+            +field(null, 'email', user.email, null, "Email")
+            if errors
+              if errors.email
+                p(class="errors")= errors.email
+            +field(null, 'username', user.username, null, "Username")
+            if errors
+              if errors.username
+                p(class="errors")= errors.username
+            +field(null, 'password', null, "password", "Password")
+            if errors
+              if errors.password
+                p(class="errors")= errors.password
+            +field(null, 'confirmPassword', null, "password", "Confirm Password")
+            if errors
+              if errors.confirmPassword
+                p(class="errors")= errors.confirmPassword
+            div(id="sign-up-button")
+              button(type='submit' id="register") Sign up!
+              p(id="orOption") OR
+              a(href="/users/login" id="login-button") Login
+  form(action="/users/login" method="post")
     input(type='hidden' name='_csrf' value=csrfToken)
-    +field('First Name', 'firstName', user.firstName)
-    +field('Last Name', 'lastName', user.lastName)
-    +field('Email', 'email', user.email)
-    +field('Username', 'username', user.username)
-    +field('Password', 'password', user.password, 'password')
-    +field('Confirm Password', 'confirmPassword', '', 'password')
-    div(class='py-4')
-      button(type='submit' class='btn btn-primary') Register
-      a(href='/' class='btn btn-warning ml-2') Cancel
-  div
-    p: a(href='/users/login') Already have an account?
+    input(type='hidden' name="email" value="demouser@gmail.com")
+    input(type='hidden' name='password' value="Demo1!")
+    button(type= "submit" id="demo-button") Demo User
