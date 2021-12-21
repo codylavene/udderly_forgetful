@@ -151,3 +151,10 @@ body {
 }
 .selected > div > input {
 }
+
+.due-date {
+  display: flex;
+  justify-content: center;
+  text-decoration: underline;
+  padding: 10px;
+}

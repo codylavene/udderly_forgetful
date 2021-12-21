@@ -24,6 +24,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
   const allTasks = document.querySelector("#all-tasks");
   const currentList = document.querySelector(".current-list");
   const searchInput = document.getElementById("search-bar");
+  const todayButton = document.getElementById("today");
+  const tomorrowButton = document.getElementById("tomorrow");
+  const thisWeekButton = document.getElementById("this-week");
+  const rightPanel = document.querySelector(".task-details")
+  const dueDate = document.querySelector(".due-date");
   /*--------------------------------------------------------------------*/
   // GLOBAL VARIABLES
   let listId;
@@ -216,4 +221,40 @@ document.addEventListener("DOMContentLoaded", (e) => {
       console.error(e);
     }
   });
+  //-------------------------Checks for children of
+  const childCheck = (div) => {
+    if (dueDate.children.length > 0) {
+      console.log(dueDate.children.length);
+      for(let i = 0; i < dueDate.children.length; i++) {
+      let child = dueDate.children[0]
+      dueDate.removeChild(child)
+      }
+    }
+  }
+
+  const todayFunc = () => {
+    childCheck(dueDate)
+    const h1 = document.createElement("h1")
+    h1.innerText = "Tasks Due Today"
+    dueDate.appendChild(h1)
+
+  };
+
+  const tomorrowFunc = () => {
+    childCheck(dueDate)
+    const h1 = document.createElement("h1")
+    h1.innerText = "Tasks Due Tomorrow"
+    dueDate.appendChild(h1)
+  };
+
+  const thisWeekFunc = () => {
+    childCheck(dueDate)
+    const h1 = document.createElement("h1")
+    h1.innerText = "Tasks Due This Week"
+    dueDate.appendChild(h1)
+  };
+
+  todayButton.addEventListener("click", todayFunc);
+  tomorrowButton.addEventListener("click", tomorrowFunc);
+  thisWeekButton.addEventListener("click", thisWeekFunc);
 });
