@@ -13,6 +13,8 @@ const {
 } = require("./utils");
 const { check, validationResult } = require("express-validator");
 const { sequelize } = require("../db/models");
+
+
 router.post(
   "/lists",
   asyncHandler(async (req, res) => {
