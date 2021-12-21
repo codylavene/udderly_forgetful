@@ -57,22 +57,22 @@ document.addEventListener("DOMContentLoaded", (e) => {
   lists.addEventListener("click", async (e) => {
     listId = e.target.id;
     currentList.innerHTML = e.target.innerHTML;
-    if (
-      listId !== "all-tasks" ||
-      listId !== "today" ||
-      listId !== "tomorrow" ||
-      listId !== "this-week"
-    ) {
-      const res = await fetch(`/api/lists/${listId}`);
+    // if (
+    //   listId !== "all-tasks" ||
+    //   listId !== "today" ||
+    //   listId !== "tomorrow" ||
+    //   listId !== "this-week"
+    // ) {
+    const res = await fetch(`/api/lists/${listId}`);
 
-      const data = await res.json();
-      if (data.message !== "Failed") {
-        addedTasks.innerHTML = "";
-        fetchAllTasks(data);
-      }
-    } else {
-      currentList.innerHTML = e.target.innerHTML;
+    const data = await res.json();
+    if (data.message !== "Failed") {
+      addedTasks.innerHTML = "";
+      fetchAllTasks(data);
     }
+    // } else {
+    currentList.innerHTML = e.target.innerHTML;
+    // }
   });
   /*--------------------------------------------------------------------*/
   /*--------------------------------------------------------------------*/
@@ -139,8 +139,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
           dueDate.innerHTML = "";
         } else if (selected.length === 1) {
           if (taskDiv.classList.contains("selected")) {
+            console.log(data);
             taskName.innerHTML = data.description;
-            listName.innerHTML = data.List.name;
+            listName.innerHTML = !data.List
+              ? "This task does not belong to any lists"
+              : data.List.name;
             dueDate.innerHTML = !data.dueAt ? "never" : data.dueAt;
           } else {
             try {
