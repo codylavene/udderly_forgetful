@@ -1,0 +1,186 @@
+.left-nav-bar {
+  display: flex;
+  position: fixed;
+  background-color: #d7e7f5;
+  flex-direction: column;
+  width: 210px;
+  height: 1000px;
+  font-family: "Segoe UI", Arial, sans-serif, "Segoe UI Emoji",
+    "Segoe UI Symbol" !important;
+}
+.inbox-div {
+  margin-top: 20px;
+  margin-left: -3px;
+}
+#inbox-toggle {
+  padding: 1px;
+  font-size: 22px;
+  border-radius: 6px;
+  position: relative;
+  top: 7px;
+  border: none;
+}
+#inbox-toggle:hover {
+  background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
+}
+.inbox {
+  font-size: 14px;
+  margin-left: 4px;
+}
+.inbox:hover {
+  background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
+}
+.all-lists {
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0px;
+  align-items: flex-start;
+  margin-left: 38px;
+  border-radius: 6px;
+}
+
+.all-lists div:hover {
+  background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
+}
+.time-based-lists,
+.created-lists {
+  border-bottom: 1px solid rgb(191, 217, 241);
+}
+.added-lists {
+  margin-top: 20px;
+  margin-left: -3px;
+}
+#list-toggle {
+  padding: 1px;
+  font-size: 22px;
+  border-radius: 6px;
+  position: relative;
+  top: 7px;
+  border: none;
+}
+#list-toggle:hover {
+  background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
+}
+.lists {
+  font-size: 14px;
+  margin-left: 4px;
+}
+.lists:hover {
+  background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.added-lists-child-container {
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  padding-bottom: 100px;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  align-items: flex-start;
+  margin-left: 38px;
+}
+
+.all-lists div {
+  font-size: 14px;
+  margin-top: 10px;
+  list-style-type: none;
+}
+
+/* .added-lists div {
+  font-size: 14px;
+  margin-top: 10px;
+  list-style-type: none;
+} */
+
+#all-tasks:hover {
+  background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#today {
+  text-decoration: none;
+}
+
+#tomorrow {
+  text-decoration: none;
+}
+
+#this-week {
+  text-decoration: none;
+}
+
+#trash {
+  text-decoration: none;
+}
+
+.added-list-children {
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin-top: 10px;
+  align-items: flex-start;
+  margin-left: 38px;
+  border-radius: 6px;
+}
+
+#today:hover {
+  background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#tomorrow:hover {
+  background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#this-week:hover {
+  background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#trash:hover {
+  background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.added-list-children:hover {
+  background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.list:hover {
+  background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.logo-container > .logo {
+  background: url("../assets/images/logo-uf.png");
+  background-repeat: no-repeat;
+  background-size: 179px auto;
+  width: 179px;
+  min-height: 100%;
+  height: 83px;
+  display: flex;
+  margin-top: 20px;
+  margin-left: 10%;
+}

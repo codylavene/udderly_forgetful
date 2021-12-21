@@ -1,6 +1,12 @@
 extends layout.pug
 include utils.pug
-
+append head
+    link(rel="stylesheet" href="/stylesheets/leftnavbar.css")
+    link(rel="stylesheet", href="/stylesheets/user-content.css")
+    link(rel="stylesheet", href="/stylesheets/user-top-nav.css")
+    script(src="/javascripts/leftnavbar.js" type="module" )
+    script(src="/javascripts/user-top-nav.js" type="module")
+    script(src="/javascripts/user-content.js" type="module")
 block content
     div(class='top-nav-bar')
         div(class='hamburger-div')
@@ -10,16 +16,51 @@ block content
           div(class="search-container")
             label(for="search-bar")
                 span(class="material-icons" id="search-icon") search
-            input(type='text' id='search-bar' name="search-bar")
-        div(class='settings-div')
-            button(type='submit' id='settings-button') Settings
-    div(class='left-nav-bar')
-        ul
-            li All Tasks
-            li Today
-            li Tomorrow
-            li This Week
-            li Trash
-        ul Lists
-            each list in lists
-                li= list.name
+            input(type='search' id='search-bar' name="search-bar")
+        div(class='logout-div')
+            div.logout-container
+                div(class="material-icons material-icons-hover" id="logout-icon") logout
+                    div#logout Sign out
+    div(class="main-content")
+        div(class='left-nav-bar')
+            .logo-container
+                .logo
+            div.time-based-lists
+                div.inbox-div
+                    span(class="material-icons material-icons-dark" id="inbox-toggle") arrow_drop_down
+                    span.inbox Tasks
+                div(class='all-lists')
+                    div(id='all-tasks') All Tasks
+                    div(id='today') Today
+                    div(id='tomorrow') Tomorrow
+                    div(id='this-week') This Week
+                    //- li(id='trash') Trash
+            div.created-lists
+                div.added-lists
+                    span(class="material-icons material-icons-dark" id="list-toggle") arrow_drop_down
+                    span.lists Lists
+                div.added-list-child-container
+                    each list in lists
+                        div(class='added-list-children' id=list.id)= list.name
+        div(class="task-container")
+            div(class="task-content")
+                div.current-list All Tasks
+                div(class="task-control-panel")
+                    div(class="material-icons-dark material-icons"  id="trash-icon") delete
+                div(class="add-task-form")
+                    form(action='/api/tasks' method='post' class="add-task-form2")
+                        input(id="add-task-input" type="text" name="description" placeholder="Add a task...")
+                        button(type='submit' id="add-task-button" class="hide-button") Add Task
+                .added-tasks
+                    if tasks
+                        each task in tasks
+                            div.pre-filled(id=task.id)
+                                div(class="filled" data-id=task.id)
+                                    input(type="checkbox" data-id=task.id)
+                                    p(data-id=task.id)= task.description
+
+                .empty-task-template#empty
+            div(class="task-details")
+                h2.task-name
+                h3.list-name
+                h3.due-date

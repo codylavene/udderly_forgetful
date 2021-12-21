@@ -10,7 +10,8 @@ const {
 } = require("./utils");
 const { check, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
-const { loginUser, logoutUser } = require("../auth");
+const { loginUser, logoutUser, requireAuth } = require("../auth");
+let usersId;
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -53,12 +54,18 @@ router.post(
       user.hashedPassword = hashedPassword;
 
       await user.save();
-      await db.List.create({ name: 'Personal', userId: user.id })
-      await db.List.create({ name: 'Work', userId: user.id })
+      await db.List.create({ name: "Personal", userId: user.id });
+      await db.List.create({ name: "Work", userId: user.id });
       loginUser(req, res, user);
       return res.redirect(`/users/${user.id}`);
     } else {
-      const errors = validationErrors.array().map((error) => error.msg);
+      console.log(validationErrors.errors);
+      const errors = {};
+      for (let i = 0; i < validationErrors.errors.length; i++) {
+        errors[validationErrors.errors[i].param] = validationErrors.errors[i].msg
+      }
+
+      console.log(errors)
       res.render("user-signup", {
         title: "Sign-up",
         errors,
@@ -79,8 +86,10 @@ router.post(
     let errors = [];
     const validationErrors = validationResult(req);
 
+    console.log("==============", email);
+
     if (validationErrors.isEmpty()) {
-      const user = await db.User.findOne({ where: email });
+      const user = await db.User.findOne({ where: { email: email } });
 
       if (user !== null) {
         const passwordCheck = await bcrypt.compare(
@@ -108,18 +117,31 @@ router.post(
 );
 router.post("/logout", (req, res) => {
   logoutUser(req, res);
-  res.redirect("/login");
+  res.redirect("/users/login");
 });
 
-router.get("/:userId(\\d+)", csrfProtection, asyncHandler(async (req, res) => {
-  const { userId } = req.session.auth;
-  const lists = await db.List.findAll(
-    { where: {
-      userId: userId
-     }}
-  )
-  res.render("user-home", { csrfToken: req.csrfToken(), lists })
-}));
+router.get(
+  "/:userId(\\d+)",
+  csrfProtection,
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const { userId } = req.session.auth;
+    // usersId = userId
+    // const lists = await db.List.findAll({
+    //   where: {
+    //     userId: userId,
+    //   },
+    // });
+    // res.render("user-home", { csrfToken: req.csrfToken(), lists });
+    const lists = await db.List.findAll({ where: { userId: userId } });
+    const tasks = await db.Task.findAll({ where: { userId: userId } });
+    if (tasks) {
+      res.render("user-home", { csrfToken: req.csrfToken(), lists, tasks });
+    } else {
+      res.render("user-home", { csrfToken: req.csrfToken(), lists });
+    }
+  })
+);
 /*--------------------------------------------------------------------*/
 // EXPORTS
 module.exports = router;

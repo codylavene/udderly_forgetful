@@ -1,0 +1,179 @@
+* {
+  margin: 0px;
+  box-sizing: border-box;
+  font-family: "Roboto";
+  font-weight: 800;
+
+  color: rgb(216, 216, 216);
+}
+body {
+  background-color: rgb(0, 96, 191);
+}
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%--NAV--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+.nav-container {
+  display: inline;
+  background-color: aqua;
+  border-bottom: 1px solid black;
+}
+
+.link-list li {
+  float: right;
+  margin: 30px;
+  margin-left: 30px;
+  list-style: none;
+}
+.link-list {
+  width: 100%;
+  /* margin-right: 10%; */
+  display: flex;
+  justify-content: center;
+  flex-direction: row-reverse;
+  margin-left: 50px;
+}
+
+.link-list li > a {
+  text-decoration: none;
+  font-size: 15px;
+  /* margin-left: -40px; */
+}
+.link-list li > a:hover {
+  color: white;
+}
+
+#signup {
+  padding: 6px;
+  border: 1px solid rgb(216, 216, 216);
+  border-radius: 3px;
+}
+
+#signup:hover {
+  border-color: white;
+  color: white;
+}
+
+.home-nav-bar {
+  display: flex;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgb(100, 100, 100);
+  height: 114px;
+  background-repeat: no-repeat;
+  align-items: center;
+}
+
+.logo-container {
+  width: 40%;
+  display: flex;
+  margin-left: 130px;
+}
+.logo-container > a {
+  background: url("../assets/images/logo-uf.png");
+  background-repeat: no-repeat;
+  background-size: 179px auto;
+  width: 179px;
+  min-height: 100%;
+  height: 83px;
+  display: flex;
+  /* margin-top: 20px; */
+  margin-left: 10%;
+  /* z-index: 80; */
+}
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%--SWIPER--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+.heading-sign-up {
+  display: flex;
+  flex-direction: column;
+  margin-top: 120px;
+  padding-top: 100px;
+  /* margin: 0px auto; */
+}
+.heading-sign-up > h1 {
+  display: flex;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bolder;
+  color: white;
+}
+.heading-sign-up > a {
+  display: flex;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 13px 40px;
+  border: 1px solid #ca492e;
+  text-decoration: none;
+  font-size: 20px;
+  background-color: #ca492e;
+  color: white;
+  font-weight: bolder;
+  border-radius: 3px;
+}
+
+.swiper-container {
+  overflow: hidden;
+  width: 90%;
+}
+
+.swiper-container * {
+  box-sizing: border-box;
+}
+
+.swiper-card {
+  transform-style: preserve-3d;
+}
+.swiper-card h2 {
+  margin: 10px auto;
+  position: relative;
+  left: 5%;
+  /* right: 30%; */
+  text-align: center;
+  font-size: 32px;
+  color: white;
+  font-weight: bolder;
+}
+.swiper-card p {
+  margin: 10px auto;
+  position: relative;
+  width: 325px;
+  word-wrap: normal;
+  left: 5%;
+  /* right: 30%; */
+  text-align: center;
+  font-size: 22px;
+  color: white;
+}
+
+.swiper-img {
+  opacity: 0;
+  position: absolute;
+  top: 10px;
+  left: 35%;
+  right: 30%;
+  width: 40%;
+  margin: auto;
+  padding: 4px 16px;
+  z-index: 90;
+  transition: transform 0.6s, opacity 0.6s, z-index 0.6s;
+}
+
+.swiper-img.starter,
+.swiper-img.active {
+  opacity: 1;
+  position: relative;
+  z-index: 800;
+}
+
+.swiper-img.prev,
+.swiper-img.next {
+  z-index: 700;
+}
+
+.swiper-img.prev {
+  transform: translateX(-100%);
+}
+.swiper-img.next {
+  transform: translateX(100%);
+}

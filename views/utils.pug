@@ -1,10 +1,7 @@
 mixin validationErrorSummary(errors)
   if errors
-    div(class='alert alert-danger' role='alert')
-      p The following error(s) occurred:
-      ul
-        each error in errors
-          li= error
+    div(id='error-message' role='alert')
+      p Sorry, that wasn't a valid login. Please try again.
 
 mixin field(labelText, fieldName, fieldValue, fieldType = 'text', placeholder = null)
   div()
@@ -13,3 +10,4 @@ mixin field(labelText, fieldName, fieldValue, fieldType = 'text', placeholder = 
       textarea(id=fieldName name=fieldName rows='5')= fieldValue
     else
       input(type=fieldType id=fieldName name=fieldName value=fieldValue placeholder=placeholder)
+

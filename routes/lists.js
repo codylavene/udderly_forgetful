@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../db/models");
+
 const {
   csrfProtection,
   asyncHandler,
   userValidators,
   loginValidators,
 } = require("./utils");
+
 const { check, validationResult } = require("express-validator");
 
 

@@ -1,16 +1,33 @@
 extends layout.pug
-
 include utils.pug
-
+append head
+        link(rel='stylesheet' href='/stylesheets/login.css')
+        script(src="/javascripts/login.js" type="module")
 block content
-  +validationErrorSummary(errors)
-  form(action='/users/login' method='post')
-    input(type='hidden' name='_csrf' value=csrfToken)
-    +field('Email Address', 'emailAddress', emailAddress)
-    +field('Password', 'password', null, 'password')
-    div(class='py-4')
-      button(type='submit' class='btn btn-primary') Login
-      button(type='submit' class='demo-log') Demo-User
-      a(href='/' class='btn btn-warning ml-2') Cancel
-  div
-    p: a(href='/users/signup') Don't have an account?
+  body
+    div(class="row")
+      div(class="left-col")
+        div(class="left")
+          div(class="title-and-quote")
+            div.logo-container
+              a.logo(href="/")
+            p(id="quote") "Do or do not, there is no try" - Yoda
+            p#author
+      div(class="right-col")
+        div(class="right")
+          div#no-account-link
+            p: a(href='/users/signup' id='account-sign-up') Sign up for free
+          div#form-content
+            p#been-here-text Been here before? Welcome Back!
+            +validationErrorSummary(errors)
+            form(action='/users/login' method='post')
+              input(type='hidden' name='_csrf' value=csrfToken)
+              +field(null, 'email', email, null, "Email")
+              +field(null, 'password', null, 'password', "Password")
+              div(class='py-4')
+                button(type='submit' class='btn btn-primary') Log in
+                div.left-border-of-or
+                p(id="orOption") OR
+                div.right-border-of-or
+                button(type='submit' class='demo-log') Demo-User
+                a(href='/' class='btn btn-warning ml-2')
