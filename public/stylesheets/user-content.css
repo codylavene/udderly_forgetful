@@ -23,7 +23,6 @@ body {
 
 .task-details {
   width: 50%;
-  border: 3px solid red;
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
   background-color: #e4eef8;
