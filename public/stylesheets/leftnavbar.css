@@ -184,3 +184,13 @@
   margin-top: 20px;
   margin-left: 10%;
 }
+
+#add-list-button {
+  font-size: 12px;
+}
+
+#add-list-button:hover {
+  background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
+}

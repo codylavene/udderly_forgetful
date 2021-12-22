@@ -18,11 +18,16 @@ const { sequelize } = require("../db/models");
 router.post(
   "/lists",
   asyncHandler(async (req, res) => {
-    const { description, listId } = req.body;
+    const { name } = req.body;
     const { userId } = req.session.auth;
 
-    const task = await db.Task.create({ description, userId, listId });
-    res.end();
+    const list = await db.List.create({ name, userId });
+
+    if (list) {
+      res.json(list);
+    } else {
+      res.json({ message: "Failed" });
+    }
   })
 );
 router.get(
@@ -108,4 +113,6 @@ router.get(
     }
   })
 );
+
+
 module.exports = router;

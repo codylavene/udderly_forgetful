@@ -22,6 +22,11 @@ block content
                 div(class="material-icons material-icons-hover" id="logout-icon") logout
                     div#logout Sign out
     div(class="main-content")
+        div(class="add-list-container hide-list-container")
+            div.list-modal
+                form(action='/api/lists' method='post' class="add-list-form")
+                  input(id="add-list-input" type="text" name="name" placeholder="Add a list...")
+                  button(type='submit' id="submit-list-button") Add List
         div(class='left-nav-bar')
             .logo-container
                 .logo
@@ -39,6 +44,7 @@ block content
                 div.added-lists
                     span(class="material-icons material-icons-dark" id="list-toggle") arrow_drop_down
                     span.lists Lists
+                    span(class="material-icons material-icons-dark" id="add-list-button") add
                 div.added-list-child-container
                     each list in lists
                         div(class='added-list-children' id=list.id)= list.name
