@@ -113,6 +113,15 @@ router.get(
     }
   })
 );
+router.delete("/lists/:id(\\d+)", async (req, res, next) => {
+  const list = await db.List.findByPk(req.params.id);
+  if (list) {
+    await list.destroy();
+    res.json({ message: "Destroyed" });
+  } else {
+    res.json({ message: "Failed" });
+  }
+});
 
 
 module.exports = router;

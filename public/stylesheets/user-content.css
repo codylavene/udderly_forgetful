@@ -188,7 +188,7 @@ body {
   justify-content: center;
   align-items: center;
 }
-#close-add-list {
+#close-add-list, #close-delete-list{
   position: absolute;
   border: none;
   top: 25px;
@@ -243,3 +243,28 @@ body {
   background: #ffd83c;
   filter: blur(3px);
 } */
+
+#delete-list-input {
+  width: 80%;
+  height: 38px;
+  margin-top: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border-color: #d7e7f5;
+  border-style: none;
+  padding-left: 12px;
+}
+
+#delete-list-button {
+  height: fit-content;
+  font-size: 16px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 10px 12px;
+  color: white;
+  background-color: #009dff;
+  border-radius: 5px;
+  margin: 20px;
+  /* margin-top: 25px; */
+  border: none;
+  width: 40%;
+}

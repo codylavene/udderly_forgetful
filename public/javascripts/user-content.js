@@ -24,6 +24,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
   const allTasks = document.querySelector("#all-tasks");
   const currentList = document.querySelector(".current-list");
   const searchInput = document.getElementById("search-bar");
+  const deleteListTrashButton = document.getElementById("trash-lists")
+  const deleteListModel = document.querySelector(".delete-list-container")
+  const deleteListInput = document.getElementById('delete-list-input')
+  const deleteListButton = document.getElementById("delete-list-button");
+  const deleteListForm = document.querySelector(".delete-list-form")
   /*--------------------------------------------------------------------*/
   // GLOBAL VARIABLES
   let listId;
@@ -242,6 +247,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   const listInput = document.getElementById("add-list-input");
 
   const closeListAddModal = document.getElementById("close-add-list");
+  const closeListDeleteModal = document.getElementById("close-delete-list");
 
   //Event lister to create list on click of add list button
   submitListButton.addEventListener("click", async (e) => {
@@ -273,10 +279,14 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
       if (!data.message) {
         const div = document.createElement("div");
+        const option = document.createElement("option");
         div.id = data.id;
+        option.value = data.id;
         div.classList.add("added-list-children");
         div.innerHTML = data.name;
+        option.innerHTML = data.name;
         listContainer.appendChild(div);
+        deleteListInput.appendChild(option);
         listInput.value = "";
         addListContainer.classList.toggle("hide-list-container");
       }
@@ -284,7 +294,41 @@ document.addEventListener("DOMContentLoaded", (e) => {
       console.error(e);
     }
   });
-  closeListAddModal.addEventListener("click", (e) => {
-    addListContainer.classList.toggle("hide-list-container");
-  });
+  // closeListAddModal.forEach(close => {close.addEventListener("click", (e) => {
+  //   addListContainer.classList.toggle("hide-list-container");
+  // })})
+
+  //--------------------------------------------------------------
+  // Delete an existing list
+
+  const deleteListContainer = async () => {
+    deleteListModel.classList.toggle("hide-list-container")
+    //const res = await fetch("/api/lists", {
+
+    //})
+  }
+  const closeListDelete = () => {
+    deleteListModel.classList.toggle("hide-list-container")
+  }
+  const deleteList = async (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    const id = deleteListInput.options[deleteListInput.selectedIndex].value
+    console.log(id)
+    const res = await fetch(`/api/lists/${id}`, {
+      method: "Delete"
+    })
+    const children = document.querySelector('.added-list-child-container').children
+    console.log(children)
+    for(let i = 0; i < children.length; i++) {
+      let child = children[i]
+      if(child.id === id) {
+      lists.removeChild(child)
+      }
+    }
+  }
+
+  closeListDeleteModal.addEventListener("click", closeListDelete);
+  deleteListButton.addEventListener("click", deleteList);
+  deleteListTrashButton.addEventListener("click", deleteListContainer);
 });

@@ -29,6 +29,15 @@ block content
                     form(action='/api/lists' method='post' class="add-list-form")
                         input(id="add-list-input" type="text" name="name" placeholder="Add a list...")
                         button(type='submit' id="submit-list-button") Add List
+        div(class="delete-list-container hide-list-container")
+            .close-modal
+                div.material-icons.material-icons-dark#close-delete-list close
+                div.list-modal
+                    form(action='/api/lists' method='post' class="delete-list-form")
+                        select(id="delete-list-input" name="name" placeholder="Delete a list...")
+                            each list in lists
+                                option(value=list.id name=list.id)=list.name
+                        button(type='submit' id="delete-list-button") Delete List
         div(class='left-nav-bar')
             .logo-container
                 .logo
