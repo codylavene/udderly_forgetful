@@ -35,76 +35,67 @@ window.addEventListener("DOMContentLoaded", () => {
   };
   addedListButton.addEventListener("click", listCollapse);
 
+  // const addListButton = document.getElementById("add-list-button");
+  // const addListContainer = document.querySelector(".add-list-container");
 
-  const addListButton = document.getElementById("add-list-button")
-  const addListContainer = document.querySelector(".add-list-container")
+  // //Event listener to toggle add a list form
+  // addListButton.addEventListener("click", (e) => {
+  //   e.stopPropagation();
+  //   e.preventDefault();
+  //   addListContainer.classList.toggle("hide-list-container");
+  // });
 
-  //Event listener to toggle add a list form
-  addListButton.addEventListener("click", (e) => {
-    e.stopPropagation()
-    e.preventDefault()
-    addListContainer.classList.toggle("hide-list-container")
-  })
+  // //get add a list button
+  // // const addListButton = document.getElementById("add-list-button")
+  // const addListForm = document.querySelector(".add-list-form");
 
+  // const submitListButton = document.getElementById("submit-list-button");
 
-  //get add a list button
-  // const addListButton = document.getElementById("add-list-button")
-  const addListForm = document.querySelector(".add-list-form")
+  // //get added lists div container
+  // const listContainer = document.querySelector(".added-list-child-container");
 
-  const submitListButton = document.getElementById("submit-list-button")
+  // //add list input
+  // const listInput = document.getElementById("add-list-input");
 
-  //get added lists div container
-  const listContainer = document.querySelector(".added-list-child-container")
+  // //Event lister to create list on click of add list button
+  // submitListButton.addEventListener("click", async (e) => {
+  //   e.preventDefault();
+  //   // e.stopPropagation()
 
-  //add list input
-  const listInput = document.getElementById("add-list-input")
+  //   const formData = new FormData(addListForm);
 
-  //Event lister to create list on click of add list button
-  submitListButton.addEventListener("click", async (e) => {
+  //   console.log(formData);
 
-    e.preventDefault()
-    // e.stopPropagation()
+  //   const name = formData.get("name");
 
-    const formData = new FormData(addListForm)
+  //   console.log({ name });
 
-    console.log(formData)
+  //   const body = { name };
 
-    const name = formData.get("name")
+  //   try {
+  //     const res = await fetch("/api/lists", {
+  //       method: "POST",
+  //       body: JSON.stringify(body),
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
 
-    console.log({ name })
+  //     const data = await res.json();
 
-    const body = { name };
+  //     console.log({ data });
 
-    try {
-
-      const res = await fetch("/api/lists", {
-        method: "POST",
-        body: JSON.stringify(body),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const data = await res.json()
-
-      console.log({ data })
-
-      if (!data.message) {
-        const div = document.createElement("div");
-        div.id = data.id;
-        div.classList.add("added-list-children");
-        div.innerHTML = data.name;
-        listContainer.appendChild(div);
-
-        listInput.value = ""
-      }
-
-    } catch (e) {
-      console.error(e);
-    }
-
-
-  })
-
-
+  //     if (!data.message) {
+  //       const div = document.createElement("div");
+  //       div.id = data.id;
+  //       div.classList.add("added-list-children");
+  //       div.innerHTML = data.name;
+  //       listContainer.appendChild(div);
+  //       listInput.value = "";
+  //       addListContainer.classList.toggle("hide-list-container");
+  //     }
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // });
 });
