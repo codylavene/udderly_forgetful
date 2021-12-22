@@ -14,7 +14,6 @@ const {
 const { check, validationResult } = require("express-validator");
 const { sequelize } = require("../db/models");
 
-
 router.post(
   "/lists",
   asyncHandler(async (req, res) => {
@@ -44,25 +43,16 @@ router.post(
   asyncHandler(async (req, res) => {
     const { description, listId } = req.body;
     const { userId } = req.session.auth;
-    if (listId === undefined) {
-      const task = await db.Task.create({
-        description,
-        listId: null,
-        userId,
-      });
-    } else {
-      const task = await db.Task.create({
-        description,
-        listId,
-        userId,
-      });
-    } if (task) {
-      res.json({ message: "Success", task: { id: task.id } });
-    } else {
-      res.json({ message: 'Failed' })
-    }
+    const task = await db.Task.create({
+      description,
+      listId,
+      userId,
+    });
+
+    res.json({ message: "Success", task: { id: task.id } });
   })
 );
+
 router.delete("/tasks/:id(\\d+)", async (req, res, next) => {
   const task = await db.Task.findByPk(req.params.id);
   if (task) {
