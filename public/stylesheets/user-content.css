@@ -107,7 +107,6 @@ body {
 .pre-filled {
   border-bottom: 1px dotted rgb(229, 229, 229);
   margin-left: 0px;
-
   height: 38px;
   width: 100%;
 }
@@ -168,7 +167,6 @@ body {
   position: absolute;
   width: 500px;
   height: 150px;
-
   border-radius: 6px;
   background-color: #d7e7f5;
   display: flex;
