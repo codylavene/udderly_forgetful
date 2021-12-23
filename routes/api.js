@@ -14,7 +14,6 @@ const {
 const { check, validationResult } = require("express-validator");
 const { sequelize } = require("../db/models");
 
-
 router.post(
   "/lists",
   asyncHandler(async (req, res) => {
@@ -35,7 +34,24 @@ router.get(
   asyncHandler(async (req, res, next) => {
     const { userId } = req.session.auth;
     const tasks = await db.Task.findAll({
-      where: { userId },
+      where: { userId, completed: false },
+    });
+    if (tasks) {
+      res.json(tasks);
+    } else {
+      res.json({ message: "Failed" });
+    }
+  })
+);
+router.get(
+  "/tasks/complete",
+  asyncHandler(async (req, res, next) => {
+    const { userId } = req.session.auth;
+    const tasks = await db.Task.findAll({
+      where: {
+        userId,
+        completed: true,
+      },
     });
     if (tasks) {
       res.json(tasks);
@@ -123,5 +139,17 @@ router.delete("/lists/:id(\\d+)", async (req, res, next) => {
   }
 });
 
+router.patch("/tasks/:id(\\d+)", async (req, res, next) => {
+  console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", req.body);
+  const task = await db.Task.findByPk(req.params.id);
+  const { completed, description, dueAt } = req.body;
+  console.log("description++++++++++", description, "dueAt---------", dueAt);
+  const updated = await task.update({ completed, description, dueAt });
+  if (updated) {
+    res.json({ message: "Updated" });
+  } else {
+    res.json({ message: "Failed" });
+  }
+});
 
 module.exports = router;

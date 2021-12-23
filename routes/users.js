@@ -62,10 +62,11 @@ router.post(
       console.log(validationErrors.errors);
       const errors = {};
       for (let i = 0; i < validationErrors.errors.length; i++) {
-        errors[validationErrors.errors[i].param] = validationErrors.errors[i].msg
+        errors[validationErrors.errors[i].param] =
+          validationErrors.errors[i].msg;
       }
 
-      console.log(errors)
+      console.log(errors);
       res.render("user-signup", {
         title: "Sign-up",
         errors,
@@ -134,7 +135,9 @@ router.get(
     // });
     // res.render("user-home", { csrfToken: req.csrfToken(), lists });
     const lists = await db.List.findAll({ where: { userId: userId } });
-    const tasks = await db.Task.findAll({ where: { userId: userId } });
+    const tasks = await db.Task.findAll({
+      where: { userId: userId, completed: false },
+    });
     if (tasks) {
       res.render("user-home", { csrfToken: req.csrfToken(), lists, tasks });
     } else {

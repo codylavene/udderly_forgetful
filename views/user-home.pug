@@ -47,9 +47,8 @@ block content
                     span.inbox Tasks
                 div(class='all-lists')
                     div(id='all-tasks') All Tasks
-                    div(id='today') Today
-                    div(id='tomorrow') Tomorrow
-                    div(id='this-week') This Week
+
+                    div#completed Completed
                     //- li(id='trash') Trash
             div.created-lists
                 div.added-lists
@@ -64,7 +63,8 @@ block content
             div(class="task-content")
                 div.current-list All Tasks
                 div(class="task-control-panel")
-                    div(class="material-icons-dark material-icons"  id="trash-icon") delete
+                    div(class="material-icons-dark material-icons" id="trash-icon") delete
+                    div(class="material-icons-dark material-icons" id="complete-icon") done
                 div(class="add-task-form")
                     form(action='/api/tasks' method='post' class="add-task-form2")
                         input(id="add-task-input" type="text" name="description" placeholder="Add a task...")
@@ -80,10 +80,10 @@ block content
                 .empty-task-template#empty
             div(class="task-details-container")
                 .curr-list-container
-                    .current-list Current list
+                    .current-list-stats Stats for all tasks
                 .task-stats
                     .total-tasks
-                        h2.num-tasks 4
+                        h2.num-tasks 0
                         div task(s)
                     .total-complete
                         h2.num-complete 0
