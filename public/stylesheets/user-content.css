@@ -199,9 +199,8 @@ body {
   font-size: 28px;
 }
 
-#close-add-list:hover {
-  /* border: 3px solid #d7e7f5; */
-  /* background-color: #d7e7f5; */
+#close-add-list:hover,
+#close-delete-list:hover {
   color: #c83619;
 }
 
