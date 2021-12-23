@@ -42,7 +42,23 @@ document.addEventListener("DOMContentLoaded", (e) => {
     document.querySelector(".num-tasks").innerHTML = numTasks;
   };
   getNumTasks();
+  const getNumComplete = async () => {
+    try {
+      const res = await fetch("/api/tasks/complete");
+      const data = await res.json();
+      const numComplete = data.length;
+      numCompleted.innerHTML = numComplete;
 
+      if (!data.message) {
+        return data;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  getNumComplete();
+  console.log("HELLO");
   /*--------------------------------------------------------------------*/
   // FUNCTIONS
   const fetchAllTasks = (data) => {
@@ -54,6 +70,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
       div.innerHTML = boiler;
       addedTasks.appendChild(div);
       getNumTasks();
+      getNumComplete();
     });
   };
   /*--------------------------------------------------------------------*/
@@ -81,6 +98,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
       addedTasks.innerHTML = "";
       fetchAllTasks(data);
       getNumTasks();
+      getNumComplete();
     }
     // } else {
     currentList.innerHTML = e.target.innerHTML;
@@ -125,6 +143,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
         addTaskInput.value = "";
         addTaskInput.blur();
         getNumTasks();
+        getNumComplete();
       }
     } catch (e) {
       console.error(e);
@@ -197,6 +216,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
           const listName = document.querySelector(".list-name");
           const dueDate = document.querySelector(".due-date");
           getNumTasks();
+          getNumComplete();
           taskName.innerHTML = `${num} task(s) deleted`;
           setTimeout(() => {
             taskName.innerHTML = ``;
@@ -221,6 +241,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
       const data = await res.json();
       if (data.message !== "Failed") {
         addedTasks.innerHTML = "";
+        getNumComplete();
         fetchAllTasks(data);
       }
     } catch (e) {
@@ -365,6 +386,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
         const data = await res.json();
         if (data.message === "Updated") {
           addedTasks.removeChild(task);
+          getNumComplete();
           // const taskName = document.querySelector(".task-name");
           // const listName = document.querySelector(".list-name");
           // const dueDate = document.querySelector(".due-date");
@@ -384,15 +406,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
   completedTasks.addEventListener("click", async (e) => {
     addedTasks.innerHTML = "";
-    try {
-      const res = await fetch("/api/tasks/complete");
-      const data = await res.json();
-      const numComplete = data.length;
-      numCompleted.innerHTML = numComplete;
-      console.log(data);
-      if (!data.message) fetchAllTasks(data);
-    } catch (e) {
-      console.error(e);
-    }
+    currentList.innerHTML = "Completed Tasks";
+    getNumTasks();
+    const data = await getNumComplete();
+    fetchAllTasks(data);
   });
 });

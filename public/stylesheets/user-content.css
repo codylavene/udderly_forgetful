@@ -295,3 +295,10 @@ body {
   color: #0060bf;
   position: relative;
 }
+
+.detail-card {
+  border: 1 px solid salmon;
+  height: 300px;
+  width: 100%;
+  margin: 20px;
+}
