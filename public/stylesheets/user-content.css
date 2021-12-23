@@ -149,7 +149,8 @@ body {
   height: 38px;
 }
 
-.add-list-container {
+.add-list-container,
+.delete-list-container {
   position: absolute;
   border: 1px solid black;
   height: 100%;
@@ -158,6 +159,7 @@ body {
   top: 0%;
   left: 0%;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   z-index: 9000;
   display: flex;
   align-items: flex-start;
@@ -188,7 +190,8 @@ body {
   justify-content: center;
   align-items: center;
 }
-#close-add-list, #close-delete-list{
+#close-add-list,
+#close-delete-list {
   position: absolute;
   border: none;
   top: 25px;

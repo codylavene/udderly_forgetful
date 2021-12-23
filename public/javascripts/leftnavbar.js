@@ -25,13 +25,14 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const addedListButton = document.querySelector("#list-toggle");
   const listCollapse = (e) => {
-    const children = document.querySelectorAll(".added-list-children");
+    const children = document.querySelector(".added-list-child-container");
     if (e.target.className === "added-list-children") {
       return;
     }
-    children.forEach((child) => {
-      child.classList.toggle("height-transition");
-    });
+    children.classList.toggle("height-transition");
+    // children.forEach((child) => {
+    //   child.classList.toggle("height-transition");
+    // });
   };
   addedListButton.addEventListener("click", listCollapse);
 

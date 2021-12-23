@@ -24,11 +24,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
   const allTasks = document.querySelector("#all-tasks");
   const currentList = document.querySelector(".current-list");
   const searchInput = document.getElementById("search-bar");
-  const deleteListTrashButton = document.getElementById("trash-lists")
-  const deleteListModel = document.querySelector(".delete-list-container")
-  const deleteListInput = document.getElementById('delete-list-input')
+  const deleteListTrashButton = document.getElementById("trash-lists");
+  const deleteListModel = document.querySelector(".delete-list-container");
+  const deleteListInput = document.getElementById("delete-list-input");
   const deleteListButton = document.getElementById("delete-list-button");
-  const deleteListForm = document.querySelector(".delete-list-form")
+  const deleteListForm = document.querySelector(".delete-list-form");
   /*--------------------------------------------------------------------*/
   // GLOBAL VARIABLES
   let listId;
@@ -144,7 +144,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
           dueDate.innerHTML = "";
         } else if (selected.length === 1) {
           if (taskDiv.classList.contains("selected")) {
-            console.log(data);
             taskName.innerHTML = data.description;
             listName.innerHTML = !data.List
               ? "This task does not belong to any lists"
@@ -184,8 +183,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
         const data = await res.json();
         if (data.message === "Destroyed") {
           addedTasks.removeChild(task);
-        } else {
-          console.log("failed");
         }
       } catch (e) {
         console.error(e);
@@ -214,7 +211,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
     try {
       const res = await fetch(`/api/search/${val}`);
       const data = await res.json();
-      console.log(data);
       if (!data.message) {
         currentList.innerHTML = "Search Results";
         addedTasks.innerHTML = "";
@@ -256,11 +252,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
     const formData = new FormData(addListForm);
 
-    console.log(formData);
-
     const name = formData.get("name");
-
-    console.log({ name });
 
     const body = { name };
 
@@ -274,8 +266,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
       });
 
       const data = await res.json();
-
-      console.log({ data });
 
       if (!data.message) {
         const div = document.createElement("div");
@@ -294,39 +284,44 @@ document.addEventListener("DOMContentLoaded", (e) => {
       console.error(e);
     }
   });
-  // closeListAddModal.forEach(close => {close.addEventListener("click", (e) => {
-  //   addListContainer.classList.toggle("hide-list-container");
-  // })})
+  closeListAddModal.addEventListener("click", (e) => {
+    addListContainer.classList.toggle("hide-list-container");
+  });
 
   //--------------------------------------------------------------
   // Delete an existing list
 
   const deleteListContainer = async () => {
-    deleteListModel.classList.toggle("hide-list-container")
+    deleteListModel.classList.toggle("hide-list-container");
     //const res = await fetch("/api/lists", {
 
     //})
-  }
+  };
   const closeListDelete = () => {
-    deleteListModel.classList.toggle("hide-list-container")
-  }
+    deleteListModel.classList.toggle("hide-list-container");
+  };
   const deleteList = async (e) => {
-    e.preventDefault()
-    e.stopPropagation()
-    const id = deleteListInput.options[deleteListInput.selectedIndex].value
-    console.log(id)
+    e.preventDefault();
+    e.stopPropagation();
+    const selected = deleteListInput.options[deleteListInput.selectedIndex];
+    const id = selected.value;
     const res = await fetch(`/api/lists/${id}`, {
-      method: "Delete"
-    })
-    const children = document.querySelector('.added-list-child-container').children
-    console.log(children)
-    for(let i = 0; i < children.length; i++) {
-      let child = children[i]
-      if(child.id === id) {
-      lists.removeChild(child)
+      method: "Delete",
+    });
+    const data = await res.json();
+    if (data.message === "Destroyed") {
+      deleteListInput.removeChild(selected);
+      const children = document.querySelector(
+        ".added-list-child-container"
+      ).children;
+      for (let i = 0; i < children.length; i++) {
+        let child = children[i];
+        if (child.id === id) {
+          lists.removeChild(child);
+        }
       }
     }
-  }
+  };
 
   closeListDeleteModal.addEventListener("click", closeListDelete);
   deleteListButton.addEventListener("click", deleteList);
