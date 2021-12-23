@@ -78,7 +78,17 @@ block content
                                     p(data-id=task.id)= task.description
 
                 .empty-task-template#empty
-            div(class="task-details")
-                h2.task-name
-                h3.list-name
-                h3.due-date
+            div(class="task-details-container")
+                .curr-list-container
+                    .current-list Current list
+                .task-stats
+                    .total-tasks
+                        h2.num-tasks 4
+                        div task(s)
+                    .total-complete
+                        h2.num-complete 0
+                        div complete
+                .task-details
+                    h2.task-name
+                    h3.list-name
+                    h3.due-date

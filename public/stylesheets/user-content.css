@@ -21,7 +21,7 @@ body {
   overflow-y: hidden;
 }
 
-.task-details {
+.task-details-container {
   width: 50%;
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
@@ -263,4 +263,35 @@ body {
   /* margin-top: 25px; */
   border: none;
   width: 40%;
+}
+
+.task-stats {
+  width: 100%;
+  height: 200px;
+  display: flex;
+}
+
+.total-tasks,
+.total-complete {
+  width: 90px;
+  height: 90px;
+  padding: 4px;
+  border-radius: 6px;
+  margin: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #d7e7f5;
+}
+.curr-list-container div {
+  margin: 20px 20px;
+  font-size: 18px;
+}
+
+.total-tasks > h2,
+.total-complete > h2 {
+  font-size: 42px;
+  color: #0060bf;
+  position: relative;
 }

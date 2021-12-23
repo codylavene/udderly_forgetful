@@ -33,6 +33,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
   // GLOBAL VARIABLES
   let listId;
   let taskId;
+  const numTasks = document.querySelectorAll(".pre-filled").length;
+  document.querySelector(".num-tasks").innerHTML = numTasks;
   /*--------------------------------------------------------------------*/
   // FUNCTIONS
   const fetchAllTasks = (data) => {
