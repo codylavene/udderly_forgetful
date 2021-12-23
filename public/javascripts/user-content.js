@@ -116,6 +116,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
         div.innerHTML = boiler;
         addedTasks.appendChild(div);
         addTaskInput.value = "";
+        addTaskInput.blur();
       }
     } catch (e) {
       console.error(e);
@@ -174,6 +175,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   // DELETING TASKS FROM DATABASE AND PAGE
   trashIcon.addEventListener("click", async (e) => {
     const tasks = document.querySelectorAll(".selected");
+    const num = tasks.length;
     tasks.forEach(async (task) => {
       taskId = !task.id ? task.dataset.id : task.id;
       try {
@@ -183,6 +185,16 @@ document.addEventListener("DOMContentLoaded", (e) => {
         const data = await res.json();
         if (data.message === "Destroyed") {
           addedTasks.removeChild(task);
+          const taskName = document.querySelector(".task-name");
+          const listName = document.querySelector(".list-name");
+          const dueDate = document.querySelector(".due-date");
+
+          taskName.innerHTML = `${num} task(s) deleted`;
+          setTimeout(() => {
+            taskName.innerHTML = ``;
+          }, 7000);
+          listName.innerHTML = "";
+          dueDate.innerHTML = "";
         }
       } catch (e) {
         console.error(e);

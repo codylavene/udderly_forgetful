@@ -208,7 +208,8 @@ body {
   display: none;
 }
 
-.add-list-form {
+.add-list-form,
+.delete-list-form {
   width: 100%;
   height: 100%;
   display: flex;
@@ -217,7 +218,8 @@ body {
   align-items: center;
 }
 
-#add-list-input {
+#add-list-input,
+#delete-list-input {
   width: 80%;
   height: 38px;
   margin-top: 10px;
@@ -246,16 +248,8 @@ body {
   filter: blur(3px);
 } */
 
-#delete-list-input {
-  width: 80%;
-  height: 38px;
-  margin-top: 10px;
-  font-size: 16px;
-  border-radius: 6px;
-  border-color: #d7e7f5;
-  border-style: none;
-  padding-left: 12px;
-}
+/* #delete-list-input {
+} */
 
 #delete-list-button {
   height: fit-content;
