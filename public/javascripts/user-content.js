@@ -151,10 +151,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
   });
   /*--------------------------------------------------------------------*/
   // SELECTING TASKS
+  const detailCard = document.querySelector(".detail-card");
   addedTasks.addEventListener("click", async (e) => {
     taskId = !e.target.id ? e.target.dataset.id : e.target.id;
     const taskDiv = document.getElementById(taskId);
     taskDiv.classList.toggle("selected");
+    detailCard.classList.remove("detail-card-hidden");
+    detailCard.classList.add("detail-card-active");
     /*--------------------------------------------------------------------*/
     // FETCHING TASK DETAILS
     try {
@@ -172,18 +175,22 @@ document.addEventListener("DOMContentLoaded", (e) => {
           dueDate.innerHTML = "";
         } else if (selected.length === 1) {
           if (taskDiv.classList.contains("selected")) {
-            taskName.innerHTML = data.description;
+            taskName.innerHTML = `Task Name: ${data.description}`;
             listName.innerHTML = !data.List
               ? "This task does not belong to any lists"
-              : data.List.name;
-            dueDate.innerHTML = !data.dueAt ? "never" : data.dueAt;
+              : `List Name: ${data.List.name}`;
+            dueDate.innerHTML = !data.dueAt
+              ? "Due: never"
+              : `Due: ${data.dueAt}`;
           } else {
             try {
               const res = await fetch(`/api/tasks/${selected[0].id}`);
               const data = await res.json();
-              taskName.innerHTML = data.description;
-              listName.innerHTML = data.List.name;
-              dueDate.innerHTML = !data.dueAt ? "never" : data.dueAt;
+              taskName.innerHTML = `Task Name: ${data.description}`;
+              listName.innerHTML = `List Name: ${data.List.name}`;
+              dueDate.innerHTML = !data.dueAt
+                ? "Due: never"
+                : `Due: ${data.dueAt}`;
             } catch (e) {
               console.error(e);
             }
@@ -192,11 +199,18 @@ document.addEventListener("DOMContentLoaded", (e) => {
           taskName.innerHTML = "";
           listName.innerHTML = "";
           dueDate.innerHTML = "";
+          detailCard.classList.add("detail-card-hidden");
+          detailCard.classList.remove("detail-card-active");
         }
       }
     } catch (e) {
       console.error(e);
     }
+  });
+  const closeTaskCard = document.getElementById("close-task-detail");
+  closeTaskCard.addEventListener("click", (e) => {
+    detailCard.classList.add("detail-card-hidden");
+    detailCard.classList.remove("detail-card-active");
   });
   /*--------------------------------------------------------------------*/
   // DELETING TASKS FROM DATABASE AND PAGE
