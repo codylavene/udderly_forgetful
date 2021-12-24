@@ -72,7 +72,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
     }
   };
 
-  console.log("HELLO");
   /*--------------------------------------------------------------------*/
   // FUNCTIONS
   const fetchAllTasks = (data) => {
@@ -132,7 +131,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
       if (listId) {
         body = { description, listId };
       }
-      console.log({ body });
       const res = await fetch("/api/tasks", {
         method: "POST",
         body: JSON.stringify(body),
@@ -140,13 +138,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
           "Content-Type": "application/json",
         },
       });
-      console.log({ res });
       if (!res.ok) {
         throw res;
       }
 
       const data = await res.json();
-      console.log({ data });
       if (data.message === "Success") {
         const val = addTaskInput.value;
         const div = document.createElement("div");
@@ -199,10 +195,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
             // taskName.dataset.taskId = taskId;
             taskName.value = data.description;
             // listName.innerHTML = !data.List;
-            // console.log(listName.children);
             if (data.List) {
               Array.from(listName.children).forEach((child) => {
-                console.log(child);
                 if (child.value == data.List.id) {
                   child.selected = "true";
                 }
@@ -213,7 +207,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
             // listName.options[listName.selectedIndex].selected = !data.List.id
             //   ? null
             //   : data.List.id;
-            // console.log(data.List.id);
             // ? "This task does not belong to any lists"
             // : `List Name: ${data.List.name}`;
           } else {
@@ -225,7 +218,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
               taskName.value = data.description;
               if (data.list) {
                 Array.from(listName.children).forEach((child) => {
-                  console.log(child);
                   if (child.value == data.List.id) {
                     child.selected = "true";
                   }
@@ -368,13 +360,17 @@ document.addEventListener("DOMContentLoaded", (e) => {
       if (!data.message) {
         const div = document.createElement("div");
         const option = document.createElement("option");
+        const optionForEdit = document.createElement("option");
         div.id = data.id;
         option.value = data.id;
+        optionForEdit.value = data.id;
         div.classList.add("added-list-children");
         div.innerHTML = data.name;
         option.innerHTML = data.name;
+        optionForEdit.innerHTML = data.name;
         listContainer.appendChild(div);
         deleteListInput.appendChild(option);
+        listName.appendChild(optionForEdit);
         listInput.value = "";
         addListContainer.classList.toggle("hide-list-container");
       }
@@ -418,6 +414,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
           lists.removeChild(child);
         }
       }
+      Array.from(listName.children).forEach((child) => {
+        if (child.value === id) {
+          listName.removeChild(child);
+        }
+      });
     }
   };
 
@@ -442,7 +443,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
         const data = await res.json();
         if (data.message === "Updated") {
           addedTasks.removeChild(task);
-          getNumCompleteInList();
+          if (!listId) {
+            getNumTasks();
+            getNumComplete();
+          } else {
+            getNumTasks();
+            getNumCompleteInList();
+          }
           detailCard.classList.add("detail-card-hidden");
           detailCard.classList.remove("detail-card-active");
           // const taskName = document.querySelector(".task-name");
@@ -463,6 +470,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   });
 
   completedTasks.addEventListener("click", async (e) => {
+    listId = undefined;
     addedTasks.innerHTML = "";
     currentList.innerHTML = "Completed Tasks";
     getNumTasks();
@@ -475,11 +483,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
   editTaskSubmit.addEventListener("click", async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    // console.log(taskName.value);
     const description = taskName.value;
     listId = listName.options[listName.selectedIndex].value;
-    // console.log(newListId);
-    console.log(taskId);
     try {
       const body = { description, listId };
       const res = await fetch(`/api/tasks/${taskId}`, {
