@@ -189,7 +189,7 @@ input {
   color: #004991;
   background-color: #f9a826;
   border-radius: 5px;
-  width: 9%;
+  width: fit-content;
   margin: 3px;
   position: absolute;
   right: 200px;
