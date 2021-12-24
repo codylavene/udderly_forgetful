@@ -3,8 +3,7 @@
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
-
-  color: rgb(216, 216, 216);
+  color: white;
 }
 body {
   background-color: rgb(0, 96, 191);
@@ -37,7 +36,7 @@ body {
   /* margin-left: -40px; */
 }
 .link-list li > a:hover {
-  color: white;
+  color: #f9a826;
 }
 
 #signup {
@@ -47,8 +46,8 @@ body {
 }
 
 #signup:hover {
-  border-color: white;
-  color: white;
+  border-color: #f9a826;
+  color: #f9a826;
 }
 
 .home-nav-bar {
@@ -171,8 +170,8 @@ h1 > span {
   display: none;
 }
 
-.swiper-text span {
-  font-size: 22px;
+.swiper-head span {
+  font-size: inherit;
   color: #f9a826;
 }
 

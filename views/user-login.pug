@@ -11,15 +11,13 @@ block content
     div(class="row")
       div(class="left-col")
         div(class="left")
-          div(class="title-and-quote")
-            div.logo-container
-              a.logo(href="/")
-            p(id="quote") "Do or do not, there is no try" - Yoda
+          div.logo-container
+            a.logo(href="/")
+          div.quote-container
+            p(id="quote")
             p#author
       div(class="right-col")
         div(class="right")
-          div#no-account-link
-            p: a(href='/users/signup' id='account-sign-up') Sign up for free
           div#form-content
             p#been-here-text Been here before? Welcome Back!
             +validationErrorSummary(errors)
@@ -30,7 +28,9 @@ block content
               div(class='py-4')
                 button(type='submit' class='btn btn-primary') Log in
                 div.left-border-of-or
+                button(type='submit' class='demo-log') Demo User
                 p(id="orOption") OR
                 div.right-border-of-or
-                button(type='submit' class='demo-log') Demo-User
+                div#no-account-link
+                  a(href='/users/signup' id='account-sign-up') Sign up for free
                 a(href='/' class='btn btn-warning ml-2')

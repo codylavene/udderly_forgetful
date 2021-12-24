@@ -14,11 +14,9 @@ block content
       .logo-container
         a.logo(href="/")
       div(id='left-sign-up')
-        div(id="icons")
-          div.image-container
-            img(src="../assets/images/hp_steve_2.png", class="animated-images")
-
-        p(id="p-text") Join millions of people getting more organized and productive!
+        div.image-container
+          img(src="../assets/images/undraw6.svg", class="sign-up-image")
+        p(id="p-text") It's no <span>cowincidence</span> that you're here, sign up today!
     div(id='right-sign-up-container')
       div(id='right-sign-up')
         div(id="form-contents")
@@ -50,7 +48,7 @@ block content
                 p(class="errors")= errors.confirmPassword
             div(id="sign-up-button")
               button(type='submit' id="register") Sign up!
-              p(id="orOption") OR
+              p(id="orOption") Already have an account?
               a(href="/users/login" id="login-button") Login
   form(action="/users/login" method="post")
     input(type='hidden' name='_csrf' value=csrfToken)
