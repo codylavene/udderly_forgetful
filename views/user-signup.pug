@@ -2,8 +2,11 @@ extends layout.pug
 
 include utils.pug
   append head
-     link(rel='stylesheet' href='/stylesheets/sign-up.css')
-     script(src="/javascripts/sign-up-demo-user.js" type="module")
+    link(rel='stylesheet' href='/stylesheets/sign-up.css')
+    link(rel="preconnect" href="https://fonts.googleapis.com")
+    link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet")
+    script(src="/javascripts/sign-up-demo-user.js" type="module")
 
 block content
   div(class='sign-up-panel-holder')
@@ -11,11 +14,9 @@ block content
       .logo-container
         a.logo(href="/")
       div(id='left-sign-up')
-        div(id="icons")
-          div.image-container
-            img(src="../assets/images/hp_steve_2.png", class="animated-images")
-
-        p(id="p-text") Join millions of people getting more organized and productive!
+        div.image-container
+          img(src="../assets/images/undraw6.svg", class="sign-up-image")
+        p(id="p-text") It's no <span>cowincidence</span> that you're here, sign up today!
     div(id='right-sign-up-container')
       div(id='right-sign-up')
         div(id="form-contents")
@@ -47,7 +48,7 @@ block content
                 p(class="errors")= errors.confirmPassword
             div(id="sign-up-button")
               button(type='submit' id="register") Sign up!
-              p(id="orOption") OR
+              p(id="orOption") Already have an account?
               a(href="/users/login" id="login-button") Login
   form(action="/users/login" method="post")
     input(type='hidden' name='_csrf' value=csrfToken)

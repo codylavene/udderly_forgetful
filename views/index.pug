@@ -1,15 +1,12 @@
 extends layout
 
 append head
-  //- add page specific styles by appending to the head
   link(rel="stylesheet" href="/stylesheets/landing.css")
-  //- add page specific js
-  script(src="/javascripts/index.js" type="module" defer)
   script(src="/javascripts/landing.js" type="module" defer)
   link(rel="preconnect" href="https://fonts.googleapis.com")
   link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
-  link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet")
-
+  link(href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet")
+  link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
 
 block content
   div.nav-container
@@ -24,19 +21,24 @@ block content
         li.tour
           a#tour(href="/tour") Tour
   .heading-sign-up
-    h1 The smart to-do app for busy people.
+    h1 The <span> smart </span> to-do app for forgetful people.
     a(href='/users/signup') Sign Up Free
-  .swiper-container
-    .swiper-card
-      img.swiper-img.starter(src="../assets/images/hp_steve_1.png")
-      h2.swiper-head Get to-dos out of your head.
-      p.swiper-text Stop thinking about your to-dos, and let the app remember for you.
-      img.swiper-img(src="../assets/images/hp_steve_2.png")
-      h2.swiper-head
-      p.swiper-text
-      img.swiper-img(src="../assets/images/hp_steve_3.png")
-      h2.swiper-head
-      p.swiper-text
-      img.swiper-img(src="../assets/images/hp_steve_4.png")
-      h2.swiper-head
-      p.swiper-text
+    .swiper-container
+      .swiper-card.slide
+        img.swiper-img.starter(src="../assets/images/undraw1.svg")
+        h2.swiper-head Stop thinking you <span>lactose</span> skills to be productive.
+        p.swiper-text
+      .swiper-card.slide
+        img.swiper-img(src="../assets/images/undraw2.svg")
+        h2.swiper-head A to-do app beyond your wildest <span>creams</span>.
+        p.swiper-text
+      .swiper-card.slide
+        img.swiper-img(src="../assets/images/undraw3.svg")
+        h2.swiper-head Make your productivity smooth as <span>milk</span>.
+        p.swiper-text
+      .swiper-card.slide
+        img.swiper-img(src="../assets/images/undraw4.svg")
+        h2.swiper-head Udderly Forgetful is the <span>kefir</span> making remembering easy.
+        p.swiper-text
+      a.prev(onclick="changeSlide(-1)"): span(class="material-icons") arrow_back_ios
+      a.next(onclick="changeSlide(1)"): span(class="material-icons") arrow_forward_ios

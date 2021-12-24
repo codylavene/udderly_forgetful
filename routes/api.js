@@ -88,9 +88,11 @@ router.post(
       listId,
       userId,
     });
+
     res.json({ message: "Success", task: { id: task.id } });
   })
 );
+
 router.delete("/tasks/:id(\\d+)", async (req, res, next) => {
   const task = await db.Task.findByPk(req.params.id);
   if (task) {
