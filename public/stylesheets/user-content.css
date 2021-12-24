@@ -219,7 +219,9 @@ body {
 }
 
 #add-list-input,
-#delete-list-input {
+#delete-list-input,
+.task-name,
+.list-drop-down {
   width: 80%;
   height: 38px;
   margin-top: 10px;
@@ -229,7 +231,8 @@ body {
   border-style: none;
   padding-left: 12px;
 }
-#submit-list-button {
+#submit-list-button,
+#edit-task-btn {
   /* float: right; */
   height: fit-content;
   font-size: 16px;
@@ -298,24 +301,47 @@ body {
 }
 
 .detail-card-active {
-  height: 400px;
+  height: 300px;
   width: 100%;
   margin: 20px;
   border-radius: 6px;
-  background-color: white;
+  background-color: #fff;
 }
 .detail-card-hidden {
   display: none;
 }
+.detail-form-active {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 15px;
+}
 .task-name,
-.list-name,
-.due-date {
+.list-name {
   margin: 20px;
 }
 #close-task-detail {
-  float: right;
+  position: relative;
+  top: 3px;
+  right: 3px;
   border: none;
 }
 #close-task-detail:hover {
   color: #c83619;
+}
+
+.edit {
+  text-align: center;
+  margin-top: -20px;
+  font-size: 20px;
+}
+
+.task-name,
+.list-drop-down {
+  background-color: rgb(255, 255, 209);
+  border: 1px dotted rgb(229, 229, 229);
 }

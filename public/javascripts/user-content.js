@@ -56,8 +56,22 @@ document.addEventListener("DOMContentLoaded", (e) => {
       console.error(e);
     }
   };
-
   getNumComplete();
+  const getNumCompleteInList = async () => {
+    try {
+      const res = await fetch(`/api/tasks/complete/${listId}`);
+      const data = await res.json();
+      const numComplete = data.length;
+      numCompleted.innerHTML = numComplete;
+
+      if (!data.message) {
+        return data;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   console.log("HELLO");
   /*--------------------------------------------------------------------*/
   // FUNCTIONS
@@ -98,7 +112,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
       addedTasks.innerHTML = "";
       fetchAllTasks(data);
       getNumTasks();
-      getNumComplete();
+      getNumCompleteInList();
     }
     // } else {
     currentList.innerHTML = e.target.innerHTML;
@@ -143,7 +157,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
         addTaskInput.value = "";
         addTaskInput.blur();
         getNumTasks();
-        getNumComplete();
+        getNumCompleteInList();
       }
     } catch (e) {
       console.error(e);
@@ -152,6 +166,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
   /*--------------------------------------------------------------------*/
   // SELECTING TASKS
   const detailCard = document.querySelector(".detail-card");
+  const taskDetailsHead = document.querySelector(".edit");
+  const taskName = document.querySelector(".task-name");
+  const listName = document.querySelector(".list-drop-down");
   addedTasks.addEventListener("click", async (e) => {
     taskId = !e.target.id ? e.target.dataset.id : e.target.id;
     const taskDiv = document.getElementById(taskId);
@@ -165,42 +182,68 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
       const data = await res.json();
       if (!data.message) {
-        const taskName = document.querySelector(".task-name");
-        const listName = document.querySelector(".list-name");
-        const dueDate = document.querySelector(".due-date");
         const selected = document.querySelectorAll(".selected");
+        const editForm = document.querySelector(".edit-task");
+        // const
         if (selected.length > 1) {
-          taskName.innerHTML = `${selected.length} tasks selected`;
-          listName.innerHTML = "";
-          dueDate.innerHTML = "";
+          taskDetailsHead.innerHTML = `${selected.length} tasks selected`;
+          // editForm.disabled = "true";
+          editForm.classList.add("detail-card-hidden");
+          editForm.classList.remove("detail-form-active");
         } else if (selected.length === 1) {
+          taskDetailsHead.innerHTML = `Edit Task Details`;
+          editForm.classList.remove("detail-card-hidden");
+          editForm.classList.add("detail-form-active");
           if (taskDiv.classList.contains("selected")) {
-            taskName.innerHTML = `Task Name: ${data.description}`;
-            listName.innerHTML = !data.List
-              ? "This task does not belong to any lists"
-              : `List Name: ${data.List.name}`;
-            dueDate.innerHTML = !data.dueAt
-              ? "Due: never"
-              : `Due: ${data.dueAt}`;
+            // taskName.dataset.taskId = taskId;
+            taskName.value = data.description;
+            // listName.innerHTML = !data.List;
+            // console.log(listName.children);
+            if (data.List) {
+              Array.from(listName.children).forEach((child) => {
+                console.log(child);
+                if (child.value == data.List.id) {
+                  child.selected = "true";
+                }
+              });
+            } else {
+              document.getElementById("null").selected = "true";
+            }
+            // listName.options[listName.selectedIndex].selected = !data.List.id
+            //   ? null
+            //   : data.List.id;
+            // console.log(data.List.id);
+            // ? "This task does not belong to any lists"
+            // : `List Name: ${data.List.name}`;
           } else {
+            // editForm.classList.toggle("detail-card-hidden");
+
             try {
               const res = await fetch(`/api/tasks/${selected[0].id}`);
               const data = await res.json();
-              taskName.innerHTML = `Task Name: ${data.description}`;
-              listName.innerHTML = `List Name: ${data.List.name}`;
-              dueDate.innerHTML = !data.dueAt
-                ? "Due: never"
-                : `Due: ${data.dueAt}`;
+              taskName.value = data.description;
+              if (data.list) {
+                Array.from(listName.children).forEach((child) => {
+                  console.log(child);
+                  if (child.value == data.List.id) {
+                    child.selected = "true";
+                  }
+                });
+              } else {
+                document.getElementById("null").selected = "true";
+              }
+              // listName.innerHTML = `List Name: ${data.List.name}`;
             } catch (e) {
               console.error(e);
             }
           }
         } else {
-          taskName.innerHTML = "";
-          listName.innerHTML = "";
-          dueDate.innerHTML = "";
+          // taskName.innerHTML = "";
+          // listName.innerHTML = "";
           detailCard.classList.add("detail-card-hidden");
           detailCard.classList.remove("detail-card-active");
+          editForm.classList.add("detail-card-hidden");
+          editForm.classList.remove("detail-form-active");
         }
       }
     } catch (e) {
@@ -211,6 +254,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
   closeTaskCard.addEventListener("click", (e) => {
     detailCard.classList.add("detail-card-hidden");
     detailCard.classList.remove("detail-card-active");
+    document
+      .querySelectorAll(".selected")
+      .forEach((child) => child.classList.remove("selected"));
   });
   /*--------------------------------------------------------------------*/
   // DELETING TASKS FROM DATABASE AND PAGE
@@ -227,16 +273,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
         if (data.message === "Destroyed") {
           addedTasks.removeChild(task);
           const taskName = document.querySelector(".task-name");
-          const listName = document.querySelector(".list-name");
-          const dueDate = document.querySelector(".due-date");
+          const listName = document.querySelector(".list-drop-down");
           getNumTasks();
           getNumComplete();
-          taskName.innerHTML = `${num} task(s) deleted`;
-          setTimeout(() => {
-            taskName.innerHTML = ``;
-          }, 7000);
-          listName.innerHTML = "";
-          dueDate.innerHTML = "";
+          detailCard.classList.add("detail-card-hidden");
+          detailCard.classList.remove("detail-card-active");
         }
       } catch (e) {
         console.error(e);
@@ -400,9 +441,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
         const data = await res.json();
         if (data.message === "Updated") {
           addedTasks.removeChild(task);
-          getNumComplete();
+          getNumCompleteInList();
+          detailCard.classList.add("detail-card-hidden");
+          detailCard.classList.remove("detail-card-active");
           // const taskName = document.querySelector(".task-name");
-          // const listName = document.querySelector(".list-name");
+          // const listName = document.querySelector(".list-drop-down");
           // const dueDate = document.querySelector(".due-date");
           // getNumTasks();
           // taskName.innerHTML = `${num} task(s) deleted`;
@@ -424,5 +467,59 @@ document.addEventListener("DOMContentLoaded", (e) => {
     getNumTasks();
     const data = await getNumComplete();
     fetchAllTasks(data);
+  });
+
+  const editTaskSubmit = document.querySelector("#edit-task-btn");
+
+  editTaskSubmit.addEventListener("click", async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // console.log(taskName.value);
+    const description = taskName.value;
+    listId = listName.options[listName.selectedIndex].value;
+    // console.log(newListId);
+    console.log(taskId);
+    try {
+      const body = { description, listId };
+      const res = await fetch(`/api/tasks/${taskId}`, {
+        method: "PATCH",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await res.json();
+      if (data.message === "Updated") {
+        try {
+          const newRes = await fetch(`/api/tasks/`);
+
+          const data = await newRes.json();
+
+          if (!data.message) {
+            addedTasks.innerHTML = "";
+            fetchAllTasks(data);
+            detailCard.classList.add("detail-card-hidden");
+            detailCard.classList.remove("detail-card-active");
+          }
+        } catch (e) {
+          console.error(e);
+        }
+        // addedTasks.removeChild(task);
+        // getNumComplete();
+        // const taskName = document.querySelector(".task-name");
+        // const listName = document.querySelector(".list-drop-down");
+        // const dueDate = document.querySelector(".due-date");
+        // getNumTasks();
+        // taskName.innerHTML = `${num} task(s) deleted`;
+        // setTimeout(() => {
+        //   taskName.innerHTML = ``;
+        // }, 7000);
+        // listName.innerHTML = "";
+        // dueDate.innerHTML = "";
+      }
+    } catch (e) {
+      console.error(e);
+    }
   });
 });

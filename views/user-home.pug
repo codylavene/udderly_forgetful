@@ -91,6 +91,11 @@ block content
                 .task-details
                     .detail-card.detail-card-hidden
                         div.material-icons.material-icons-dark#close-task-detail close
-                        h2.task-name
-                        h3.list-name
-                        h3.due-date
+                        div.edit Edit Task Details
+                        form.edit-task(action="/api/tasks/" method="post")
+                            input.task-name(type="text")
+                            select.list-drop-down
+                                option(value="null" id="null") No list
+                                each list in lists
+                                    option(value=list.id name=list.id)=list.name
+                            button(type="button" id="edit-task-btn") Edit

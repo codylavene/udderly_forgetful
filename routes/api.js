@@ -60,6 +60,24 @@ router.get(
     }
   })
 );
+router.get(
+  "/tasks/complete/:id",
+  asyncHandler(async (req, res, next) => {
+    const { userId } = req.session.auth;
+    const tasks = await db.Task.findAll({
+      where: {
+        userId,
+        listId: req.params.id,
+        completed: true,
+      },
+    });
+    if (tasks) {
+      res.json(tasks);
+    } else {
+      res.json({ message: "Failed" });
+    }
+  })
+);
 router.post(
   "/tasks",
   asyncHandler(async (req, res) => {
@@ -89,6 +107,7 @@ router.get(
     const tasks = await db.Task.findAll({
       where: {
         listId: req.params.id,
+        completed: false,
       },
     });
     if (tasks) {
@@ -142,9 +161,9 @@ router.delete("/lists/:id(\\d+)", async (req, res, next) => {
 router.patch("/tasks/:id(\\d+)", async (req, res, next) => {
   console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", req.body);
   const task = await db.Task.findByPk(req.params.id);
-  const { completed, description, dueAt } = req.body;
-  console.log("description++++++++++", description, "dueAt---------", dueAt);
-  const updated = await task.update({ completed, description, dueAt });
+  const { completed, description, listId } = req.body;
+  console.log("description++++++++++", description);
+  const updated = await task.update({ completed, description, listId });
   if (updated) {
     res.json({ message: "Updated" });
   } else {
