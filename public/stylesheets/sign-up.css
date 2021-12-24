@@ -53,14 +53,20 @@ body {
 }
 
 #orOption {
-  margin-left: 165px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
   margin-bottom: 30px;
+  color: gray;
 }
 
 #login-button {
   margin-left: 0px;
   padding: 15px 150px;
   height: 48px;
+  font-weight: 700;
   color: #004991;
   background-color: #f9a826;
   border-radius: 5px;
@@ -82,18 +88,16 @@ body {
   background-color: #dbebf9;
 }
 
-.or-and-login-button {
-  padding-top: 100px;
-}
-
 #sign-up-button {
   height: 30px;
   padding-top: 30px;
+  font-weight: 700;
 }
 
 #register {
   height: 48px;
   font-size: 20px;
+  /* font-weight: 700; */
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding: 10px 12px;
   color: #004991;
