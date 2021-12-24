@@ -19,18 +19,15 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
   const logoutBtn = document.querySelector(".logout-container");
 
-  const signout = (e) => {
-    fetch("/users/logout", { method: "POST" })
-      .then((response) => {
-        // HTTP 301 response
-        // HOW CAN I FOLLOW THE HTTP REDIRECT RESPONSE?
-        if (response.redirected) {
-          window.location.href = response.url;
-        }
-      })
-      .catch(function (err) {
-        console.info(err + " url: " + "/users/logout");
-      });
+  const signout = async (e) => {
+    try {
+      const res = await fetch("/users/logout", { method: "POST" });
+      if (res.redirected) {
+        window.location.href = res.url;
+      }
+    } catch (err) {
+      console.info(err + " url: " + "/users/logout");
+    }
   };
 
   const ham = document.querySelector(".hamburger-container");

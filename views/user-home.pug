@@ -4,6 +4,7 @@ append head
     link(rel="stylesheet" href="/stylesheets/leftnavbar.css")
     link(rel="stylesheet", href="/stylesheets/user-content.css")
     link(rel="stylesheet", href="/stylesheets/user-top-nav.css")
+    link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
     script(src="/javascripts/leftnavbar.js" type="module" )
     script(src="/javascripts/user-top-nav.js" type="module")
     script(src="/javascripts/user-content.js" type="module")
@@ -22,6 +23,22 @@ block content
                 div(class="material-icons material-icons-hover" id="logout-icon") logout
                     div#logout Sign out
     div(class="main-content")
+        div(class="add-list-container hide-list-container")
+            .close-modal
+                div.material-icons.material-icons-dark#close-add-list close
+                div.list-modal
+                    form(action='/api/lists' method='post' class="add-list-form")
+                        input(id="add-list-input" type="text" name="name" placeholder="Add a list...")
+                        button(type='submit' id="submit-list-button") Add List
+        div(class="delete-list-container hide-list-container")
+            .close-modal
+                div.material-icons.material-icons-dark#close-delete-list close
+                div.list-modal
+                    form(action='/api/lists' method='post' class="delete-list-form")
+                        select(id="delete-list-input" name="name" placeholder="Delete a list...")
+                            each list in lists
+                                option(value=list.id name=list.id)=list.name
+                        button(type='submit' id="delete-list-button") Delete List
         div(class='left-nav-bar')
             .logo-container
                 .logo
@@ -31,14 +48,15 @@ block content
                     span.inbox Tasks
                 div(class='all-lists')
                     div(id='all-tasks') All Tasks
-                    div(id='today') Today
-                    div(id='tomorrow') Tomorrow
-                    div(id='this-week') This Week
+
+                    div#completed Completed
                     //- li(id='trash') Trash
             div.created-lists
                 div.added-lists
                     span(class="material-icons material-icons-dark" id="list-toggle") arrow_drop_down
                     span.lists Lists
+                    span(class="material-icons material-icons-dark" id="add-list-button") add
+                    span(class="material-icons-dark material-icons"  id="trash-lists") delete
                 div.added-list-child-container
                     each list in lists
                         div(class='added-list-children' id=list.id)= list.name
@@ -46,7 +64,8 @@ block content
             div(class="task-content")
                 div.current-list All Tasks
                 div(class="task-control-panel")
-                    div(class="material-icons-dark material-icons"  id="trash-icon") delete
+                    div(class="material-icons-dark material-icons" id="trash-icon") delete
+                    div(class="material-icons-dark material-icons" id="complete-icon") done
                 div(class="add-task-form")
                     form(action='/api/tasks' method='post' class="add-task-form2")
                         input(id="add-task-input" type="text" name="description" placeholder="Add a task...")
@@ -60,7 +79,24 @@ block content
                                     p(data-id=task.id)= task.description
 
                 .empty-task-template#empty
-            div(class="task-details")
-                h2.task-name
-                h3.list-name
-                h3.due-date
+            div(class="task-details-container")
+                .curr-list-container
+                    .current-list-stats Stats for all tasks
+                .task-stats
+                    .total-tasks
+                        h2.num-tasks 0
+                        div task(s)
+                    .total-complete
+                        h2.num-complete 0
+                        div complete
+                .task-details
+                    .detail-card.detail-card-hidden
+                        div.material-icons.material-icons-dark#close-task-detail close
+                        div.edit Edit Task Details
+                        form.edit-task(action="/api/tasks/" method="post")
+                            input.task-name(type="text")
+                            select.list-drop-down
+                                option(value="null" id="null") No list
+                                each list in lists
+                                    option(value=list.id name=list.id)=list.name
+                            button(type="button" id="edit-task-btn") Edit

@@ -17,11 +17,16 @@ const { sequelize } = require("../db/models");
 router.post(
   "/lists",
   asyncHandler(async (req, res) => {
-    const { description, listId } = req.body;
+    const { name } = req.body;
     const { userId } = req.session.auth;
 
-    const task = await db.Task.create({ description, userId, listId });
-    res.end();
+    const list = await db.List.create({ name, userId });
+
+    if (list) {
+      res.json(list);
+    } else {
+      res.json({ message: "Failed" });
+    }
   })
 );
 router.get(
@@ -29,7 +34,42 @@ router.get(
   asyncHandler(async (req, res, next) => {
     const { userId } = req.session.auth;
     const tasks = await db.Task.findAll({
-      where: { userId },
+      where: { userId, completed: false },
+    });
+    if (tasks) {
+      res.json(tasks);
+    } else {
+      res.json({ message: "Failed" });
+    }
+  })
+);
+router.get(
+  "/tasks/complete",
+  asyncHandler(async (req, res, next) => {
+    const { userId } = req.session.auth;
+    const tasks = await db.Task.findAll({
+      where: {
+        userId,
+        completed: true,
+      },
+    });
+    if (tasks) {
+      res.json(tasks);
+    } else {
+      res.json({ message: "Failed" });
+    }
+  })
+);
+router.get(
+  "/tasks/complete/:id",
+  asyncHandler(async (req, res, next) => {
+    const { userId } = req.session.auth;
+    const tasks = await db.Task.findAll({
+      where: {
+        userId,
+        listId: req.params.id,
+        completed: true,
+      },
     });
     if (tasks) {
       res.json(tasks);
@@ -69,6 +109,7 @@ router.get(
     const tasks = await db.Task.findAll({
       where: {
         listId: req.params.id,
+        completed: false,
       },
     });
     if (tasks) {
@@ -109,4 +150,27 @@ router.get(
     }
   })
 );
+router.delete("/lists/:id(\\d+)", async (req, res, next) => {
+  const list = await db.List.findByPk(req.params.id);
+  if (list) {
+    await list.destroy();
+    res.json({ message: "Destroyed" });
+  } else {
+    res.json({ message: "Failed" });
+  }
+});
+
+router.patch("/tasks/:id(\\d+)", async (req, res, next) => {
+  console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", req.body);
+  const task = await db.Task.findByPk(req.params.id);
+  const { completed, description, listId } = req.body;
+  console.log("description++++++++++", description);
+  const updated = await task.update({ completed, description, listId });
+  if (updated) {
+    res.json({ message: "Updated" });
+  } else {
+    res.json({ message: "Failed" });
+  }
+});
+
 module.exports = router;

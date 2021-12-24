@@ -24,10 +24,54 @@ document.addEventListener("DOMContentLoaded", (e) => {
   const allTasks = document.querySelector("#all-tasks");
   const currentList = document.querySelector(".current-list");
   const searchInput = document.getElementById("search-bar");
+  const deleteListTrashButton = document.getElementById("trash-lists");
+  const deleteListModel = document.querySelector(".delete-list-container");
+  const deleteListInput = document.getElementById("delete-list-input");
+  const deleteListButton = document.getElementById("delete-list-button");
+  const deleteListForm = document.querySelector(".delete-list-form");
+  const currListStats = document.querySelector(".current-list-stats");
+  const completeBtn = document.querySelector("#complete-icon");
+  const completedTasks = document.getElementById("completed");
+  const numCompleted = document.querySelector(".num-complete");
   /*--------------------------------------------------------------------*/
   // GLOBAL VARIABLES
   let listId;
   let taskId;
+  const getNumTasks = () => {
+    const numTasks = document.querySelectorAll(".pre-filled").length;
+    document.querySelector(".num-tasks").innerHTML = numTasks;
+  };
+  getNumTasks();
+  const getNumComplete = async () => {
+    try {
+      const res = await fetch("/api/tasks/complete");
+      const data = await res.json();
+      const numComplete = data.length;
+      numCompleted.innerHTML = numComplete;
+
+      if (!data.message) {
+        return data;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+  getNumComplete();
+  const getNumCompleteInList = async () => {
+    try {
+      const res = await fetch(`/api/tasks/complete/${listId}`);
+      const data = await res.json();
+      const numComplete = data.length;
+      numCompleted.innerHTML = numComplete;
+
+      if (!data.message) {
+        return data;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   /*--------------------------------------------------------------------*/
   // FUNCTIONS
   const fetchAllTasks = (data) => {
@@ -38,6 +82,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
       const boiler = `<div class="filled" data-id=${task.id}><input type="checkbox" data-id=${task.id}><p data-id=${task.id}>${task.description}</p></div>`;
       div.innerHTML = boiler;
       addedTasks.appendChild(div);
+      getNumTasks();
+      getNumComplete();
     });
   };
   /*--------------------------------------------------------------------*/
@@ -57,18 +103,15 @@ document.addEventListener("DOMContentLoaded", (e) => {
   lists.addEventListener("click", async (e) => {
     listId = e.target.id;
     currentList.innerHTML = e.target.innerHTML;
-    // if (
-    //   listId !== "all-tasks" ||
-    //   listId !== "today" ||
-    //   listId !== "tomorrow" ||
-    //   listId !== "this-week"
-    // ) {
+    currListStats.innerHTML = `Stats for ${e.target.innerHTML} list`;
     const res = await fetch(`/api/lists/${listId}`);
 
     const data = await res.json();
     if (data.message !== "Failed") {
       addedTasks.innerHTML = "";
       fetchAllTasks(data);
+      getNumTasks();
+      getNumCompleteInList();
     }
     // } else {
     currentList.innerHTML = e.target.innerHTML;
@@ -88,7 +131,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
       if (listId) {
         body = { description, listId };
       }
-      console.log({body})
       const res = await fetch("/api/tasks", {
         method: "POST",
         body: JSON.stringify(body),
@@ -96,13 +138,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
           "Content-Type": "application/json",
         },
       });
-      console.log({res})
       if (!res.ok) {
         throw res;
       }
 
       const data = await res.json();
-      console.log({data})
       if (data.message === "Success") {
         const val = addTaskInput.value;
         const div = document.createElement("div");
@@ -112,6 +152,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
         div.innerHTML = boiler;
         addedTasks.appendChild(div);
         addTaskInput.value = "";
+        addTaskInput.blur();
+        getNumTasks();
+        getNumCompleteInList();
       }
     } catch (e) {
       console.error(e);
@@ -119,10 +162,16 @@ document.addEventListener("DOMContentLoaded", (e) => {
   });
   /*--------------------------------------------------------------------*/
   // SELECTING TASKS
+  const detailCard = document.querySelector(".detail-card");
+  const taskDetailsHead = document.querySelector(".edit");
+  const taskName = document.querySelector(".task-name");
+  const listName = document.querySelector(".list-drop-down");
   addedTasks.addEventListener("click", async (e) => {
     taskId = !e.target.id ? e.target.dataset.id : e.target.id;
     const taskDiv = document.getElementById(taskId);
     taskDiv.classList.toggle("selected");
+    detailCard.classList.remove("detail-card-hidden");
+    detailCard.classList.add("detail-card-active");
     /*--------------------------------------------------------------------*/
     // FETCHING TASK DETAILS
     try {
@@ -130,47 +179,83 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
       const data = await res.json();
       if (!data.message) {
-        const taskName = document.querySelector(".task-name");
-        const listName = document.querySelector(".list-name");
-        const dueDate = document.querySelector(".due-date");
         const selected = document.querySelectorAll(".selected");
+        const editForm = document.querySelector(".edit-task");
+        // const
         if (selected.length > 1) {
-          taskName.innerHTML = `${selected.length} tasks selected`;
-          listName.innerHTML = "";
-          dueDate.innerHTML = "";
+          taskDetailsHead.innerHTML = `${selected.length} tasks selected`;
+          // editForm.disabled = "true";
+          editForm.classList.add("detail-card-hidden");
+          editForm.classList.remove("detail-form-active");
         } else if (selected.length === 1) {
+          taskDetailsHead.innerHTML = `Edit Task Details`;
+          editForm.classList.remove("detail-card-hidden");
+          editForm.classList.add("detail-form-active");
           if (taskDiv.classList.contains("selected")) {
-            console.log(data);
-            taskName.innerHTML = data.description;
-            listName.innerHTML = !data.List
-              ? "This task does not belong to any lists"
-              : data.List.name;
-            dueDate.innerHTML = !data.dueAt ? "never" : data.dueAt;
+            // taskName.dataset.taskId = taskId;
+            taskName.value = data.description;
+            // listName.innerHTML = !data.List;
+            if (data.List) {
+              Array.from(listName.children).forEach((child) => {
+                if (child.value == data.List.id) {
+                  child.selected = "true";
+                }
+              });
+            } else {
+              document.getElementById("null").selected = "true";
+            }
+            // listName.options[listName.selectedIndex].selected = !data.List.id
+            //   ? null
+            //   : data.List.id;
+            // ? "This task does not belong to any lists"
+            // : `List Name: ${data.List.name}`;
           } else {
+            // editForm.classList.toggle("detail-card-hidden");
+
             try {
               const res = await fetch(`/api/tasks/${selected[0].id}`);
               const data = await res.json();
-              taskName.innerHTML = data.description;
-              listName.innerHTML = data.List.name;
-              dueDate.innerHTML = !data.dueAt ? "never" : data.dueAt;
+              taskName.value = data.description;
+              if (data.list) {
+                Array.from(listName.children).forEach((child) => {
+                  if (child.value == data.List.id) {
+                    child.selected = "true";
+                  }
+                });
+              } else {
+                document.getElementById("null").selected = "true";
+              }
+              // listName.innerHTML = `List Name: ${data.List.name}`;
             } catch (e) {
               console.error(e);
             }
           }
         } else {
-          taskName.innerHTML = "";
-          listName.innerHTML = "";
-          dueDate.innerHTML = "";
+          // taskName.innerHTML = "";
+          // listName.innerHTML = "";
+          detailCard.classList.add("detail-card-hidden");
+          detailCard.classList.remove("detail-card-active");
+          editForm.classList.add("detail-card-hidden");
+          editForm.classList.remove("detail-form-active");
         }
       }
     } catch (e) {
       console.error(e);
     }
   });
+  const closeTaskCard = document.getElementById("close-task-detail");
+  closeTaskCard.addEventListener("click", (e) => {
+    detailCard.classList.add("detail-card-hidden");
+    detailCard.classList.remove("detail-card-active");
+    document
+      .querySelectorAll(".selected")
+      .forEach((child) => child.classList.remove("selected"));
+  });
   /*--------------------------------------------------------------------*/
   // DELETING TASKS FROM DATABASE AND PAGE
   trashIcon.addEventListener("click", async (e) => {
     const tasks = document.querySelectorAll(".selected");
+    const num = tasks.length;
     tasks.forEach(async (task) => {
       taskId = !task.id ? task.dataset.id : task.id;
       try {
@@ -180,8 +265,12 @@ document.addEventListener("DOMContentLoaded", (e) => {
         const data = await res.json();
         if (data.message === "Destroyed") {
           addedTasks.removeChild(task);
-        } else {
-          console.log("failed");
+          const taskName = document.querySelector(".task-name");
+          const listName = document.querySelector(".list-drop-down");
+          getNumTasks();
+          getNumComplete();
+          detailCard.classList.add("detail-card-hidden");
+          detailCard.classList.remove("detail-card-active");
         }
       } catch (e) {
         console.error(e);
@@ -193,12 +282,14 @@ document.addEventListener("DOMContentLoaded", (e) => {
   allTasks.addEventListener("click", async (e) => {
     listId = undefined;
     currentList.innerHTML = "All Tasks";
+    currListStats.innerHTML = "Stats for all tasks";
     try {
       const res = await fetch("/api/tasks");
 
       const data = await res.json();
       if (data.message !== "Failed") {
         addedTasks.innerHTML = "";
+        getNumComplete();
         fetchAllTasks(data);
       }
     } catch (e) {
@@ -210,11 +301,230 @@ document.addEventListener("DOMContentLoaded", (e) => {
     try {
       const res = await fetch(`/api/search/${val}`);
       const data = await res.json();
-      console.log(data);
       if (!data.message) {
         currentList.innerHTML = "Search Results";
         addedTasks.innerHTML = "";
         fetchAllTasks(data);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  });
+  const addListButton = document.getElementById("add-list-button");
+  const addListContainer = document.querySelector(".add-list-container");
+
+  //Event listener to toggle add a list form
+  addListButton.addEventListener("click", (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    addListContainer.classList.toggle("hide-list-container");
+  });
+
+  //get add a list button
+  // const addListButton = document.getElementById("add-list-button")
+  const addListForm = document.querySelector(".add-list-form");
+
+  const submitListButton = document.getElementById("submit-list-button");
+
+  //get added lists div container
+  const listContainer = document.querySelector(".added-list-child-container");
+
+  //add list input
+  const listInput = document.getElementById("add-list-input");
+
+  const closeListAddModal = document.getElementById("close-add-list");
+  const closeListDeleteModal = document.getElementById("close-delete-list");
+
+  //Event lister to create list on click of add list button
+  submitListButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    // e.stopPropagation()
+
+    const formData = new FormData(addListForm);
+
+    const name = formData.get("name");
+
+    const body = { name };
+
+    try {
+      const res = await fetch("/api/lists", {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await res.json();
+
+      if (!data.message) {
+        const div = document.createElement("div");
+        const option = document.createElement("option");
+        const optionForEdit = document.createElement("option");
+        div.id = data.id;
+        option.value = data.id;
+        optionForEdit.value = data.id;
+        div.classList.add("added-list-children");
+        div.innerHTML = data.name;
+        option.innerHTML = data.name;
+        optionForEdit.innerHTML = data.name;
+        listContainer.appendChild(div);
+        deleteListInput.appendChild(option);
+        listName.appendChild(optionForEdit);
+        listInput.value = "";
+        addListContainer.classList.toggle("hide-list-container");
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  });
+  closeListAddModal.addEventListener("click", (e) => {
+    addListContainer.classList.toggle("hide-list-container");
+  });
+
+  //--------------------------------------------------------------
+  // Delete an existing list
+
+  const deleteListContainer = async () => {
+    deleteListModel.classList.toggle("hide-list-container");
+    //const res = await fetch("/api/lists", {
+
+    //})
+  };
+  const closeListDelete = () => {
+    deleteListModel.classList.toggle("hide-list-container");
+  };
+  const deleteList = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const selected = deleteListInput.options[deleteListInput.selectedIndex];
+    const id = selected.value;
+    const res = await fetch(`/api/lists/${id}`, {
+      method: "Delete",
+    });
+    const data = await res.json();
+    if (data.message === "Destroyed") {
+      deleteListInput.removeChild(selected);
+      const children = document.querySelector(
+        ".added-list-child-container"
+      ).children;
+      for (let i = 0; i < children.length; i++) {
+        let child = children[i];
+        if (child.id === id) {
+          lists.removeChild(child);
+        }
+      }
+      Array.from(listName.children).forEach((child) => {
+        if (child.value === id) {
+          listName.removeChild(child);
+        }
+      });
+    }
+  };
+
+  closeListDeleteModal.addEventListener("click", closeListDelete);
+  deleteListButton.addEventListener("click", deleteList);
+  deleteListTrashButton.addEventListener("click", deleteListContainer);
+
+  completeBtn.addEventListener("click", (e) => {
+    const tasks = document.querySelectorAll(".selected");
+    tasks.forEach(async (task) => {
+      taskId = !task.id ? task.dataset.id : task.id;
+      try {
+        const body = { completed: true };
+        const res = await fetch(`/api/tasks/${taskId}`, {
+          method: "PATCH",
+          body: JSON.stringify(body),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        const data = await res.json();
+        if (data.message === "Updated") {
+          addedTasks.removeChild(task);
+          if (!listId) {
+            getNumTasks();
+            getNumComplete();
+          } else {
+            getNumTasks();
+            getNumCompleteInList();
+          }
+          detailCard.classList.add("detail-card-hidden");
+          detailCard.classList.remove("detail-card-active");
+          // const taskName = document.querySelector(".task-name");
+          // const listName = document.querySelector(".list-drop-down");
+          // const dueDate = document.querySelector(".due-date");
+          // getNumTasks();
+          // taskName.innerHTML = `${num} task(s) deleted`;
+          // setTimeout(() => {
+          //   taskName.innerHTML = ``;
+          // }, 7000);
+          // listName.innerHTML = "";
+          // dueDate.innerHTML = "";
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    });
+  });
+
+  completedTasks.addEventListener("click", async (e) => {
+    listId = undefined;
+    addedTasks.innerHTML = "";
+    currentList.innerHTML = "Completed Tasks";
+    getNumTasks();
+    const data = await getNumComplete();
+    fetchAllTasks(data);
+  });
+
+  const editTaskSubmit = document.querySelector("#edit-task-btn");
+
+  editTaskSubmit.addEventListener("click", async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const description = taskName.value;
+    listId = listName.options[listName.selectedIndex].value;
+    try {
+      const body = { description, listId };
+      const res = await fetch(`/api/tasks/${taskId}`, {
+        method: "PATCH",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await res.json();
+      if (data.message === "Updated") {
+        try {
+          const newRes = await fetch(`/api/tasks/`);
+
+          const data = await newRes.json();
+
+          if (!data.message) {
+            addedTasks.innerHTML = "";
+            fetchAllTasks(data);
+            detailCard.classList.add("detail-card-hidden");
+            detailCard.classList.remove("detail-card-active");
+            currentList.innerHTML = "All Tasks";
+            currListStats.innerHTML = "Stats for all tasks";
+          }
+        } catch (e) {
+          console.error(e);
+        }
+        // addedTasks.removeChild(task);
+        // getNumComplete();
+        // const taskName = document.querySelector(".task-name");
+        // const listName = document.querySelector(".list-drop-down");
+        // const dueDate = document.querySelector(".due-date");
+        // getNumTasks();
+        // taskName.innerHTML = `${num} task(s) deleted`;
+        // setTimeout(() => {
+        //   taskName.innerHTML = ``;
+        // }, 7000);
+        // listName.innerHTML = "";
+        // dueDate.innerHTML = "";
       }
     } catch (e) {
       console.error(e);

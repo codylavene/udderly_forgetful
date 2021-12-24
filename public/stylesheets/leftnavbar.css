@@ -28,6 +28,7 @@
 .inbox {
   font-size: 14px;
   margin-left: 4px;
+  width: 100%;
 }
 .inbox:hover {
   background-color: #bfd7ef;
@@ -52,10 +53,12 @@
 .time-based-lists,
 .created-lists {
   border-bottom: 1px solid rgb(191, 217, 241);
+  padding-bottom: 20px;
 }
 .added-lists {
   margin-top: 20px;
   margin-left: -3px;
+  width: 100%;
 }
 #list-toggle {
   padding: 1px;
@@ -73,6 +76,7 @@
 .lists {
   font-size: 14px;
   margin-left: 4px;
+  width: 100%;
 }
 .lists:hover {
   background-color: #bfd7ef;
@@ -96,6 +100,7 @@
   font-size: 14px;
   margin-top: 10px;
   list-style-type: none;
+  width: 100%;
 }
 
 /* .added-lists div {
@@ -130,7 +135,7 @@
   font-size: 14px;
   display: flex;
   flex-direction: column;
-  width: fit-content;
+  width: 80%;
   margin-top: 10px;
   align-items: flex-start;
   margin-left: 38px;
@@ -183,4 +188,29 @@
   display: flex;
   margin-top: 20px;
   margin-left: 10%;
+}
+
+#add-list-button {
+  font-size: 14px;
+  float: right;
+  margin-top: 6px;
+  margin-right: 6px;
+  margin-left: 6px;
+}
+
+#add-list-button:hover {
+  background-color: #bfd7ef;
+  font-weight: bold;
+  cursor: pointer;
+}
+#trash-lists {
+  font-size: 14px;
+  float: right;
+  margin-top: 6px;
+}
+
+#trash-lists:hover {
+  background-color: #bfd7ef;
+
+  cursor: pointer;
 }
