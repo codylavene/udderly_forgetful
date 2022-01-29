@@ -43,26 +43,30 @@ document.addEventListener("DOMContentLoaded", (e) => {
 	// GLOBAL VARIABLES
 	let listId;
 	let taskId;
-	const getNumTasks = () => {
-		const numTasks = document.querySelectorAll(".pre-filled").length;
-		document.querySelector(".num-tasks").innerHTML = numTasks;
-	};
-	getNumTasks();
-	const getNumComplete = async () => {
-		try {
-			const res = await fetch("/api/tasks/complete");
-			const data = await res.json();
-			const numComplete = data.length;
-			numCompleted.innerHTML = numComplete;
+	const task = new Task();
+	const list = new List();
+	task.getTotalTasks();
+	task.getComplete();
+	// const getTotalTasks = () => {
+	// 	const numTasks = document.querySelectorAll(".pre-filled").length;
+	// 	document.querySelector(".num-tasks").innerHTML = numTasks;
+	// };
+	// getTotalTasks();
+	// const task.getComplete = async () => {
+	// 	try {
+	// 		const res = await fetch("/api/tasks/complete");
+	// 		const data = await res.json();
+	// 		const numComplete = data.length;
+	// 		numCompleted.innerHTML = numComplete;
 
-			if (!data.message) {
-				return data;
-			}
-		} catch (e) {
-			console.error(e);
-		}
-	};
-	getNumComplete();
+	// 		if (!data.message) {
+	// 			return data;
+	// 		}
+	// 	} catch (e) {
+	// 		console.error(e);
+	// 	}
+	// };
+	// task.getComplete();
 	const getNumCompleteInList = async () => {
 		try {
 			const res = await fetch(`/api/tasks/complete/${listId}`);
@@ -80,18 +84,18 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
 	/*--------------------------------------------------------------------*/
 	// FUNCTIONS
-	const fetchAllTasks = (data) => {
-		data.forEach((task) => {
-			const div = document.createElement("div");
-			div.id = task.id;
-			div.classList.add("pre-filled");
-			const boiler = `<div class="filled" data-id=${task.id}><input type="checkbox" data-id=${task.id}><p data-id=${task.id}>${task.description}</p></div>`;
-			div.innerHTML = boiler;
-			addedTasks.appendChild(div);
-			getNumTasks();
-			getNumComplete();
-		});
-	};
+	// const fetchAllTasks = (data) => {
+	// 	data.forEach((task) => {
+	// 		const div = document.createElement("div");
+	// 		div.id = task.id;
+	// 		div.classList.add("pre-filled");
+	// 		const boiler = `<div class="filled" data-id=${task.id}><input type="checkbox" data-id=${task.id}><p data-id=${task.id}>${task.description}</p></div>`;
+	// 		div.innerHTML = boiler;
+	// 		addedTasks.appendChild(div);
+	// 		task.getTotalTasks();
+	// 		task.getComplete();
+	// 	});
+	// };
 	/*--------------------------------------------------------------------*/
 	// SHOW ADD TASK BUTTON LISTENER
 	addTaskInput.addEventListener("focus", (e) => {
@@ -115,8 +119,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
 		const data = await res.json();
 		if (data.message !== "Failed") {
 			addedTasks.innerHTML = "";
-			fetchAllTasks(data);
-			getNumTasks();
+			task.getTasks(data);
+			task.getTotalTasks();
 			getNumCompleteInList();
 		}
 		// } else {
@@ -128,7 +132,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 	// ADDING TASK TO PAGE AND DATABASE
 	addTaskButton.addEventListener("click", async (e) => {
 		e.preventDefault();
-		const task = new Task();
+		// const task = new Task();
 		task.addTask(listId);
 		// 	const formData = new FormData(addTaskForm);
 
@@ -162,7 +166,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 		// 			addedTasks.appendChild(div);
 		// 			addTaskInput.value = "";
 		// 			addTaskInput.blur();
-		// 			getNumTasks();
+		// 			task.getTotalTasks();
 		// 			getNumCompleteInList();
 		// 		}
 		// 	} catch (e) {
@@ -268,30 +272,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 	/*--------------------------------------------------------------------*/
 	// DELETING TASKS FROM DATABASE AND PAGE
 	trashIcon.addEventListener("click", async (e) => {
-		const tasks = document.querySelectorAll(".selected");
-		const num = tasks.length;
-		tasks.forEach(async (task) => {
-			taskId = !task.id ? task.dataset.id : task.id;
-			try {
-				const res = await fetch(`/api/tasks/${taskId}`, {
-					method: "DELETE",
-				});
-
-				// if (!res.ok) throw res;
-				const data = await res.json();
-				if (data.message === "Destroyed") {
-					addedTasks.removeChild(task);
-					const taskName = document.querySelector(".task-name");
-					const listName = document.querySelector(".list-drop-down");
-					getNumTasks();
-					getNumComplete();
-					detailCard.classList.add("detail-card-hidden");
-					detailCard.classList.remove("detail-card-active");
-				}
-			} catch (e) {
-				console.error(e);
-			}
-		});
+		task.deleteTask();
 	});
 	/*--------------------------------------------------------------------*/
 	// FETCHING ALL TASKS
@@ -305,8 +286,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
 			const data = await res.json();
 			if (data.message !== "Failed") {
 				addedTasks.innerHTML = "";
-				getNumComplete();
-				fetchAllTasks(data);
+				task.getComplete();
+				task.getTasks(data);
 			}
 		} catch (e) {
 			console.error(e);
@@ -320,7 +301,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 			if (!data.message) {
 				currentList.innerHTML = "Search Results";
 				addedTasks.innerHTML = "";
-				fetchAllTasks(data);
+				task.getTasks(data);
 			}
 		} catch (e) {
 			console.error(e);
@@ -460,10 +441,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
 				if (data.message === "Updated") {
 					addedTasks.removeChild(task);
 					if (!listId) {
-						getNumTasks();
-						getNumComplete();
+						task.getTotalTasks();
+						task.getComplete();
 					} else {
-						getNumTasks();
+						task.getTotalTasks();
 						getNumCompleteInList();
 					}
 					detailCard.classList.add("detail-card-hidden");
@@ -471,7 +452,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 					// const taskName = document.querySelector(".task-name");
 					// const listName = document.querySelector(".list-drop-down");
 					// const dueDate = document.querySelector(".due-date");
-					// getNumTasks();
+					// task.getTotalTasks();
 					// taskName.innerHTML = `${num} task(s) deleted`;
 					// setTimeout(() => {
 					//   taskName.innerHTML = ``;
@@ -489,9 +470,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
 		listId = undefined;
 		addedTasks.innerHTML = "";
 		currentList.innerHTML = "Completed Tasks";
-		getNumTasks();
-		const data = await getNumComplete();
-		fetchAllTasks(data);
+		task.getTotalTasks();
+		const data = await task.getComplete();
+		task.getTasks(data);
 	});
 
 	const editTaskSubmit = document.querySelector("#edit-task-btn");
@@ -501,49 +482,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
 		e.stopPropagation();
 		const description = taskName.value;
 		listId = listName.options[listName.selectedIndex].value;
-		try {
-			const body = { description, listId };
-			const res = await fetch(`/api/tasks/${taskId}`, {
-				method: "PATCH",
-				body: JSON.stringify(body),
-				headers: {
-					"Content-Type": "application/json",
-				},
-			});
-
-			const data = await res.json();
-			if (data.message === "Updated") {
-				try {
-					const newRes = await fetch(`/api/tasks/`);
-
-					const data = await newRes.json();
-
-					if (!data.message) {
-						addedTasks.innerHTML = "";
-						fetchAllTasks(data);
-						detailCard.classList.add("detail-card-hidden");
-						detailCard.classList.remove("detail-card-active");
-						currentList.innerHTML = "All Tasks";
-						currListStats.innerHTML = "Stats for all tasks";
-					}
-				} catch (e) {
-					console.error(e);
-				}
-				// addedTasks.removeChild(task);
-				// getNumComplete();
-				// const taskName = document.querySelector(".task-name");
-				// const listName = document.querySelector(".list-drop-down");
-				// const dueDate = document.querySelector(".due-date");
-				// getNumTasks();
-				// taskName.innerHTML = `${num} task(s) deleted`;
-				// setTimeout(() => {
-				//   taskName.innerHTML = ``;
-				// }, 7000);
-				// listName.innerHTML = "";
-				// dueDate.innerHTML = "";
-			}
-		} catch (e) {
-			console.error(e);
-		}
+		task.updateTask(taskId, listId, description);
 	});
 });
