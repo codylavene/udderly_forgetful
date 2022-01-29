@@ -41,7 +41,7 @@
 	flex-direction: column;
 	margin-top: 0px;
 	align-items: flex-start;
-	margin-left: 38px;
+	/* margin-left: 38px; */
 	border-radius: 6px;
 }
 
@@ -97,10 +97,19 @@
 }
 
 .all-lists div {
-	font-size: 14px;
+	/* font-size: 14px;
 	margin-top: 10px;
 	list-style-type: none;
+	width: 100%; */
+    font-size: 14px;
+	display: flex;
+	flex-direction: column;
 	width: 100%;
+	padding-top: 10px;
+    padding-bottom: 5px;
+	align-items: flex-start;
+	padding-left: 38px;
+	border-radius: 6px;
 }
 
 /* .added-lists div {
@@ -135,10 +144,11 @@
 	font-size: 14px;
 	display: flex;
 	flex-direction: column;
-	width: 80%;
-	margin-top: 10px;
+	width: 100%;
+	padding-top: 10px;
+    padding-bottom: 5px;
 	align-items: flex-start;
-	margin-left: 38px;
+	padding-left: 38px;
 	border-radius: 6px;
 }
 
