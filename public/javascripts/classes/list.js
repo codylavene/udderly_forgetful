@@ -17,7 +17,7 @@ export class List {
                 const div = document.createElement("div");
                 const option = document.createElement("option");
                 const optionForEdit = document.createElement("option");
-                div.id = data.id;
+                div.dataset.listid = data.id;
                 option.value = data.id;
                 optionForEdit.value = data.id;
                 div.classList.add("added-list-children");
@@ -48,14 +48,13 @@ export class List {
     async renderList(listId, e) {
         let task = new Task();
 
-        if (e.target.innerHTML == "Completed") {
-            document.getElementById("complete-icon").style.color = "#fff"
-        }
 
         document.querySelector(".current-list").innerHTML = e.target.innerHTML;
         document.querySelector(
             ".current-list-stats"
         ).innerHTML = `Stats for ${e.target.innerHTML} list`;
+
+        document.getElementById("complete-icon").style.display = "inline-block"
         const res = await fetch(`/api/lists/${listId}`);
 
         const data = await res.json();
@@ -87,7 +86,7 @@ export class List {
             ).children;
             for (let i = 0; i < children.length; i++) {
                 let child = children[i];
-                if (child.id === id) {
+                if (child.dataset.listid === id) {
                     document
                         .querySelector(".added-list-child-container")
                         .removeChild(child);

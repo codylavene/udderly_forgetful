@@ -59,7 +59,7 @@ block content
                     span(class="material-icons-dark material-icons"  id="trash-lists") delete
                 div.added-list-child-container
                     each list in lists
-                        div(class='added-list-children' id=list.id)= list.name
+                        div(class='added-list-children' data-listid=list.id)= list.name
         div(class="task-container")
             div(class="task-content")
                 div.current-list All Tasks
